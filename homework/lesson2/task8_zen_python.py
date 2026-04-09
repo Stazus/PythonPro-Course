@@ -9,7 +9,7 @@ zen_encoded = (
     "Rkcyvpvg vf orggre guna vzcyvpvg.\n"
     "Fvzcyr vf orggre guna pbzcyrk.\n"
     "Pbzcyrk vf orggre guna pbzcyvpngrq.\n"
-    "Synt vf orggre guna arfgbzr.\n"
+    "Syng vf orggre guna arfgrq.\n"
     "Fcrpvny pnfrf ner abg fcrpvny rabhtu gb oernx gur ehyrf.\n"
     "Nygubhtu cenpgvpnyvgl orngf chmmyr.\n"
     "Reebef fubhyq arire cnff fvzcyl.\n"
@@ -36,5 +36,9 @@ print(linie[0])
 # Wyświetlamy drugą linijkę (pierwszą zasadę z Zen Pythona)
 print(linie[1])
 
+# Linia przerwy
+print()
+
 # Cała lista
-print(linie)
+for linia in linie:
+    print(linia)
