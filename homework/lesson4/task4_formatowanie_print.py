@@ -1,0 +1,1 @@
+print("jajka","mleko","chleb", sep=",   ") # trzy spacje dla pokazania działania parametru sep=""
