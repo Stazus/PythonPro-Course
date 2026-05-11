@@ -5,3 +5,4 @@
 2026-05-10 17:35:20.587643 - Błąd: ZeroDivisionError - float division by zero
 2026-05-10 17:36:46 - KeyError: brak klucza 'wiek'
 2026-05-10 17:38:59 - KeyError: brak klucza 'wiek'
+2026-05-11 07:26:38 - KeyError: brak klucza 'wiek'
