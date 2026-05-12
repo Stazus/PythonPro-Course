@@ -1,0 +1,3 @@
+To jest pierwsza linia wpisu do dziennika.
+To jest druga linia wpisu do dziennika.
+k
