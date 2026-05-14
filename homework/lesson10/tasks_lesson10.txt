@@ -1,0 +1,51 @@
+Zadanie 1
+
+(venv) stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10/task1$ git init
+hint: Using 'master' as the name for the initial branch. This default branch name
+hint: is subject to change. To configure the initial branch name to use in all
+hint: of your new repositories, which will suppress this warning, call:
+hint:
+hint:   git config --global init.defaultBranch <name>
+hint:
+hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+hint: 'development'. The just-created branch can be renamed via this command:
+hint:
+hint:   git branch -m <name>
+Initialized empty Git repository in /home/stanislaw/PythonPro-Course/homework/lesson10/task1/.git/
+(venv) stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10/task1$ touch README.md
+(venv) stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10/task1$ code .
+(venv) stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10/task1$ ls
+README.md
+(venv) stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10/task1$ git add README.md
+(venv) stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10/task1$ git status
+On branch master
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+        new file:   README.md
+
+(venv) stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10/task1$ git commit -m "Pierwszy commit"
+[master (root-commit) 3857bbb] Pierwszy commit
+ 1 file changed, 1 insertion(+)
+ create mode 100644 README.md
+(venv) stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10/task1$ git status
+On branch master
+nothing to commit, working tree clean
+(venv) stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10/task1$ git log
+commit 3857bbb1777d97a1e69431203f74e6cab9062922 (HEAD -> master)
+Author: Stanisław Flak <stazus@interia.pl>
+Date:   Thu May 14 20:38:56 2026 +0200
+
+    Pierwszy commit
+(venv) stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10/task1$ git status
+On branch master
+nothing to commit, working tree clean
+(venv) stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10/task1$ cd ..
+(venv) stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10$ ls
+task1  tasks_lesson10.txt
+
+Zadanie 2
+
+
