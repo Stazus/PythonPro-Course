@@ -48,4 +48,194 @@ task1  tasks_lesson10.txt
 
 Zadanie 2
 
+stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10$ ls
+task1  tasks_lesson10.txt
+stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10$ tree
+.
+├── task1
+│   └── README.md
+└── tasks_lesson10.txt
+
+2 directories, 2 files
+stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10$ mkdir task2
+stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10$ ls
+task1  task2  tasks_lesson10.txt
+stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10$ cd task2
+stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10/task2$ ls
+stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10/task2$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10/task2$ git branch
+* main
+stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10/task2$ git branch feature-login
+stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10/task2$ git branch
+  feature-login
+* main
+stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10/task2$ git checkout feature-login
+Switched to branch 'feature-login'
+stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10/task2$ git branch
+* feature-login
+  main
+stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10/task2$ touch login.py
+stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10/task2$ ls
+login.py
+stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10/task2$ nano login.py
+stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10/task2$ git add login.py
+stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10/task2$ git status
+On branch feature-login
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        new file:   login.py
+
+stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10/task2$ git commit -m "Dodano plik login.py"
+[feature-login 8fe4999] Dodano plik login.py
+ 1 file changed, 1 insertion(+)
+ create mode 100644 homework/lesson10/task2/login.py
+stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10/task2$ git status
+On branch feature-login
+nothing to commit, working tree clean
+stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10/task2$ git branch
+* feature-login
+  main
+stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10/task2$ git checkout main
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10/task2$ git branch
+  feature-login
+* main
+stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10/task2$ ls
+stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10/task2$ git checkout feature-login
+Switched to branch 'feature-login'
+stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10/task2$ ls
+login.py
+stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10/task2$ git checkout main
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10/task2$ ls
+stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10/task2$ git merge feature-login
+Updating 9e2471d..8fe4999
+Fast-forward
+ homework/lesson10/task2/login.py | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 homework/lesson10/task2/login.py
+stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10/task2$ git branch
+  feature-login
+* main
+stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10/task2$ ls
+login.py
+stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10/task2$ git log
+commit 8fe4999912613c3917f9e47894f36c7cb71bc937 (HEAD -> main, feature-login)
+Author: Stanisław Flak <stazus@interia.pl>
+Date:   Fri May 15 21:44:47 2026 +0200
+
+    Dodano plik login.py
+
+commit 9e2471d4408937321ad3387af2cb1ddd71c4dd04 (origin/main)
+Author: Stanisław Flak <stazus@interia.pl>
+Date:   Thu May 14 20:56:56 2026 +0200
+
+    Add lessons10/task1
+
+commit f98077aa4d9ce20e6473777aced6156949d7072b
+Author: Stanisław Flak <stazus@interia.pl>
+Date:   Thu May 14 20:17:30 2026 +0200
+
+    Add task10_mini-projekt_lista_zadan.py
+
+commit 55ad602b9727b4324289bb7690902b44aaa24156
+Author: Stanisław Flak <stazus@interia.pl>
+Date:   Wed May 13 22:47:53 2026 +0200
+
+    Add task9__prosty_arkusz_kalkulacyjny.py
+
+:
+commit 8fe4999912613c3917f9e47894f36c7cb71bc937 (HEAD -> main, feature-login)
+Author: Stanisław Flak <stazus@interia.pl>
+Date:   Fri May 15 21:44:47 2026 +0200
+
+    Dodano plik login.py
+
+commit 9e2471d4408937321ad3387af2cb1ddd71c4dd04 (origin/main)
+Author: Stanisław Flak <stazus@interia.pl>
+Date:   Thu May 14 20:56:56 2026 +0200
+
+    Add lessons10/task1
+
+commit f98077aa4d9ce20e6473777aced6156949d7072b
+Author: Stanisław Flak <stazus@interia.pl>
+Date:   Thu May 14 20:17:30 2026 +0200
+
+    Add task10_mini-projekt_lista_zadan.py
+
+commit 55ad602b9727b4324289bb7690902b44aaa24156
+Author: Stanisław Flak <stazus@interia.pl>
+Date:   Wed May 13 22:47:53 2026 +0200
+
+    Add task9__prosty_arkusz_kalkulacyjny.py
+
+:
+commit 8fe4999912613c3917f9e47894f36c7cb71bc937 (HEAD -> main, feature-login)
+Author: Stanisław Flak <stazus@interia.pl>
+Date:   Fri May 15 21:44:47 2026 +0200
+
+    Dodano plik login.py
+
+commit 9e2471d4408937321ad3387af2cb1ddd71c4dd04 (origin/main)
+Author: Stanisław Flak <stazus@interia.pl>
+Date:   Thu May 14 20:56:56 2026 +0200
+
+    Add lessons10/task1
+
+commit f98077aa4d9ce20e6473777aced6156949d7072b
+Author: Stanisław Flak <stazus@interia.pl>
+Date:   Thu May 14 20:17:30 2026 +0200
+
+    Add task10_mini-projekt_lista_zadan.py
+
+commit 55ad602b9727b4324289bb7690902b44aaa24156
+Author: Stanisław Flak <stazus@interia.pl>
+Date:   Wed May 13 22:47:53 2026 +0200
+
+    Add task9__prosty_arkusz_kalkulacyjny.py
+
+
+stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10/task2$ ls
+login.py
+stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10/task2$ git branch
+  feature-login
+* main
+stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10/task2$ git status
+On branch main
+Your branch is ahead of 'origin/main' by 1 commit.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10/task2$
+
+stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10/task2$ tree
+.
+└── login.py
+
+1 directory, 1 file
+stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10/task2$ cd ..
+stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10$ tree
+.
+├── task1
+│   └── README.md
+├── task2
+│   └── login.py
+└── tasks_lesson10.txt
+
+3 directories, 3 files
+stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10$
+
+Zadanie 3
+
 
