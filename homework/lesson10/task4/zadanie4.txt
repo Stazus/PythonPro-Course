@@ -1,0 +1,30 @@
+Zadanie 4
+
+stanislaw@user-komputer1:~$ cd team_project-basic
+-bash: cd: team_project-basic: No such file or directory
+stanislaw@user-komputer1:~$ cd team-project-basic
+stanislaw@user-komputer1:~/team-project-basic$ git init
+hint: Using 'master' as the name for the initial branch. This default branch name
+hint: is subject to change. To configure the initial branch name to use in all
+hint: of your new repositories, which will suppress this warning, call:
+hint:
+hint:   git config --global init.defaultBranch <name>
+hint:
+hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+hint: 'development'. The just-created branch can be renamed via this command:
+hint:
+hint:   git branch -m <name>
+Initialized empty Git repository in /home/stanislaw/team-project-basic/.git/
+stanislaw@user-komputer1:~/team-project-basic$ git config user.name "Stanisław Flak"
+stanislaw@user-komputer1:~/team-project-basic$ git config user.email "stazus@interia.pl"
+stanislaw@user-komputer1:~/team-project-basic$ git config user.name
+Stanisław Flak
+stanislaw@user-komputer1:~/team-project-basic$ git config user.email
+stazus@interia.pl
+stanislaw@user-komputer1:~/team-project-basic$ git status
+On branch master
+
+No commits yet
+
+nothing to commit (create/copy files and use "git add" to track)
+stanislaw@user-komputer1:~/team-project-basic$

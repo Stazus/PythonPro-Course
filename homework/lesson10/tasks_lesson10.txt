@@ -381,4 +381,99 @@ stanislaw@user-komputer1:~/task3-git-branches$
 
 Zadanie 4
 
+stanislaw@user-komputer1:~$ cd team_project-basic
+-bash: cd: team_project-basic: No such file or directory
+stanislaw@user-komputer1:~$ cd team-project-basic
+stanislaw@user-komputer1:~/team-project-basic$ git init
+hint: Using 'master' as the name for the initial branch. This default branch name
+hint: is subject to change. To configure the initial branch name to use in all
+hint: of your new repositories, which will suppress this warning, call:
+hint:
+hint:   git config --global init.defaultBranch <name>
+hint:
+hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+hint: 'development'. The just-created branch can be renamed via this command:
+hint:
+hint:   git branch -m <name>
+Initialized empty Git repository in /home/stanislaw/team-project-basic/.git/
+stanislaw@user-komputer1:~/team-project-basic$ git config user.name "Stanisław Flak"
+stanislaw@user-komputer1:~/team-project-basic$ git config user.email "stazus@interia.pl"
+stanislaw@user-komputer1:~/team-project-basic$ git config user.name
+Stanisław Flak
+stanislaw@user-komputer1:~/team-project-basic$ git config user.email
+stazus@interia.pl
+stanislaw@user-komputer1:~/team-project-basic$ git status
+On branch master
+
+No commits yet
+
+nothing to commit (create/copy files and use "git add" to track)
+stanislaw@user-komputer1:~/team-project-basic$
+
+Zadanie 5
+
+stanislaw@user-komputer1:~$ cd team-project-basic
+stanislaw@user-komputer1:~/team-project-basic$ ls
+stanislaw@user-komputer1:~/team-project-basic$ touch app.py
+stanislaw@user-komputer1:~/team-project-basic$ ls
+app.py
+stanislaw@user-komputer1:~/team-project-basic$ nano app.py
+stanislaw@user-komputer1:~/team-project-basic$ python3 app.py
+Hello World
+stanislaw@user-komputer1:~/team-project-basic$ git add app.py
+stanislaw@user-komputer1:~/team-project-basic$ git status
+On branch master
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+        new file:   app.py
+
+stanislaw@user-komputer1:~/team-project-basic$ git commit -m "feat: add hello world function"
+[master (root-commit) 37734cf] feat: add hello world function
+ 1 file changed, 5 insertions(+)
+ create mode 100644 app.py
+stanislaw@user-komputer1:~/team-project-basic$ git status
+On branch master
+nothing to commit, working tree clean
+stanislaw@user-komputer1:~/team-project-basic$ git log --oneline
+37734cf (HEAD -> master) feat: add hello world function
+stanislaw@user-komputer1:~/team-project-basic$ nano app.py
+stanislaw@user-komputer1:~/team-project-basic$ cat app.py
+def hello_world():
+    print("Hello Git")
+
+
+hello_world()
+stanislaw@user-komputer1:~/team-project-basic$ python3 app.py
+Hello Git
+stanislaw@user-komputer1:~/team-project-basic$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   app.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+stanislaw@user-komputer1:~/team-project-basic$ git add app.py
+stanislaw@user-komputer1:~/team-project-basic$ git status
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   app.py
+
+stanislaw@user-komputer1:~/team-project-basic$ git commit -m "fix: update hello world message"
+[master 59f1bf5] fix: update hello world message
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+stanislaw@user-komputer1:~/team-project-basic$ git status
+On branch master
+nothing to commit, working tree clean
+stanislaw@user-komputer1:~/team-project-basic$ git log --oneline
+59f1bf5 (HEAD -> master) fix: update hello world message
+37734cf feat: add hello world function
+stanislaw@user-komputer1:~/team-project-basic$
+
+Zadanie 6
+
 

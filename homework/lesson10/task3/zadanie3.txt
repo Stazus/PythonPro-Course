@@ -1,0 +1,142 @@
+Zadanie 3
+
+stanislaw@user-komputer1:~$ cd task3-git-branches
+stanislaw@user-komputer1:~/task3-git-branches$ ls
+stanislaw@user-komputer1:~/task3-git-branches$ touch contributores.txt
+stanislaw@user-komputer1:~/task3-git-branches$ ls
+contributores.txt
+stanislaw@user-komputer1:~/task3-git-branches$ mv contributores.txt contributors.txt
+stanislaw@user-komputer1:~/task3-git-branches$ ls
+contributors.txt
+stanislaw@user-komputer1:~/task3-git-branches$ nano contributors.txt
+stanislaw@user-komputer1:~/task3-git-branches$ cat contributors.txt
+Stanisław Flak
+stanislaw@user-komputer1:~/task3-git-branches$ ls
+contributors.txt
+stanislaw@user-komputer1:~/task3-git-branches$ git status
+On branch main
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        contributors.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+stanislaw@user-komputer1:~/task3-git-branches$ git branch
+stanislaw@user-komputer1:~/task3-git-branches$ git checkout -b add-contributor
+Switched to a new branch 'add-contributor'
+stanislaw@user-komputer1:~/task3-git-branches$ git branch
+stanislaw@user-komputer1:~/task3-git-branches$ git add contributors.txt
+stanislaw@user-komputer1:~/task3-git-branches$ git commit -m "Add contributors file"
+[add-contributor (root-commit) ff06f5e] Add contributors file
+ 1 file changed, 1 insertion(+)
+ create mode 100644 contributors.txt
+stanislaw@user-komputer1:~/task3-git-branches$ git branch
+* add-contributor
+stanislaw@user-komputer1:~/task3-git-branches$ git push -u origin add-contributor
+Username for 'https://github.com': Stazus
+Password for 'https://Stazus@github.com':
+stanislaw@user-komputer1:~/task3-git-branches$ git remote -v
+origin  https://github.com/Stazus/task3-git-branches.git (fetch)
+origin  https://github.com/Stazus/task3-git-branches.git (push)
+stanislaw@user-komputer1:~/task3-git-branches$ git remote set-url origin git@github.com:Stazus/task3-git-branches.git
+stanislaw@user-komputer1:~/task3-git-branches$ git remote -v
+origin  git@github.com:Stazus/task3-git-branches.git (fetch)
+origin  git@github.com:Stazus/task3-git-branches.git (push)
+stanislaw@user-komputer1:~/task3-git-branches$ git push -u origin add-contributor
+Enumerating objects: 3, done.
+Counting objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 252 bytes | 252.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+To github.com:Stazus/task3-git-branches.git
+ * [new branch]      add-contributor -> add-contributor
+branch 'add-contributor' set up to track 'origin/add-contributor'.
+stanislaw@user-komputer1:~/task3-git-branches$ git checkout -b main
+Switched to a new branch 'main'
+Your branch is based on 'origin/main', but the upstream is gone.
+  (use "git branch --unset-upstream" to fixup)
+stanislaw@user-komputer1:~/task3-git-branches$ git branch
+  add-contributor
+* main
+stanislaw@user-komputer1:~/task3-git-branches$ git push -u origin main
+Total 0 (delta 0), reused 0 (delta 0), pack-reused 0
+remote:
+remote: Create a pull request for 'main' on GitHub by visiting:
+remote:      https://github.com/Stazus/task3-git-branches/pull/new/main
+remote:
+To github.com:Stazus/task3-git-branches.git
+ * [new branch]      main -> main
+branch 'main' set up to track 'origin/main'.
+stanislaw@user-komputer1:~/task3-git-branches$ git checkout add-contributor
+Switched to branch 'add-contributor'
+Your branch is up to date with 'origin/add-contributor'.
+stanislaw@user-komputer1:~/task3-git-branches$ git branch
+* add-contributor
+  main
+stanislaw@user-komputer1:~/task3-git-branches$ git branch
+* add-contributor
+  main
+stanislaw@user-komputer1:~/task3-git-branches$ nano contributors.txt
+stanislaw@user-komputer1:~/task3-git-branches$ cat contributors.txt
+Stanisław Flak
+Git task completed
+stanislaw@user-komputer1:~/task3-git-branches$ git add contributors.txt
+stanislaw@user-komputer1:~/task3-git-branches$ git commit -m "Update contributors file"
+[add-contributor de37e7c] Update contributors file
+ 1 file changed, 1 insertion(+)
+stanislaw@user-komputer1:~/task3-git-branches$ git push
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Writing objects: 100% (3/3), 306 bytes | 76.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+To github.com:Stazus/task3-git-branches.git
+   ff06f5e..de37e7c  add-contributor -> add-contributor
+stanislaw@user-komputer1:~/task3-git-branches$ gh --version
+Command 'gh' not found, but can be installed with:
+sudo snap install gh  # version 2.86.0-112-gc30647b78, or
+sudo apt  install gh  # version 2.45.0-1ubuntu0.3
+See 'snap info gh' for additional versions.
+stanislaw@user-komputer1:~/task3-git-branches$ sudo apt install gh
+[sudo] password for stanislaw:
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following NEW packages will be installed:
+  gh
+0 upgraded, 1 newly installed, 0 to remove and 68 not upgraded.
+Need to get 8836 kB of archives.
+After this operation, 45.4 MB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 gh amd64 2.45.0-1ubuntu0.3 [8836 kB]
+Fetched 8836 kB in 1s (15.7 MB/s)
+Selecting previously unselected package gh.
+(Reading database ... 51004 files and directories currently installed.)
+Preparing to unpack .../gh_2.45.0-1ubuntu0.3_amd64.deb ...
+Unpacking gh (2.45.0-1ubuntu0.3) ...
+Setting up gh (2.45.0-1ubuntu0.3) ...
+Processing triggers for man-db (2.12.0-4build2) ...
+stanislaw@user-komputer1:~/task3-git-branches$ gh auth login
+? What account do you want to log into? GitHub.com
+? What is your preferred protocol for Git operations on this host? SSH
+? Upload your SSH public key to your GitHub account? /home/stanislaw/.ssh/id_ed25519.pub
+? Title for your SSH key: GitHub CLI
+? How would you like to authenticate GitHub CLI? Login with a web browser
+
+! First copy your one-time code: 760B-8214
+Press Enter to open github.com in your browser...
+! Failed opening a web browser at https://github.com/login/device
+  exec: "xdg-open,x-www-browser,www-browser,wslview": executable file not found in $PATH
+  Please try entering the URL in your browser manually
+✓ Authentication complete.
+- gh config set -h github.com git_protocol ssh
+✓ Configured git protocol
+! Authentication credentials saved in plain text
+✓ SSH key already existed on your GitHub account: /home/stanislaw/.ssh/id_ed25519.pub
+✓ Logged in as Stazus
+stanislaw@user-komputer1:~/task3-git-branches$ gh pr list
+
+Showing 1 of 1 open pull request in Stazus/task3-git-branches
+
+ID  TITLE                     BRANCH           CREATED AT
+#1  Update contributors file  add-contributor  about 9 minutes ago
+stanislaw@user-komputer1:~/task3-git-branches$
