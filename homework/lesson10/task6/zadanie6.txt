@@ -1,0 +1,54 @@
+Zadanie 6
+
+stanislaw@user-komputer1:~$ cd team-project-basic
+stanislaw@user-komputer1:~/team-project-basic$ ls
+app.py
+stanislaw@user-komputer1:~/team-project-basic$ nano app.py
+stanislaw@user-komputer1:~/team-project-basic$ git add app.py
+stanislaw@user-komputer1:~/team-project-basic$ git status
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   app.py
+
+stanislaw@user-komputer1:~/team-project-basic$ git reset HEAD app.py
+Unstaged changes after reset:
+M       app.py
+stanislaw@user-komputer1:~/team-project-basic$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   app.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+stanislaw@user-komputer1:~/team-project-basic$ nano app.py
+stanislaw@user-komputer1:~/team-project-basic$ git add app.py
+stanislaw@user-komputer1:~/team-project-basic$ git status
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   app.py
+
+stanislaw@user-komputer1:~/team-project-basic$ git commit -m "feat: extend app functionality"
+[master 8cf643e] feat: extend app functionality
+ 1 file changed, 10 insertions(+)
+stanislaw@user-komputer1:~/team-project-basic$ git log --oneline
+8cf643e (HEAD -> master) feat: extend app functionality
+59f1bf5 fix: update hello world message
+37734cf feat: add hello world function
+stanislaw@user-komputer1:~/team-project-basic$ git reset --hard 59f1bf5
+HEAD is now at 59f1bf5 fix: update hello world message
+stanislaw@user-komputer1:~/team-project-basic$ git log --oneline
+59f1bf5 (HEAD -> master) fix: update hello world message
+37734cf feat: add hello world function
+stanislaw@user-komputer1:~/team-project-basic$ ls
+app.py
+stanislaw@user-komputer1:~/team-project-basic$ nano app.py
+stanislaw@user-komputer1:~/team-project-basic$ cat app.py
+def hello_world():
+    print("Hello Git")
+
+
+hello_world()
+stanislaw@user-komputer1:~/team-project-basic$
