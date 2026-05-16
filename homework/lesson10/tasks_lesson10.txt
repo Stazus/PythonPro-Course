@@ -531,4 +531,88 @@ stanislaw@user-komputer1:~/team-project-basic$
 
 Zadanie 7
 
+stanislaw@user-komputer1:~/team-project-basic$ git branch
+* master
+stanislaw@user-komputer1:~/team-project-basic$ git checkout master
+Already on 'master'
+stanislaw@user-komputer1:~/team-project-basic$ git branch -m master main
+stanislaw@user-komputer1:~/team-project-basic$ git branch
+* main
+stanislaw@user-komputer1:~/team-project-basic$ git branch feature-branch
+stanislaw@user-komputer1:~/team-project-basic$ git branch
+  feature-branch
+* main
+stanislaw@user-komputer1:~/team-project-basic$ git checkout feature-branch
+Switched to branch 'feature-branch'
+stanislaw@user-komputer1:~/team-project-basic$ git branch
+* feature-branch
+  main
+stanislaw@user-komputer1:~/team-project-basic$ echo "# Feature branch task" >> app.py
+stanislaw@user-komputer1:~/team-project-basic$ git add app.py
+stanislaw@user-komputer1:~/team-project-basic$ git commit -m "chore: add feature task header"
+[feature-branch b2408aa] chore: add feature task header
+ 1 file changed, 1 insertion(+)
+stanislaw@user-komputer1:~/team-project-basic$ echo "# First small change" >> app.py
+stanislaw@user-komputer1:~/team-project-basic$ git add app.py
+stanislaw@user-komputer1:~/team-project-basic$ git commit -m "chore: add first small change"
+[feature-branch b5df87d] chore: add first small change
+ 1 file changed, 1 insertion(+)
+stanislaw@user-komputer1:~/team-project-basic$ echo "# Second small change" >> app.py
+stanislaw@user-komputer1:~/team-project-basic$ git add app.py
+stanislaw@user-komputer1:~/team-project-basic$ git commit -m "chore: add second small change"
+[feature-branch 6768cb6] chore: add second small change
+ 1 file changed, 1 insertion(+)
+stanislaw@user-komputer1:~/team-project-basic$ git log --oneline
+6768cb6 (HEAD -> feature-branch) chore: add second small change
+b5df87d chore: add first small change
+b2408aa chore: add feature task header
+59f1bf5 (main) fix: update hello world message
+37734cf feat: add hello world function
+stanislaw@user-komputer1:~/team-project-basic$ git rebase -i HEAD~3
+[detached HEAD fd64106] feat: add feature branch changes
+ Date: Sat May 16 21:34:23 2026 +0200
+ 1 file changed, 3 insertions(+)
+Successfully rebased and updated refs/heads/feature-branch.
+stanislaw@user-komputer1:~/team-project-basic$ git log --oneline
+fd64106 (HEAD -> feature-branch) feat: add feature branch changes
+59f1bf5 (main) fix: update hello world message
+37734cf feat: add hello world function
+stanislaw@user-komputer1:~/team-project-basic$ git branch
+* feature-branch
+  main
+stanislaw@user-komputer1:~/team-project-basic$ git push -u origin feature-branch
+fatal: 'origin' does not appear to be a git repository
+fatal: Could not read from remote repository.
 
+Please make sure you have the correct access rights
+and the repository exists.
+stanislaw@user-komputer1:~/team-project-basic$ git remote -v
+stanislaw@user-komputer1:~/team-project-basic$ git remote add origin git@github.com:Stazus/team-project-basic.git
+stanislaw@user-komputer1:~/team-project-basic$ git remote -v
+origin  git@github.com:Stazus/team-project-basic.git (fetch)
+origin  git@github.com:Stazus/team-project-basic.git (push)
+stanislaw@user-komputer1:~/team-project-basic$ git push -u origin main
+Enumerating objects: 6, done.
+Counting objects: 100% (6/6), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (6/6), 551 bytes | 551.00 KiB/s, done.
+Total 6 (delta 0), reused 0 (delta 0), pack-reused 0
+To github.com:Stazus/team-project-basic.git
+ * [new branch]      main -> main
+branch 'main' set up to track 'origin/main'.
+stanislaw@user-komputer1:~/team-project-basic$ git push -u origin feature-branch
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 360 bytes | 360.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+remote:
+remote: Create a pull request for 'feature-branch' on GitHub by visiting:
+remote:      https://github.com/Stazus/team-project-basic/pull/new/feature-branch
+remote:
+To github.com:Stazus/team-project-basic.git
+ * [new branch]      feature-branch -> feature-branch
+branch 'feature-branch' set up to track 'origin/feature-branch'.
+stanislaw@user-komputer1:~/team-project-basic$
