@@ -1,0 +1,57 @@
+Zadanie 11
+
+stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10$ cd ~
+stanislaw@user-komputer1:~$ git clone git@github.com:Stazus/team-project-preparation.git
+Cloning into 'team-project-preparation'...
+warning: You appear to have cloned an empty repository.
+stanislaw@user-komputer1:~$ cd team-project-preparation
+stanislaw@user-komputer1:~/team-project-preparation$ mkdir src tests docs
+stanislaw@user-komputer1:~/team-project-preparation$ touch src/.gitkeep tests/.gitkeep docs/.gitkeep
+stanislaw@user-komputer1:~/team-project-preparation$ nano .gitignore
+stanislaw@user-komputer1:~/team-project-preparation$ nano README.md
+stanislaw@user-komputer1:~/team-project-preparation$ git add .
+stanislaw@user-komputer1:~/team-project-preparation$ git commit -m "chore: prepare project structure"
+[main (root-commit) 5a727eb] chore: prepare project structure
+ 5 files changed, 19 insertions(+)
+ create mode 100644 .gitignore
+ create mode 100644 README.md
+ create mode 100644 docs/.gitkeep
+ create mode 100644 src/.gitkeep
+ create mode 100644 tests/.gitkeep
+stanislaw@user-komputer1:~/team-project-preparation$ git push -u origin main
+Enumerating objects: 6, done.
+Counting objects: 100% (6/6), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (6/6), 605 bytes | 201.00 KiB/s, done.
+Total 6 (delta 0), reused 0 (delta 0), pack-reused 0
+To github.com:Stazus/team-project-preparation.git
+ * [new branch]      main -> main
+branch 'main' set up to track 'origin/main'.
+stanislaw@user-komputer1:~/team-project-preparation$ git checkout -b develop
+Switched to a new branch 'develop'
+stanislaw@user-komputer1:~/team-project-preparation$ git push -u origin develop
+Total 0 (delta 0), reused 0 (delta 0), pack-reused 0
+remote:
+remote: Create a pull request for 'develop' on GitHub by visiting:
+remote:      https://github.com/Stazus/team-project-preparation/pull/new/develop
+remote:
+To github.com:Stazus/team-project-preparation.git
+ * [new branch]      develop -> develop
+branch 'develop' set up to track 'origin/develop'.
+stanislaw@user-komputer1:~/team-project-preparation$ git branch -a
+* develop
+  main
+  remotes/origin/develop
+  remotes/origin/main
+stanislaw@user-komputer1:~/team-project-preparation$ git remote -v
+origin  git@github.com:Stazus/team-project-preparation.git (fetch)
+origin  git@github.com:Stazus/team-project-preparation.git (push)
+stanislaw@user-komputer1:~/team-project-preparation$ git log --oneline --graph --all
+* 5a727eb (HEAD -> develop, origin/main, origin/develop, main) chore: prepare project structure
+stanislaw@user-komputer1:~/team-project-preparation$ git status
+On branch develop
+Your branch is up to date with 'origin/develop'.
+
+nothing to commit, working tree clean
+stanislaw@user-komputer1:~/team-project-preparation$
