@@ -1,0 +1,92 @@
+Zadanie 8
+
+stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10/task8$ cd ~
+stanislaw@user-komputer1:~$ mkdir git-conflict-task
+stanislaw@user-komputer1:~$ cd git-conflict-task
+stanislaw@user-komputer1:~/git-conflict-task$ git init
+hint: Using 'master' as the name for the initial branch. This default branch name
+hint: is subject to change. To configure the initial branch name to use in all
+hint: of your new repositories, which will suppress this warning, call:
+hint:
+hint:   git config --global init.defaultBranch <name>
+hint:
+hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+hint: 'development'. The just-created branch can be renamed via this command:
+hint:
+hint:   git branch -m <name>
+Initialized empty Git repository in /home/stanislaw/git-conflict-task/.git/
+stanislaw@user-komputer1:~/git-conflict-task$ git branch -m main
+stanislaw@user-komputer1:~/git-conflict-task$ git branch
+stanislaw@user-komputer1:~/git-conflict-task$ touch conflict_example.txt
+stanislaw@user-komputer1:~/git-conflict-task$ ls
+conflict_example.txt
+stanislaw@user-komputer1:~/git-conflict-task$ nano conflict_example.txt
+stanislaw@user-komputer1:~/git-conflict-task$ git add conflict_example.txt
+stanislaw@user-komputer1:~/git-conflict-task$ git commit -m "feat: dodano pierwsza linie"
+[main (root-commit) e609e2e] feat: dodano pierwsza linie
+ 1 file changed, 1 insertion(+)
+ create mode 100644 conflict_example.txt
+stanislaw@user-komputer1:~/git-conflict-task$ git checkout -b branch-A
+Switched to a new branch 'branch-A'
+stanislaw@user-komputer1:~/git-conflict-task$ git branch
+* branch-A
+  main
+stanislaw@user-komputer1:~/git-conflict-task$ echo "Linia 2 - z branch-A" >> conflict_example.txt
+stanislaw@user-komputer1:~/git-conflict-task$ git add conflict_example.txt
+stanislaw@user-komputer1:~/git-conflict-task$ git commit -m "feat: dodano druga linie w branch-A"
+[branch-A ca845af] feat: dodano druga linie w branch-A
+ 1 file changed, 1 insertion(+)
+stanislaw@user-komputer1:~/git-conflict-task$ git checkout main
+Switched to branch 'main'
+stanislaw@user-komputer1:~/git-conflict-task$ git branch
+  branch-A
+* main
+stanislaw@user-komputer1:~/git-conflict-task$ nano conflict_example.txt
+stanislaw@user-komputer1:~/git-conflict-task$ nano conflict_example.txt
+stanislaw@user-komputer1:~/git-conflict-task$ git add conflict_example.txt
+stanislaw@user-komputer1:~/git-conflict-task$ git commit -m "fix: zmieniono pierwsza linie i dodano druga w main"
+[main 7f111ff] fix: zmieniono pierwsza linie i dodano druga w main
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+stanislaw@user-komputer1:~/git-conflict-task$ git merge branch-A
+Auto-merging conflict_example.txt
+CONFLICT (content): Merge conflict in conflict_example.txt
+Automatic merge failed; fix conflicts and then commit the result.
+stanislaw@user-komputer1:~/git-conflict-task$ nano conflict_example.txt
+stanislaw@user-komputer1:~/git-conflict-task$ git add conflict_example.txt
+stanislaw@user-komputer1:~/git-conflict-task$ git commit
+[main 424776c] Merge branch 'branch-A'
+stanislaw@user-komputer1:~/git-conflict-task$ git branch
+  branch-A
+* main
+stanislaw@user-komputer1:~/git-conflict-task$ git status
+On branch main
+nothing to commit, working tree clean
+stanislaw@user-komputer1:~/git-conflict-task$ cat conflict_example.txt
+Linia 1 - zmieniona w main
+Linia 2 - z main
+Linia 2 - z branch-A
+stanislaw@user-komputer1:~/git-conflict-task$ git log --oneline --graph --all
+*   424776c (HEAD -> main) Merge branch 'branch-A'
+|\
+| * ca845af (branch-A) feat: dodano druga linie w branch-A
+* | 7f111ff fix: zmieniono pierwsza linie i dodano druga w main
+|/
+* e609e2e feat: dodano pierwsza linie
+stanislaw@user-komputer1:~/git-conflict-task$ git branch
+  branch-A
+* main
+stanislaw@user-komputer1:~/git-conflict-task$ git reflog
+424776c (HEAD -> main) HEAD@{0}: commit (merge): Merge branch 'branch-A'
+7f111ff HEAD@{1}: commit: fix: zmieniono pierwsza linie i dodano druga w main
+e609e2e HEAD@{2}: checkout: moving from branch-A to main
+ca845af (branch-A) HEAD@{3}: commit: feat: dodano druga linie w branch-A
+e609e2e HEAD@{4}: checkout: moving from main to branch-A
+e609e2e HEAD@{5}: commit (initial): feat: dodano pierwsza linie
+stanislaw@user-komputer1:~/git-conflict-task$ git log --oneline --graph --all
+*   424776c (HEAD -> main) Merge branch 'branch-A'
+|\
+| * ca845af (branch-A) feat: dodano druga linie w branch-A
+* | 7f111ff fix: zmieniono pierwsza linie i dodano druga w main
+|/
+* e609e2e feat: dodano pierwsza linie
+stanislaw@user-komputer1:~/git-conflict-task$
