@@ -712,4 +712,45 @@ stanislaw@user-komputer1:~/git-conflict-task$
 
 Zadanie 9
 
+stanislaw@user-komputer1:~$ cd git-conflict-task
+stanislaw@user-komputer1:~/git-conflict-task$ git log --oneline
+424776c (HEAD -> main) Merge branch 'branch-A'
+7f111ff fix: zmieniono pierwsza linie i dodano druga w main
+ca845af (branch-A) feat: dodano druga linie w branch-A
+e609e2e feat: dodano pierwsza linie
+stanislaw@user-komputer1:~/git-conflict-task$ nano README.md
+stanislaw@user-komputer1:~/git-conflict-task$ git add README.md
+stanislaw@user-komputer1:~/git-conflict-task$ git commit -m "docs: add merge conflict description" -m "Dodano dokumentację projektu, aby wyjaśnić cel repozytorium oraz sposób ćwiczenia konfliktów merge."
+[main f1c4234] docs: add merge conflict description
+ 1 file changed, 3 insertions(+)
+ create mode 100644 README.md
+stanislaw@user-komputer1:~/git-conflict-task$ git log
+commit f1c42340ce372aa5433dc0e1d818aa29c454b618 (HEAD -> main)
+Author: Stanisław Flak <stazus@interia.pl>
+Date:   Sun May 17 17:43:27 2026 +0200
+
+    docs: add merge conflict description
+
+    Dodano dokumentację projektu, aby wyjaśnić cel repozytorium oraz sposób ćwiczenia konfliktów merge.
+
+commit 424776c74ee7999174f03d68d21cf22ee2881f59
+Merge: 7f111ff ca845af
+Author: Stanisław Flak <stazus@interia.pl>
+Date:   Sun May 17 14:19:53 2026 +0200
+
+    Merge branch 'branch-A'
+
+commit 7f111ff9b4b3c02a742418cdbac72975ae08b6e1
+Author: Stanisław Flak <stazus@interia.pl>
+Date:   Sun May 17 14:15:02 2026 +0200
+
+    fix: zmieniono pierwsza linie i dodano druga w main
+
+commit ca845af682aa6e3cacf8aa9a8b70368467e93ea7 (branch-A)
+Author: Stanisław Flak <stazus@interia.pl>
+Date:   Sun May 17 14:04:52 2026 +0200
+stanislaw@user-komputer1:~/git-conflict-task$
+
+Zadanie 10
+
 
