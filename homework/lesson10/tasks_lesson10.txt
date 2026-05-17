@@ -1119,5 +1119,76 @@ stanislaw@user-komputer1:~/project-description-task$
 
 Zadanie 13
 
+stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10$ cd ~
+stanislaw@user-komputer1:~$ mkdir git-konflikt-linie
+stanislaw@user-komputer1:~$ cd git-konflikt-linie
+stanislaw@user-komputer1:~/git-konflikt-linie$ git init
+hint: Using 'master' as the name for the initial branch. This default branch name
+hint: is subject to change. To configure the initial branch name to use in all
+hint: of your new repositories, which will suppress this warning, call:
+hint:
+hint:   git config --global init.defaultBranch <name>
+hint:
+hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+hint: 'development'. The just-created branch can be renamed via this command:
+hint:
+hint:   git branch -m <name>
+Initialized empty Git repository in /home/stanislaw/git-konflikt-linie/.git/
+stanislaw@user-komputer1:~/git-konflikt-linie$ git branch -m main
+stanislaw@user-komputer1:~/git-konflikt-linie$ echo "Pierwsza linia tekstu." > konflikt.txt
+stanislaw@user-komputer1:~/git-konflikt-linie$ git add konflikt.txt
+stanislaw@user-komputer1:~/git-konflikt-linie$ git commit -m "feat: dodano poczatkowy tekst"
+[main (root-commit) 9b89c6c] feat: dodano poczatkowy tekst
+ 1 file changed, 1 insertion(+)
+ create mode 100644 konflikt.txt
+stanislaw@user-komputer1:~/git-konflikt-linie$ git checkout -b galaz-A
+Switched to a new branch 'galaz-A'
+stanislaw@user-komputer1:~/git-konflikt-linie$ printf "Pierwsza linia tekstu.\nLinia dodana w galaz-A.\n" > konflikt.txt
+stanislaw@user-komputer1:~/git-konflikt-linie$ git add konflikt.txt
+stanislaw@user-komputer1:~/git-konflikt-linie$ git commit -m "feat: dodano linie z galaz-A"
+[galaz-A 164fc77] feat: dodano linie z galaz-A
+ 1 file changed, 1 insertion(+)
+stanislaw@user-komputer1:~/git-konflikt-linie$ git checkout main
+Switched to branch 'main'
+stanislaw@user-komputer1:~/git-konflikt-linie$ printf "Pierwsza linia tekstu.\nLinia dodana w main.\n" > konflikt.txt
+stanislaw@user-komputer1:~/git-konflikt-linie$ git add konflikt.txt
+stanislaw@user-komputer1:~/git-konflikt-linie$ git commit -m "feat: dodano linie z main"
+[main b0e9ff6] feat: dodano linie z main
+ 1 file changed, 1 insertion(+)
+stanislaw@user-komputer1:~/git-konflikt-linie$ git merge galaz-A
+Auto-merging konflikt.txt
+CONFLICT (content): Merge conflict in konflikt.txt
+Automatic merge failed; fix conflicts and then commit the result.
+stanislaw@user-komputer1:~/git-konflikt-linie$ nano konflikt.txt
+stanislaw@user-komputer1:~/git-konflikt-linie$ git add konflikt.txt
+stanislaw@user-komputer1:~/git-konflikt-linie$ git add konflikt.txt
+stanislaw@user-komputer1:~/git-konflikt-linie$ cat konflikt.txt
+Pierwsza linia tekstu.
+Linia dodana w galaz-A.
+Linia dodana w main.
+stanislaw@user-komputer1:~/git-konflikt-linie$ git status
+On branch main
+All conflicts fixed but you are still merging.
+  (use "git commit" to conclude merge)
 
+Changes to be committed:
+        modified:   konflikt.txt
 
+stanislaw@user-komputer1:~/git-konflikt-linie$ git log --oneline --graph --all
+* b0e9ff6 (HEAD -> main) feat: dodano linie z main
+| * 164fc77 (galaz-A) feat: dodano linie z galaz-A
+|/
+* 9b89c6c feat: dodano poczatkowy tekst
+stanislaw@user-komputer1:~/git-konflikt-linie$ git commit -m "merge: rozwiazano konflikt w konflikt.txt"
+[main 5c84d3f] merge: rozwiazano konflikt w konflikt.txt
+stanislaw@user-komputer1:~/git-konflikt-linie$ git status
+On branch main
+nothing to commit, working tree clean
+stanislaw@user-komputer1:~/git-konflikt-linie$ git log --oneline --graph --all
+*   5c84d3f (HEAD -> main) merge: rozwiazano konflikt w konflikt.txt
+|\
+| * 164fc77 (galaz-A) feat: dodano linie z galaz-A
+* | b0e9ff6 feat: dodano linie z main
+|/
+* 9b89c6c feat: dodano poczatkowy tekst
+stanislaw@user-komputer1:~/git-konflikt-linie$
