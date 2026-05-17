@@ -1045,5 +1045,79 @@ stanislaw@user-komputer1:~/team-project-preparation$
 
 Zadanie 12
 
+stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson10/task12$ cd ~
+stanislaw@user-komputer1:~$ git clone git@github.com:Stazus/project-description-task.git
+Cloning into 'project-description-task'...
+warning: You appear to have cloned an empty repository.
+stanislaw@user-komputer1:~$ cd project-description-task
+stanislaw@user-komputer1:~/project-description-task$ echo "# Project Description Task" > README.md
+stanislaw@user-komputer1:~/project-description-task$ git add README.md
+stanislaw@user-komputer1:~/project-description-task$ git commit -m "docs: add readme"
+[main (root-commit) 6933783] docs: add readme
+ 1 file changed, 1 insertion(+)
+ create mode 100644 README.md
+stanislaw@user-komputer1:~/project-description-task$ git push -u origin main
+Enumerating objects: 3, done.
+Counting objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 252 bytes | 252.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+To github.com:Stazus/project-description-task.git
+ * [new branch]      main -> main
+branch 'main' set up to track 'origin/main'.
+stanislaw@user-komputer1:~/project-description-task$ git checkout -b feature-readme
+Switched to a new branch 'feature-readme'
+stanislaw@user-komputer1:~/project-description-task$ nano projekt.md
+stanislaw@user-komputer1:~/project-description-task$ git add projekt.md
+stanislaw@user-komputer1:~/project-description-task$ git commit -m "docs: dodano opis projektu"
+[feature-readme b3d20f0] docs: dodano opis projektu
+ 1 file changed, 13 insertions(+)
+ create mode 100644 projekt.md
+stanislaw@user-komputer1:~/project-description-task$ git push -u origin feature-readme
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 472 bytes | 157.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+remote:
+remote: Create a pull request for 'feature-readme' on GitHub by visiting:
+remote:      https://github.com/Stazus/project-description-task/pull/new/feature-readme
+remote:
+To github.com:Stazus/project-description-task.git
+ * [new branch]      feature-readme -> feature-readme
+branch 'feature-readme' set up to track 'origin/feature-readme'.
+stanislaw@user-komputer1:~/project-description-task$ git checkout main
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+stanislaw@user-komputer1:~/project-description-task$ git pull
+remote: Enumerating objects: 1, done.
+remote: Counting objects: 100% (1/1), done.
+remote: Total 1 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+Unpacking objects: 100% (1/1), 902 bytes | 300.00 KiB/s, done.
+From github.com:Stazus/project-description-task
+   6933783..d617a4e  main       -> origin/main
+Updating 6933783..d617a4e
+Fast-forward
+ projekt.md | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+ create mode 100644 projekt.md
+stanislaw@user-komputer1:~/project-description-task$ git branch -d feature-readme
+Deleted branch feature-readme (was b3d20f0).
+stanislaw@user-komputer1:~/project-description-task$ git push origin --delete feature-readme
+To github.com:Stazus/project-description-task.git
+ - [deleted]         feature-readme
+stanislaw@user-komputer1:~/project-description-task$ git branch -a
+* main
+  remotes/origin/main
+stanislaw@user-komputer1:~/project-description-task$ git log --oneline --graph --all
+*   d617a4e (HEAD -> main, origin/main) Merge pull request #1 from Stazus/feature-readme
+|\
+| * b3d20f0 docs: dodano opis projektu
+|/
+* 6933783 docs: add readme
+stanislaw@user-komputer1:~/project-description-task$
+
+Zadanie 13
+
 
 
