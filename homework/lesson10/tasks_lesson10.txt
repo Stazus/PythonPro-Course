@@ -753,4 +753,241 @@ stanislaw@user-komputer1:~/git-conflict-task$
 
 Zadanie 10
 
+stanislaw@user-komputer1:~$ git flow version
+git: 'flow' is not a git command. See 'git --help'.
+
+The most similar commands are
+        reflog
+        show
+stanislaw@user-komputer1:~$ sudo apt install git-flow
+[sudo] password for stanislaw:
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following NEW packages will be installed:
+  git-flow
+0 upgraded, 1 newly installed, 0 to remove and 68 not upgraded.
+Need to get 38.6 kB of archives.
+After this operation, 329 kB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu noble/universe amd64 git-flow all 1.12.3-3 [38.6 kB]
+Fetched 38.6 kB in 0s (228 kB/s)
+Selecting previously unselected package git-flow.
+(Reading database ... 51196 files and directories currently installed.)
+Preparing to unpack .../git-flow_1.12.3-3_all.deb ...
+Unpacking git-flow (1.12.3-3) ...
+Setting up git-flow (1.12.3-3) ...
+stanislaw@user-komputer1:~$ mkdir git-flow-task
+stanislaw@user-komputer1:~$ cd git-flow-task
+stanislaw@user-komputer1:~/git-flow-task$ git init
+hint: Using 'master' as the name for the initial branch. This default branch name
+hint: is subject to change. To configure the initial branch name to use in all
+hint: of your new repositories, which will suppress this warning, call:
+hint:
+hint:   git config --global init.defaultBranch <name>
+hint:
+hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+hint: 'development'. The just-created branch can be renamed via this command:
+hint:
+hint:   git branch -m <name>
+Initialized empty Git repository in /home/stanislaw/git-flow-task/.git/
+stanislaw@user-komputer1:~/git-flow-task$ git branch -m main
+stanislaw@user-komputer1:~/git-flow-task$ echo "# Git Flow Task" > README.md
+stanislaw@user-komputer1:~/git-flow-task$ git add README.md
+stanislaw@user-komputer1:~/git-flow-task$ git commit -m "docs: add project readme"
+[main (root-commit) 84f5f56] docs: add project readme
+ 1 file changed, 1 insertion(+)
+ create mode 100644 README.md
+stanislaw@user-komputer1:~/git-flow-task$ git flow init
+
+Which branch should be used for bringing forth production releases?
+   - main
+Branch name for production releases: [main]
+Branch name for "next release" development: [develop]
+
+How to name your supporting branch prefixes?
+Feature branches? [feature/]
+Bugfix branches? [bugfix/]
+Release branches? [release/]
+Hotfix branches? [hotfix/]
+Support branches? [support/]
+Version tag prefix? []
+Hooks and filters directory? [/home/stanislaw/git-flow-task/.git/hooks]
+stanislaw@user-komputer1:~/git-flow-task$ git branch
+* develop
+  main
+stanislaw@user-komputer1:~/git-flow-task$ git flow feature start moja-funkcja
+Switched to a new branch 'feature/moja-funkcja'
+
+Summary of actions:
+- A new branch 'feature/moja-funkcja' was created, based on 'develop'
+- You are now on branch 'feature/moja-funkcja'
+
+Now, start committing on your feature. When done, use:
+
+     git flow feature finish moja-funkcja
+
+stanislaw@user-komputer1:~/git-flow-task$ git branch
+  develop
+* feature/moja-funkcja
+  main
+stanislaw@user-komputer1:~/git-flow-task$ echo "print('Hello Git Flow')" > app.py
+stanislaw@user-komputer1:~/git-flow-task$ git add app.py
+stanislaw@user-komputer1:~/git-flow-task$ git commit -m "feat: add initial app file"
+[feature/moja-funkcja cfcab16] feat: add initial app file
+ 1 file changed, 1 insertion(+)
+ create mode 100644 app.py
+stanislaw@user-komputer1:~/git-flow-task$ echo "# Feature branch changes" >> app.py
+stanislaw@user-komputer1:~/git-flow-task$ git add app.py
+stanislaw@user-komputer1:~/git-flow-task$ git commit -m "feat: add feature comment"
+[feature/moja-funkcja 39031b8] feat: add feature comment
+ 1 file changed, 1 insertion(+)
+stanislaw@user-komputer1:~/git-flow-task$ echo "print('Feature completed')" >> app.py
+stanislaw@user-komputer1:~/git-flow-task$ git add app.py
+stanislaw@user-komputer1:~/git-flow-task$ git commit -m "feat: extend application output"
+[feature/moja-funkcja 037d48a] feat: extend application output
+ 1 file changed, 1 insertion(+)
+stanislaw@user-komputer1:~/git-flow-task$ git log --oneline
+037d48a (HEAD -> feature/moja-funkcja) feat: extend application output
+39031b8 feat: add feature comment
+cfcab16 feat: add initial app file
+84f5f56 (main, develop) docs: add project readme
+stanislaw@user-komputer1:~/git-flow-task$ git flow feature finish moja-funkcja
+Switched to branch 'develop'
+Merge made by the 'ort' strategy.
+ app.py | 3 +++
+ 1 file changed, 3 insertions(+)
+ create mode 100644 app.py
+Deleted branch feature/moja-funkcja (was 037d48a).
+
+Summary of actions:
+- The feature branch 'feature/moja-funkcja' was merged into 'develop'
+- Feature branch 'feature/moja-funkcja' has been locally deleted
+- You are now on branch 'develop'
+
+stanislaw@user-komputer1:~/git-flow-task$ git branch
+* develop
+  main
+stanislaw@user-komputer1:~/git-flow-task$ git log --oneline --graph --all
+*   0309d90 (HEAD -> develop) Merge branch 'feature/moja-funkcja' into develop
+|\
+| * 037d48a feat: extend application output
+| * 39031b8 feat: add feature comment
+| * cfcab16 feat: add initial app file
+|/
+* 84f5f56 (main) docs: add project readme
+stanislaw@user-komputer1:~/git-flow-task$ git flow release start 1.0.0
+Switched to a new branch 'release/1.0.0'
+
+Summary of actions:
+- A new branch 'release/1.0.0' was created, based on 'develop'
+- You are now on branch 'release/1.0.0'
+
+Follow-up actions:
+- Bump the version number now!
+- Start committing last-minute fixes in preparing your release
+- When done, run:
+
+     git flow release finish '1.0.0'
+
+stanislaw@user-komputer1:~/git-flow-task$ git branch
+  develop
+  main
+* release/1.0.0
+stanislaw@user-komputer1:~/git-flow-task$ echo "version = '1.0.0'" >> app.py
+stanislaw@user-komputer1:~/git-flow-task$ git add app.py
+stanislaw@user-komputer1:~/git-flow-task$ git commit -m "fix: add release version"
+[release/1.0.0 f5ba819] fix: add release version
+ 1 file changed, 1 insertion(+)
+stanislaw@user-komputer1:~/git-flow-task$ git log --oneline
+f5ba819 (HEAD -> release/1.0.0) fix: add release version
+0309d90 (develop) Merge branch 'feature/moja-funkcja' into develop
+037d48a feat: extend application output
+39031b8 feat: add feature comment
+cfcab16 feat: add initial app file
+84f5f56 (main) docs: add project readme
+stanislaw@user-komputer1:~/git-flow-task$ git flow release finish 1.0.0
+Switched to branch 'main'
+Merge made by the 'ort' strategy.
+ app.py | 4 ++++
+ 1 file changed, 4 insertions(+)
+ create mode 100644 app.py
+Already on 'main'
+fatal: no tag message?
+Fatal: Tagging failed. Please run finish again to retry.
+stanislaw@user-komputer1:~/git-flow-task$ git branch
+  develop
+* main
+  release/1.0.0
+stanislaw@user-komputer1:~/git-flow-task$ git log --oneline --graph --all
+*   d1dfcc6 (HEAD -> main) Merge branch 'release/1.0.0'
+|\
+| * f5ba819 (release/1.0.0) fix: add release version
+| * 0309d90 (develop) Merge branch 'feature/moja-funkcja' into develop
+|/|
+| * 037d48a feat: extend application output
+| * 39031b8 feat: add feature comment
+| * cfcab16 feat: add initial app file
+|/
+* 84f5f56 docs: add project readme
+stanislaw@user-komputer1:~/git-flow-task$ git flow release finish 1.0.0
+Already on 'main'
+fatal: no tag message?
+Fatal: Tagging failed. Please run finish again to retry.
+stanislaw@user-komputer1:~/git-flow-task$ git branch
+  develop
+* main
+  release/1.0.0
+stanislaw@user-komputer1:~/git-flow-task$ git log --oneline --graph --all
+*   d1dfcc6 (HEAD -> main) Merge branch 'release/1.0.0'
+|\
+| * f5ba819 (release/1.0.0) fix: add release version
+| * 0309d90 (develop) Merge branch 'feature/moja-funkcja' into develop
+|/|
+| * 037d48a feat: extend application output
+| * 39031b8 feat: add feature comment
+| * cfcab16 feat: add initial app file
+|/
+* 84f5f56 docs: add project readme
+stanislaw@user-komputer1:~/git-flow-task$ git flow release finish -m "Release version 1.0.0" 1.0.0
+Already on 'main'
+Switched to branch 'develop'
+Merge made by the 'ort' strategy.
+ app.py | 1 +
+ 1 file changed, 1 insertion(+)
+Deleted branch release/1.0.0 (was f5ba819).
+
+Summary of actions:
+- Release branch 'release/1.0.0' has been merged into 'main'
+- The release was tagged '1.0.0'
+- Release tag '1.0.0' has been back-merged into 'develop'
+- Release branch 'release/1.0.0' has been locally deleted
+- You are now on branch 'develop'
+
+stanislaw@user-komputer1:~/git-flow-task$ git branch
+* develop
+  main
+stanislaw@user-komputer1:~/git-flow-task$ git log --oneline --graph --all
+*   0702322 (HEAD -> develop) Merge tag '1.0.0' into develop
+|\
+| *   d1dfcc6 (tag: 1.0.0, main) Merge branch 'release/1.0.0'
+| |\
+| | * f5ba819 fix: add release version
+| |/
+|/|
+* |   0309d90 Merge branch 'feature/moja-funkcja' into develop
+|\ \
+| |/
+|/|
+| * 037d48a feat: extend application output
+| * 39031b8 feat: add feature comment
+| * cfcab16 feat: add initial app file
+|/
+* 84f5f56 docs: add project readme
+stanislaw@user-komputer1:~/git-flow-task$
+
+Zadanie 1.1
+
+
+
+
 
