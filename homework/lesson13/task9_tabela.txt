@@ -1,0 +1,13 @@
+(venv) stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson13$ /home/stanislaw/PythonPro-Course/homework/lesson13/venv/bin/python /home/stanislaw/PythonPro-Course/homework/lesson13/task9_dokonaj_przypisan.py
++------------------+-------------------+--------------+
+|   ID Przypisania | Student           | Audytorium   |
++==================+===================+==============+
+|                1 | Anna Kowalska     | A 101        |
++------------------+-------------------+--------------+
+|                2 | Jan Nowak         | B 202        |
++------------------+-------------------+--------------+
+|                3 | Marta Wiśniewska  | C 303        |
++------------------+-------------------+--------------+
+|                4 | Piotr Lewandowski | A 101        |
++------------------+-------------------+--------------+
+(venv) stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson13$ 
