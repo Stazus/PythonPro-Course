@@ -1,0 +1,16 @@
+(venv) stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson13$ python3 task8_polacz_tabele_re
+lacja.py
+Tabela 'przypisania' została utworzona i wypełniona przykładowymi danymi.
+
++------------------+-------------------+--------------+
+|   ID Przypisania | Student           | Audytorium   |
++==================+===================+==============+
+|                1 | Anna Kowalska     | A 101        |
++------------------+-------------------+--------------+
+|                2 | Jan Nowak         | B 202        |
++------------------+-------------------+--------------+
+|                3 | Marta Wiśniewska  | C 303        |
++------------------+-------------------+--------------+
+|                4 | Piotr Lewandowski | A 101        |
++------------------+-------------------+--------------+
+(venv) stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson13$ 
