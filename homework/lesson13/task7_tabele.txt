@@ -1,0 +1,27 @@
+(venv) stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson13$ python3 task7_wypelnij_dane_uczelni.py
+Tabela studenci i audytoria została wypełniona przykładowymi danymi.
+
+Lista studentów: 
++---------------+--------+-------------+
+|   ID Studenta | Imię   | Nazwisko    |
++===============+========+=============+
+|             1 | Anna   | Kowalska    |
++---------------+--------+-------------+
+|             2 | Jan    | Nowak       |
++---------------+--------+-------------+
+|             3 | Marta  | Wiśniewska  |
++---------------+--------+-------------+
+|             4 | Piotr  | Lewandowski |
++---------------+--------+-------------+
+
+Lista audytiriów: 
++-----------------+-----------------+--------------+
+|   ID Audytorium | Nazwa Budynku   |   Numer Sali |
++=================+=================+==============+
+|               1 | A               |          101 |
++-----------------+-----------------+--------------+
+|               2 | B               |          202 |
++-----------------+-----------------+--------------+
+|               3 | C               |          303 |
++-----------------+-----------------+--------------+
+(venv) stanislaw@user-komputer1:~/PythonPro-Course/homework/lesson13$ 
