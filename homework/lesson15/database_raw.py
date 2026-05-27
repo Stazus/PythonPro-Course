@@ -83,3 +83,20 @@ def usun_zadanie(id_zadania: int):
         )
 
         conn.commit()
+        
+def wyszukaj_zadania(fraza: str):
+    """Wyszukuje zadania, których opis zawiera podaną frazę."""
+
+    with sqlite3.connect(DATABASE_NAME) as conn:
+        cursor = conn.cursor()
+
+        cursor.execute(
+            """
+            SELECT id, opis, zrobione, priorytet
+            FROM zadania
+            WHERE opis LIKE ?
+            """,
+            (f"%{fraza}%",)
+        )
+
+        return cursor.fetchall()

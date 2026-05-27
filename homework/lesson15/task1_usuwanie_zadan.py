@@ -24,6 +24,31 @@ def pokaz_zadania():
         
 
     print("------------------------\n")
+    
+
+def wyszukaj_zadania():
+    fraza = input("Podaj frazę do wyszukania: ")
+
+    zadania = db.wyszukaj_zadania(fraza)
+
+    if not zadania:
+        print("Nie znaleziono zadań.")
+        return
+
+    print("\n--- Wyniki wyszukiwania ---")
+
+    for zadanie in zadania:
+        status = "✓" if zadanie[2] else "✗"
+
+        print(
+            f"[{status}] "
+            f"ID: {zadanie[0]}, "
+            f"Opis: {zadanie[1]}, "
+            f"Priorytet: {zadanie[3]}"
+        )
+
+    print("--------------------------\n")    
+    
 
 
 def main():
@@ -39,6 +64,7 @@ def main():
         print("3. Oznacz zadanie jako zrobione")
         print("4. Usuń zadanie")
         print("5. Wyjdź")
+        print("6. Wyszukaj zadanie")
 
         wybor = input("Wybierz opcję: ")
 
@@ -88,6 +114,11 @@ def main():
         elif wybor == '5':
             print("Do zobaczenia!")
             break
+        
+        # Wyszukiwanie zadań po frazie
+        elif wybor == '6':
+            wyszukaj_zadania()
+        
         else:
             print("Nieznana opcja, spróbuj ponownie.")
 
