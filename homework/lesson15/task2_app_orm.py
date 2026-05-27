@@ -24,6 +24,32 @@ def pokaz_zadania():
     print("----------------------\n")
 
 
+def wyszukaj_zadania():
+
+    fraza = input("Podaj frazę do wyszukania: ")
+
+    zadania = db.wyszukaj_zadania(fraza)
+
+    if not zadania:
+        print("Nie znaleziono zadań.")
+        return
+
+    print("\n--- Wyniki wyszukiwania ORM ---")
+
+    for zadanie in zadania:
+
+        status = "✓" if zadanie.zrobione else "✗"
+
+        print(
+            f"[{status}] "
+            f"ID: {zadanie.id}, "
+            f"Opis: {zadanie.opis}, "
+            f"Data utworzenia: {zadanie.data_utworzenia}"
+        )
+
+    print("------------------------------\n")
+
+
 def main():
 
     db.init_db()
@@ -36,6 +62,7 @@ def main():
         print("3. Oznacz zadanie jako zrobione")
         print("4. Usuń zadanie")
         print("5. Wyjdź")
+        print("6. Wyszukaj zadanie")
 
         wybor = input("Wybierz opcję: ")
 
@@ -88,6 +115,9 @@ def main():
             print("Do zobaczenia!")
 
             break
+
+        elif wybor == '6':
+            wyszukaj_zadania()
 
         else:
 

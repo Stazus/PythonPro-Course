@@ -73,3 +73,15 @@ def usun_zadanie(id_zadania: int):
 
     finally:
         db.close()
+        
+        
+def wyszukaj_zadania(fraza: str):
+    """Wyszukuje zadania po fragmencie opisu."""
+
+    with SessionLocal() as db:
+
+        return (
+            db.query(Zadanie)
+            .filter(Zadanie.opis.contains(fraza))
+            .all()
+        )
