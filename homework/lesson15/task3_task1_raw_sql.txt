@@ -1,0 +1,6 @@
+W aplikacji RAW SQL funkcja pokaz_zadania()
+już wcześniej wyświetlała ID zadania:
+
+print(f"[{status}] ID: {zadanie[0]}, Opis: {zadanie[1]}")
+
+Dlatego zadanie zostało wykonane już w task1_usuwanie_zadan.py.
