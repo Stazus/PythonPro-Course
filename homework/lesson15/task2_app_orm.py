@@ -15,9 +15,10 @@ def pokaz_zadania():
 
         status = "✓" if zadanie.zrobione else "✗"
 
-        print(
+        print(        
             f"[{status}] ID: {zadanie.id}, "
-            f"Opis: {zadanie.opis}"
+            f"Opis: {zadanie.opis}, "
+            f"Data utworzenia: {zadanie.data_utworzenia}"
         )
 
     print("----------------------\n")
