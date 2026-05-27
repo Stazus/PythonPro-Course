@@ -14,24 +14,30 @@ def init_db():
         CREATE TABLE IF NOT EXISTS zadania (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             opis TEXT NOT NULL,
-            zrobione BOOLEAN NOT NULL CHECK (zrobione IN (0, 1))
+            zrobione BOOLEAN NOT NULL CHECK (zrobione IN (0, 1)),
+            priorytet INTEGER DEFAULT 1
         )
         """)
 
+
         conn.commit()
 
-
-def dodaj_zadanie(opis: str):
+def dodaj_zadanie(opis: str, priorytet: int):
     """Dodaje nowe zadanie."""
 
     with sqlite3.connect(DATABASE_NAME) as conn:
 
         cursor = conn.cursor()
 
+
         cursor.execute(
-            "INSERT INTO zadania (opis, zrobione) VALUES (?, ?)",
-            (opis, False)
-        )
+            """
+            INSERT INTO zadania (opis, zrobione, priorytet)
+            VALUES (?, ?, ?)
+            """,
+            (opis, False, priorytet)
+        )        
+        
 
         conn.commit()
 
@@ -44,7 +50,7 @@ def pobierz_zadania():
         cursor = conn.cursor()
 
         cursor.execute(
-            "SELECT id, opis, zrobione FROM zadania"
+            "SELECT id, opis, zrobione, priorytet FROM zadania"
         )
 
         return cursor.fetchall()

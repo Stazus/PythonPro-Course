@@ -14,8 +14,14 @@ def pokaz_zadania():
 
     for zadanie in zadania:
         status = "✓" if zadanie[2] else "✗"
-
-        print(f"[{status}] ID: {zadanie[0]}, Opis: {zadanie[1]}")
+        
+        print(
+            f"[{status}] "
+            f"ID: {zadanie[0]}, "
+            f"Opis: {zadanie[1]}, "
+            f"Priorytet: {zadanie[3]}"
+        )
+        
 
     print("------------------------\n")
 
@@ -42,10 +48,15 @@ def main():
 
         # Dodawanie zadania
         elif wybor == '2':
-
+            
             opis = input("Podaj opis zadania: ")
 
-            db.dodaj_zadanie(opis)
+            priorytet = int(
+                input("Podaj priorytet zadania (1-5): ")
+            )
+
+            db.dodaj_zadanie(opis, priorytet)            
+            
 
             print("Zadanie dodane!")
 
