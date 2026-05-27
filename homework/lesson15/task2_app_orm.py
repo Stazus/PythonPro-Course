@@ -15,10 +15,15 @@ def pokaz_zadania():
 
         status = "✓" if zadanie.zrobione else "✗"
 
-        print(        
+        tagi = ", ".join(
+            tag.nazwa for tag in zadanie.tagi
+        ) or "brak"
+
+        print(
             f"[{status}] ID: {zadanie.id}, "
             f"Opis: {zadanie.opis}, "
-            f"Data utworzenia: {zadanie.data_utworzenia}"
+            f"Data utworzenia: {zadanie.data_utworzenia}, "
+            f"Tagi: {tagi}"
         )
 
     print("----------------------\n")
@@ -63,6 +68,7 @@ def main():
         print("4. Usuń zadanie")
         print("5. Wyjdź")
         print("6. Wyszukaj zadanie")
+        print("7. Dodaj tag do zadania")
 
         wybor = input("Wybierz opcję: ")
 
@@ -118,6 +124,22 @@ def main():
 
         elif wybor == '6':
             wyszukaj_zadania()
+            
+        elif wybor == '7':
+            try:
+                id_zadania = int(input("Podaj ID zadania: "))
+                nazwa_tagu = input("Podaj nazwę taga: ")
+
+                czy_dodano = db.dodaj_tag_do_zadania(id_zadania, nazwa_tagu)
+
+                if czy_dodano:
+                    print("Tag dodany do zadania!")
+                else:
+                    print("Nie znaleziono zadania o podanym ID.")
+
+            except ValueError:
+                print("Błędne ID.")
+            
 
         else:
 

@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from models import Base, Zadanie
+from sqlalchemy.orm import sessionmaker, joinedload
+from models import Base, Zadanie, Tag
 
 DATABASE_URL = "sqlite:///todo_orm.db"
 
@@ -33,7 +33,11 @@ def pobierz_zadania():
     db = SessionLocal()
 
     try:
-        return db.query(Zadanie).all()
+        return (
+            db.query(Zadanie)
+            .options(joinedload(Zadanie.tagi))
+            .all()
+        )
 
     finally:
         db.close()
@@ -85,3 +89,32 @@ def wyszukaj_zadania(fraza: str):
             .filter(Zadanie.opis.contains(fraza))
             .all()
         )
+        
+def dodaj_tag_do_zadania(id_zadania: int, nazwa_tagu: str):
+    """Dodaje tag do zadania."""
+
+    db = SessionLocal()
+
+    try:
+        zadanie = db.query(Zadanie).filter(
+            Zadanie.id == id_zadania
+        ).first()
+
+        if not zadanie:
+            return False
+
+        tag = db.query(Tag).filter(
+            Tag.nazwa == nazwa_tagu
+        ).first()
+
+        if not tag:
+            tag = Tag(nazwa=nazwa_tagu)
+            db.add(tag)
+
+        zadanie.tagi.append(tag)
+        db.commit()
+
+        return True
+
+    finally:
+        db.close()
