@@ -80,6 +80,20 @@ class TaskManagerRaw:
             )
 
             conn.commit()
+            
+    def edytuj_zadanie(self, id_zadania: int, nowy_opis: str):
+        """Edytuje opis zadania o podanym ID."""
+
+        with sqlite3.connect(DATABASE_NAME) as conn:
+            cursor = conn.cursor()
+
+            cursor.execute(
+                "UPDATE zadania SET opis = ? WHERE id = ?",
+                (nowy_opis, id_zadania)
+            )
+
+            conn.commit()
+            
 
     def wyszukaj_zadania(self, fraza: str):
         """Wyszukuje zadania po fragmencie opisu."""
@@ -153,13 +167,15 @@ def main():
     manager = TaskManagerRaw()
 
     while True:
-        print("Menu RAW SQL - klasy:")
+        print("Menu RAW SQL - klasy:")        
         print("1. Pokaż zadania")
         print("2. Dodaj zadanie")
         print("3. Oznacz zadanie jako zrobione")
         print("4. Usuń zadanie")
         print("5. Wyszukaj zadanie")
-        print("6. Wyjdź")
+        print("6. Edytuj zadanie")
+        print("7. Wyjdź")
+        
 
         wybor = input("Wybierz opcję: ")
 
@@ -197,8 +213,21 @@ def main():
 
         elif wybor == "5":
             pokaz_wyniki_wyszukiwania(manager)
-
+            
         elif wybor == "6":
+            try:
+                id_zadania = int(input("Podaj ID zadania do edycji: "))
+                nowy_opis = input("Podaj nowy opis zadania: ")
+
+                manager.edytuj_zadanie(id_zadania, nowy_opis)
+
+                print("Zadanie zaktualizowane!")
+
+            except ValueError:
+                print("Błędne ID. Podaj liczbę.")
+            
+
+        elif wybor == "7":
             print("Do zobaczenia!")
             break
 
