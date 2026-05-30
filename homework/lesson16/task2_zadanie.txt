@@ -1,0 +1,21 @@
+Lesson 16 - Task 2
+
+Różnica między Klientem a Serwerem w architekturze Klient-Serwer:
+
+Klient to aplikacja lub urządzenie, które wysyła żądania do serwera i oczekuje odpowiedzi.
+
+Serwer to aplikacja lub komputer, który odbiera żądania od klientów, przetwarza je i odsyła odpowiedzi.
+
+Przykład klienta:
+- Przeglądarka internetowa Google Chrome.
+
+Przykład serwera:
+- Serwer aplikacji Django uruchomiony na komputerze lub w chmurze.
+
+Przykład działania:
+
+1. Użytkownik wpisuje adres strony w przeglądarce (klient).
+2. Przeglądarka wysyła żądanie HTTP do serwera.
+3. Serwer przetwarza żądanie.
+4. Serwer odsyła odpowiedź.
+5. Przeglądarka wyświetla stronę użytkownikowi.
