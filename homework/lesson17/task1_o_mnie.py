@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -16,6 +16,16 @@ class Product(db.Model):
 
     def __repr__(self):
         return f"<Product {self.name}>"
+    
+class Registration(db.Model):
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+
+    def __repr__(self):
+        return f"<Registration {self.name}>"
+    
 
 @app.route('/')
 def home():
@@ -95,6 +105,29 @@ def products():
         "products.html",
         products=products_list
     )
+    
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+
+    if request.method == 'POST':
+        name = request.form.get('name')
+        email = request.form.get('email')
+
+        new_registration = Registration(
+            name=name,
+            email=email
+        )
+
+        db.session.add(new_registration)
+        db.session.commit()
+
+        return redirect(url_for('thank_you'))
+
+    return render_template('register.html')
+
+@app.route('/thank-you')
+def thank_you():
+    return "Dziękujemy za rejestrację!"
 
 if __name__ == '__main__':
     app.run(debug=True)
