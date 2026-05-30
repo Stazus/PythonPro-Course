@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Produkty</title>
+</head>
+<body>
+
+    <h1>Lista produktów</h1>
+
+    <table border="1">
+        <tr>
+            <th>Nazwa</th>
+            <th>Cena</th>
+        </tr>
+
+        {% for product in products %}
+        <tr>
+            <td>{{ product.name }}</td>
+            <td>{{ product.price }} zł</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</body>
+</html>

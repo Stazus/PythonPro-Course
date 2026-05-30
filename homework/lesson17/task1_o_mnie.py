@@ -85,6 +85,16 @@ def gallery():
         "gallery.html",
         images=images
     )
+    
+@app.route('/products')
+def products():
+
+    products_list = Product.query.all()
+
+    return render_template(
+        "products.html",
+        products=products_list
+    )
 
 if __name__ == '__main__':
     app.run(debug=True)
