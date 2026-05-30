@@ -33,6 +33,20 @@ def movies():
         movies=favorite_movies,
         page_title=page_title
     )
+    
+@app.route('/book')
+def book():
+
+    favorite_book = {
+        "title": "Hobbit",
+        "author": "J.R.R. Tolkien",
+        "year": 1937
+    }
+
+    return render_template(
+        "book.html",
+        book=favorite_book
+    )    
 
 if __name__ == '__main__':
     app.run(debug=True)
