@@ -47,6 +47,29 @@ def book():
         "book.html",
         book=favorite_book
     )    
+    
+@app.route('/gallery')
+def gallery():
+
+    images = [
+        {
+            "url": "https://picsum.photos/id/1015/300/200",
+            "caption": "Góry i jezioro"
+        },
+        {
+            "url": "https://picsum.photos/id/1025/300/200",
+            "caption": "Pies"
+        },
+        {
+            "url": "https://picsum.photos/id/1035/300/200",
+            "caption": "Krajobraz"
+        }
+    ]
+
+    return render_template(
+        "gallery.html",
+        images=images
+    )
 
 if __name__ == '__main__':
     app.run(debug=True)

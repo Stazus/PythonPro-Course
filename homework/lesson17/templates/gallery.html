@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Galeria</title>
+</head>
+<body>
+
+    <h1>Prosta galeria</h1>
+
+    {% for image in images %}
+        <div>
+            <img src="{{ image.url }}" alt="{{ image.caption }}" width="300">
+            <p>{{ image.caption }}</p>
+        </div>
+    {% endfor %}
+
+</body>
+</html>
