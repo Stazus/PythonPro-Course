@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Ulubione filmy</title>
+</head>
+<body>
+
+    <h1>Moje ulubione filmy</h1>
+
+    <ul>
+        {% for movie in movies %}
+            <li>{{ movie }}</li>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>
