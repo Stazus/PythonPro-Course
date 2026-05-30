@@ -8,11 +8,15 @@
 
     <h1>Moje ulubione filmy</h1>
 
-    <ul>
-        {% for movie in movies %}
-            <li>{{ movie }}</li>
-        {% endfor %}
-    </ul>
+<ul>
+    {% for movie in movies %}
+        {% if loop.index % 2 == 0 %}
+            <li style="background-color: lightgray;">{{ movie }}</li>
+        {% else %}
+            <li style="background-color: white;">{{ movie }}</li>
+        {% endif %}
+    {% endfor %}
+</ul>
 
 </body>
 </html>
