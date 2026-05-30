@@ -1,0 +1,15 @@
+Lesson 16 - Task 1
+
+Dopasowanie metod HTTP do ich głównego przeznaczenia:
+
+GET     -> B. Pobranie danych
+POST    -> D. Utworzenie nowych danych
+DELETE  -> A. Usunięcie danych
+PUT     -> C. Zastąpienie danych w całości
+
+Wyjaśnienie:
+
+GET     - służy do pobierania danych z serwera.
+POST    - służy do tworzenia nowych danych na serwerze.
+DELETE  - służy do usuwania danych z serwera.
+PUT     - służy do pełnej aktualizacji (zastąpienia) istniejącego zasobu.
