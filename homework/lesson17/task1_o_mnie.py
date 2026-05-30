@@ -26,9 +26,12 @@ def movies():
         "Incepcja"
     ]
 
+    page_title = "Moje ulubione filmy"
+
     return render_template(
         "movies.html",
-        movies=favorite_movies
+        movies=favorite_movies,
+        page_title=page_title
     )
 
 if __name__ == '__main__':
