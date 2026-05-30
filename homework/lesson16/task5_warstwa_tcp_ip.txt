@@ -1,0 +1,8 @@
+Lesson 16 - Task 5
+
+Protokół IP należy do warstwy Internetowej (Internet Layer) modelu TCP/IP.
+
+Warstwa Internetowa odpowiada za adresowanie i routing pakietów danych,
+czyli znalezienie drogi do komputera docelowego w sieci.
+
+Protokół IP (Internet Protocol) jest najważniejszym protokołem tej warstwy.
