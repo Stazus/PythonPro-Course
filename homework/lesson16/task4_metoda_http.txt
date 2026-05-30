@@ -1,0 +1,7 @@
+Lesson 16 - Task 4
+
+Przeglądarka najprawdopodobniej wysyła metodę HTTP GET.
+
+Metoda GET służy do pobierania danych z serwera.
+Po wpisaniu adresu strony internetowej przeglądarka wysyła żądanie GET do serwera Google,
+aby pobrać zawartość strony głównej i wyświetlić ją użytkownikowi.
