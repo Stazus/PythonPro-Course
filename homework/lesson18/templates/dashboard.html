@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard rezerwacji</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <h1>Dashboard rezerwacji</h1>
+
+    <h2>Rezerwacje według departamentu</h2>
+
+    <canvas id="departmentChart" width="400" height="400"></canvas>
+
+    <script>
+        const labels = {{ labels | tojson }};
+        const values = {{ values | tojson }};
+
+        const ctx = document.getElementById('departmentChart');
+
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Liczba rezerwacji',
+                    data: values
+                }]
+            }
+        });
+    </script>
+
+</body>
+</html>

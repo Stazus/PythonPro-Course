@@ -1,7 +1,8 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, render_template
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import joinedload
-from sqlalchemy import event
+from sqlalchemy import event, func
+from datetime import datetime, timedelta
 import time
 
 from config import Config
@@ -20,6 +21,7 @@ def count_queries(conn, cursor, statement, parameters, context, executemany):
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
+    department = db.Column(db.String(100), nullable=False)
 
 
 class Room(db.Model):
@@ -30,6 +32,7 @@ class Room(db.Model):
 class Booking(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(200), nullable=False)
+    start_time = db.Column(db.DateTime, nullable=False)
 
     room_id = db.Column(db.Integer, db.ForeignKey("room.id"))
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
@@ -107,6 +110,87 @@ def debug_n_plus_1():
         }
     })
 
+@app.route("/dashboard")
+def dashboard():
+    thirty_days_ago = datetime.now() - timedelta(days=30)
+
+    bookings_by_department = (
+        db.session.query(
+            User.department,
+            func.count(Booking.id).label("booking_count")
+        )
+        .join(Booking)
+        .group_by(User.department)
+        .all()
+    )
+
+    popular_hours = (
+        db.session.query(
+            func.extract("dow", Booking.start_time).label("day_of_week"),
+            func.extract("hour", Booking.start_time).label("hour"),
+            func.count(Booking.id).label("booking_count")
+        )
+        .group_by("day_of_week", "hour")
+        .order_by("day_of_week", "hour")
+        .all()
+    )
+
+    daily_trend = (
+        db.session.query(
+            func.date(Booking.start_time).label("date"),
+            func.count(Booking.id).label("booking_count")
+        )
+        .filter(Booking.start_time >= thirty_days_ago)
+        .group_by("date")
+        .order_by("date")
+        .all()
+    )
+
+    return jsonify({
+        "bookings_by_department": [
+            {
+                "department": row.department,
+                "booking_count": row.booking_count
+            }
+            for row in bookings_by_department
+        ],
+        "popular_hours_heatmap": [
+            {
+                "day_of_week": int(row.day_of_week),
+                "hour": int(row.hour),
+                "booking_count": row.booking_count
+            }
+            for row in popular_hours
+        ],
+        "daily_trend_last_30_days": [
+            {
+                "date": str(row.date),
+                "booking_count": row.booking_count
+            }
+            for row in daily_trend
+        ]
+    })
+    
+@app.route("/dashboard-view")
+def dashboard_view():
+    bookings_by_department = (
+        db.session.query(
+            User.department,
+            func.count(Booking.id).label("booking_count")
+        )
+        .join(Booking)
+        .group_by(User.department)
+        .all()
+    )
+
+    labels = [row.department for row in bookings_by_department]
+    values = [row.booking_count for row in bookings_by_department]
+
+    return render_template(
+        "dashboard.html",
+        labels=labels,
+        values=values
+    )
 
 if __name__ == "__main__":
     with app.app_context():
