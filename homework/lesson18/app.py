@@ -3,6 +3,8 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import joinedload
 from sqlalchemy import event, func
 from datetime import datetime, timedelta
+from uuid import uuid4
+from dateutil.rrule import rrule, WEEKLY
 import time
 
 from config import Config
@@ -34,12 +36,17 @@ class Booking(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(200), nullable=False)
     start_time = db.Column(db.DateTime, nullable=False)
+    status = db.Column(db.String(20), default="confirmed")
 
     room_id = db.Column(db.Integer, db.ForeignKey("room.id"))
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
 
     room = db.relationship("Room")
     user = db.relationship("User")
+    
+    recurrence_rule = db.Column(db.String(50))
+    series_id = db.Column(db.String(36))
+        
     
 class Notification(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -249,6 +256,75 @@ def mark_notification_as_read(notification_id):
     return jsonify({
         "message": "Powiadomienie oznaczone jako przeczytane",
         "notification_id": notification.id
+    })
+    
+@app.route("/api/bookings/recurring", methods=["POST"])
+def create_recurring_booking():
+
+    series_id = str(uuid4())
+
+    user = User.query.first()
+    room = Room.query.first()
+
+    start_date = datetime.now()
+
+    bookings = []
+
+    for booking_date in rrule(
+        WEEKLY,
+        dtstart=start_date,
+        count=12
+    ):
+        booking = Booking(
+            title="Cykliczne spotkanie",
+            start_time=booking_date,
+            room=room,
+            user=user,
+            recurrence_rule="WEEKLY",
+            series_id=series_id
+        )
+
+        bookings.append(booking)
+
+    db.session.add_all(bookings)
+    db.session.commit()
+
+    return jsonify({
+        "message": "Utworzono serię rezerwacji",
+        "series_id": series_id,
+        "count": len(bookings)
+    })
+    
+@app.route("/api/bookings/<int:booking_id>/cancel", methods=["POST"])
+def cancel_single_booking(booking_id):
+    booking = Booking.query.get_or_404(booking_id)
+    booking.status = "cancelled"
+    db.session.commit()
+
+    return jsonify({
+        "message": "Anulowano pojedynczą rezerwację",
+        "booking_id": booking.id,
+        "status": booking.status
+    })
+    
+@app.route("/api/bookings/series/<series_id>/cancel", methods=["POST"])
+def cancel_booking_series(series_id):
+    bookings = Booking.query.filter_by(series_id=series_id).all()
+
+    if not bookings:
+        return jsonify({
+            "error": "Nie znaleziono serii rezerwacji"
+        }), 404
+
+    for booking in bookings:
+        booking.status = "cancelled"
+
+    db.session.commit()
+
+    return jsonify({
+        "message": "Anulowano całą serię rezerwacji",
+        "series_id": series_id,
+        "cancelled_count": len(bookings)
     })
 
 if __name__ == "__main__":
