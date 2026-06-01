@@ -1,3 +1,9 @@
+from flask import send_file
+from io import BytesIO
+
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
+from reportlab.lib.styles import getSampleStyleSheet
+
 from flask import Flask, jsonify, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import joinedload
@@ -326,6 +332,57 @@ def cancel_booking_series(series_id):
         "series_id": series_id,
         "cancelled_count": len(bookings)
     })
+    
+@app.route("/api/reports/monthly")
+def monthly_report():
+    month = request.args.get("month", "2026-06")
+
+    buffer = BytesIO()
+
+    doc = SimpleDocTemplate(buffer)
+    styles = getSampleStyleSheet()
+    elements = []
+
+    total_bookings = Booking.query.count()
+    total_rooms = Room.query.count()
+    total_users = User.query.count()
+
+    elements.append(Paragraph("Raport miesięczny rezerwacji", styles["Title"]))
+    elements.append(Spacer(1, 12))
+
+    elements.append(Paragraph(f"Miesiąc: {month}", styles["Normal"]))
+    elements.append(Spacer(1, 12))
+
+    elements.append(Paragraph("Podsumowanie", styles["Heading2"]))
+    elements.append(Paragraph(f"Liczba rezerwacji: {total_bookings}", styles["Normal"]))
+    elements.append(Paragraph(f"Liczba sal: {total_rooms}", styles["Normal"]))
+    elements.append(Paragraph(f"Liczba użytkowników: {total_users}", styles["Normal"]))
+    elements.append(Spacer(1, 12))
+
+    elements.append(Paragraph("Top 10 sal", styles["Heading2"]))
+
+    rooms = Room.query.limit(10).all()
+    for room in rooms:
+        elements.append(Paragraph(f"- {room.name}", styles["Normal"]))
+
+    elements.append(Spacer(1, 12))
+
+    elements.append(Paragraph("Top 10 użytkowników", styles["Heading2"]))
+
+    users = User.query.limit(10).all()
+    for user in users:
+        elements.append(Paragraph(f"- {user.name} ({user.department})", styles["Normal"]))
+
+    doc.build(elements)
+
+    buffer.seek(0)
+
+    return send_file(
+        buffer,
+        as_attachment=True,
+        download_name=f"raport_{month}.pdf",
+        mimetype="application/pdf"
+    )
 
 if __name__ == "__main__":
     with app.app_context():
