@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import joinedload
 from sqlalchemy import event, func
@@ -22,6 +22,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     department = db.Column(db.String(100), nullable=False)
+    is_admin = db.Column(db.Boolean, default=False)
 
 
 class Room(db.Model):
@@ -40,7 +41,38 @@ class Booking(db.Model):
     room = db.relationship("Room")
     user = db.relationship("User")
     
+class Notification(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
 
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+    user = db.relationship("User")
+
+    message = db.Column(db.String(255), nullable=False)
+    is_read = db.Column(db.Boolean, default=False)
+    created_at = db.Column(db.DateTime, default=datetime.now)
+    
+@event.listens_for(Booking, "after_insert")
+def create_notifications_after_booking(mapper, connection, target):
+    admin = User.query.filter_by(is_admin=True).first()
+
+    notifications = []
+
+    if admin:
+        notifications.append(
+            Notification(
+                user_id=admin.id,
+                message=f"Nowa rezerwacja: {target.title}"
+            )
+        )
+
+    notifications.append(
+        Notification(
+            user_id=target.user_id,
+            message=f"Przypomnienie: rezerwacja '{target.title}' została utworzona"
+        )
+    )
+
+    db.session.add_all(notifications)
 
 
 @app.route("/")
@@ -191,6 +223,33 @@ def dashboard_view():
         labels=labels,
         values=values
     )
+    
+@app.route("/api/notifications")
+def get_notifications():
+    notifications = Notification.query.filter_by(is_read=False).all()
+
+    return jsonify([
+        {
+            "id": notification.id,
+            "user_id": notification.user_id,
+            "message": notification.message,
+            "is_read": notification.is_read,
+            "created_at": notification.created_at.strftime("%Y-%m-%d %H:%M:%S")
+        }
+        for notification in notifications
+    ])
+
+
+@app.route("/api/notifications/<int:notification_id>/read", methods=["POST"])
+def mark_notification_as_read(notification_id):
+    notification = Notification.query.get_or_404(notification_id)
+    notification.is_read = True
+    db.session.commit()
+
+    return jsonify({
+        "message": "Powiadomienie oznaczone jako przeczytane",
+        "notification_id": notification.id
+    })
 
 if __name__ == "__main__":
     with app.app_context():

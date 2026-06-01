@@ -10,11 +10,12 @@ with app.app_context():
     user1 = User(name="Jan Kowalski", department="IT")
     user2 = User(name="Anna Nowak", department="HR")
     user3 = User(name="Piotr Wiśniewski", department="Marketing")
+    admin = User(name="Admin Systemu", department="Admin", is_admin=True)
 
     room1 = Room(name="Sala A")
     room2 = Room(name="Sala B")
 
-    db.session.add_all([user1, user2, user3, room1, room2])
+    db.session.add_all([user1, user2, user3, admin, room1, room2])
     db.session.commit()
 
     now = datetime.now().replace(minute=0, second=0, microsecond=0)
