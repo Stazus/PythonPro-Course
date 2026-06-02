@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson 18 - podsumowanie zadań</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='lesson18.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>Lesson 18 - podsumowanie zadań</h1>
+
+    <div class="task">
+        <h2>Task 1 - Połączenie z PostgreSQL</h2>
+        <a href="/test-db" target="_blank">Sprawdź /test-db</a>
+    </div>
+
+    <div class="task">
+        <h2>Task 2 - Problem N+1</h2>
+        <a href="/debug/n-plus-1" target="_blank">Pokaż porównanie zapytań</a>
+    </div>
+
+    <div class="task">
+        <h2>Task 3 - Dashboard statystyk</h2>
+        <a href="/dashboard" target="_blank">Dane JSON dashboardu</a>
+        <a href="/dashboard-view" target="_blank">Wykres dashboardu</a>
+    </div>
+
+    <div class="task">
+        <h2>Task 4 - Powiadomienia</h2>
+        <a href="/api/notifications" target="_blank">Lista powiadomień</a>
+        <p>POST: /api/notifications/&lt;id&gt;/read</p>
+    </div>
+
+    <div class="task">
+        <h2>Task 5 - Rezerwacje cykliczne</h2>
+        <p>POST: /api/bookings/recurring</p>
+        <p>POST: /api/bookings/&lt;id&gt;/cancel</p>
+        <p>POST: /api/bookings/series/&lt;series_id&gt;/cancel</p>
+    </div>
+
+    <div class="task">
+        <h2>Task 6 - Raport PDF</h2>
+        <a href="/api/reports/monthly?month=2026-06" target="_blank">Pobierz raport PDF</a>
+    </div>
+
+    <p class="note">
+        Endpointy POST najlepiej testować przez curl w drugim terminalu.
+    </p>
+</div>
+
+</body>
+</html>

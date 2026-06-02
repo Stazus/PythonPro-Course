@@ -1,4 +1,4 @@
-from flask import send_file
+from flask import Flask, jsonify, render_template, request, send_file
 from io import BytesIO
 
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
@@ -383,6 +383,10 @@ def monthly_report():
         download_name=f"raport_{month}.pdf",
         mimetype="application/pdf"
     )
+    
+@app.route("/lesson18")
+def lesson18_summary():
+    return render_template("lesson18.html")
 
 if __name__ == "__main__":
     with app.app_context():
