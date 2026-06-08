@@ -1,10 +1,13 @@
 tekst = "Python"
-liczba = int(tekst) # ValueError: invalid literal for int() with base 10: 'Python'
-print(liczba)
 
-# Wyjasnienie
-''' 
-liczba = int(tekst) nie można przekonwertować tekstu zawierającego litery na liczbę całkowitą
-funkcja int() działa tylko na tekstach, które zawierają cyfry, np. "123"
-tekst "Python" zawiera litery, więc konwersja kończy się blędem ValueError
-'''
+# liczba = int(tekst)
+
+# Wyjaśnienie:
+# Funkcja int() może konwertować na liczbę całkowitą tylko tekst,
+# który składa się z cyfr, np. "123".
+# Napis "Python" zawiera litery, dlatego próba wykonania:
+# int("Python")
+# powoduje błąd:
+# ValueError: invalid literal for int() with base 10.
+
+print("Program został naprawiony - błędna instrukcja została zakomentowana.")
