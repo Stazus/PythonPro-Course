@@ -7,3 +7,6 @@ def info(request):
 
 def rules(request):
     return HttpResponse("To jest regulamin serwisu.")
+
+def user_profile(request, username):
+    return HttpResponse(f"Witaj na profilu, {username}!")
