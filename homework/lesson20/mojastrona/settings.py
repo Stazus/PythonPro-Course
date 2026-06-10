@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'strony',
+    'notatnik',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
