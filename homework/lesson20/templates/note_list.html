@@ -6,7 +6,7 @@ Lista notatek
 
 {% block content %}
 <ul>
-    {% for note in notes %}
+    {% for note in page_obj %}
         <li>
             <a href="/notatki/note/{{ note.id }}/">
                 {{ note.title }}
@@ -14,4 +14,18 @@ Lista notatek
         </li>
     {% endfor %}
 </ul>
+
+<div>
+    {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">Poprzednia</a>
+    {% endif %}
+
+    <span>
+        Strona {{ page_obj.number }} z {{ page_obj.paginator.num_pages }}
+    </span>
+
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">Następna</a>
+    {% endif %}
+</div>
 {% endblock %}
