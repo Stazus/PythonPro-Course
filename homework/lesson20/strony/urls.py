@@ -7,4 +7,5 @@ urlpatterns = [
     path("user/<str:username>/", views.user_profile),
     path("products/", views.product_list),
     path("products/add/", views.add_product),
+    path("category/<int:category_id>/", views.products_by_category),
 ]

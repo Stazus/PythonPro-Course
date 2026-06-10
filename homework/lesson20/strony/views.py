@@ -32,3 +32,10 @@ def add_product(request):
 
 
     return render(request, "add_product.html", {"form": form})
+def products_by_category(request, category_id):
+    products = Product.objects.filter(category_id=category_id)
+    return render(
+        request,
+        "product_list.html",
+        {"products": products}
+    )
