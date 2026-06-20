@@ -1,6 +1,6 @@
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404
-from .models import Note
+from .models import Note, Category
 
 
 def note_list(request):
@@ -21,3 +21,13 @@ def note_list(request):
 def note_detail(request, note_id):
     note = get_object_or_404(Note, id=note_id)
     return render(request, "note_detail.html", {"note": note})
+
+def category_list(request):
+    categories = Category.objects.all()
+
+    return render(
+        request,
+        "category_list.html",
+        {"categories": categories}
+    )
+
