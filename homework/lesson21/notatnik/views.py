@@ -30,4 +30,17 @@ def category_list(request):
         "category_list.html",
         {"categories": categories}
     )
+    
+    
+def category_detail_view(request, pk):
+    category = get_object_or_404(Category, id=pk)
+
+    return render(
+        request,
+        "category_detail.html",
+        {"category": category}
+    )
+    
+    
+
 
