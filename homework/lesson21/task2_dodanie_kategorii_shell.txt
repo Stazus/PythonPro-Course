@@ -1,0 +1,19 @@
+Task 2 - Dodanie kategorii przez Django shell
+
+Wykonane polecenia:
+
+python manage.py shell
+
+from notatnik.models import Category
+
+Category.objects.create(name="Python")
+Category.objects.create(name="Django")
+Category.objects.create(name="Sport")
+
+Category.objects.all()
+
+Wynik:
+<QuerySet [<Category: Python>, <Category: Django>, <Category: Sport>]>
+
+Dodatkowo model Category został zarejestrowany w panelu admina Django - 
+można zobaczyć kategorie w /admin/.
