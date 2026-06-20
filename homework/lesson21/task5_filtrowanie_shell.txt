@@ -1,0 +1,24 @@
+Task 5 - Filtrowanie w Django shell
+
+Cel zadania:
+Pobrać z bazy danych tylko kategorię o nazwie "Sport" przy użyciu metody get().
+
+Wykonane polecenia:
+
+python manage.py shell
+
+from notatnik.models import Category
+
+sport = Category.objects.get(name="Sport")
+
+sport
+sport.name
+sport.id
+
+Przykładowy wynik:
+<Category: Sport>
+'Sport'
+
+Wyjaśnienie:
+Metoda get() zwraca dokładnie jeden obiekt z bazy danych.
+W tym przypadku pobiera jeden rekord modelu Category, którego pole name ma wartość "Sport".
