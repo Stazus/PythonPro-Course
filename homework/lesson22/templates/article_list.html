@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista artykułów</title>
+</head>
+<body>
+
+    <form method="get">
+        <input
+            type="text"
+            name="q"
+            value="{{ q }}"
+            placeholder="Szukaj artykułu"
+        >
+
+        <button type="submit">
+            Szukaj
+        </button>
+    </form>
+
+    <br>
+
+    <h1>Lista artykułów</h1>
+
+    <ul>
+        {% for article in articles %}
+            <li>
+                {{ article.title }}
+
+                {% if article.created_at %}
+                    <strong>NOWOŚĆ!</strong>
+                {% endif %}
+            </li>
+        {% empty %}
+            <li>Brak opublikowanych artykułów.</li>
+        {% endfor %}
+    </ul>
+
+    <p>
+        <a href="/categories/">Powrót do listy kategorii</a>
+    </p>
+</body>
+</html>

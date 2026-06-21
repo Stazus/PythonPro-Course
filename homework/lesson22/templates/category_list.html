@@ -1,0 +1,25 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista kategorii</title>
+    <link rel="stylesheet" href="{% static 'notatnik/style.css' %}">
+</head>
+<body>
+    <h1>Lista kategorii</h1>
+
+    <ul>
+        {% for category in categories %}
+            <li>{{ category.name }}</li>
+        {% empty %}
+            <li>Brak kategorii.</li>
+        {% endfor %}
+    </ul>
+
+    <p>
+        <a href="/products/">Powrót do listy produktów</a>
+    </p>
+</body>
+</html>
