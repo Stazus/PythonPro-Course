@@ -7,6 +7,18 @@
 <body>
     <h1>5 najnowszych postów</h1>
 
+    <form method="get">
+        <input
+            type="text"
+            name="q"
+            value="{{ q }}"
+            placeholder="Szukaj posta"
+        >
+        <button type="submit">Szukaj</button>
+    </form>
+
+    <br>
+
     <ul>
         {% for post in posts %}
             <li>

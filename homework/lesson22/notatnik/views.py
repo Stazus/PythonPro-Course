@@ -1,4 +1,5 @@
 from django.core.paginator import Paginator
+from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
 from .models import Note, Category, Article, Post
 
@@ -82,16 +83,27 @@ def posts_by_category(request, category_id):
         }
     )
     
-    
 def post_list(request):
-    posts = Post.objects.order_by("-created_at")[:5]
+    q = request.GET.get("q")
+
+    posts = Post.objects.all()
+
+    if q:
+        posts = posts.filter(
+            Q(title__icontains=q) | Q(content__icontains=q)
+        )
+
+    posts = posts.order_by("-created_at")[:5]
 
     return render(
         request,
         "post_list.html",
         {
             "posts": posts,
+            "q": q,
         }
     )
+    
+    
     
     
