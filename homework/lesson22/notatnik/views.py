@@ -1,3 +1,8 @@
+from django.contrib.auth import logout
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login, logout
+from django.shortcuts import redirect
+
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
@@ -103,7 +108,32 @@ def post_list(request):
             "q": q,
         }
     )
-    
-    
-    
-    
+
+
+def signup(request):
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect("/notatki/posts/")
+    else:
+        form = UserCreationForm()
+
+    return render(
+        request,
+        "registration/signup.html",
+        {
+            "form": form,
+        }
+    )
+
+def logout_user(request):
+    logout(request)
+    return redirect("/login/")
+
+
+
+
+
