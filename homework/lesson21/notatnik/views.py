@@ -43,18 +43,25 @@ def category_detail_view(request, pk):
     
     
 def article_list(request):
+    q = request.GET.get("q")
+
     articles = Article.objects.filter(
         is_published=True
-    ).order_by("-created_at")
+    )
+
+    if q:
+        articles = articles.filter(
+            title__icontains=q
+        )
+
+    articles = articles.order_by("-created_at")
 
     return render(
         request,
         "article_list.html",
         {
             "articles": articles,
+            "q": q,
         }
     )
-    
-    
-
 
