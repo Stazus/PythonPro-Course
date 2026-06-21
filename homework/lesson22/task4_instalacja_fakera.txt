@@ -1,0 +1,24 @@
+Task 4 - Instalacja biblioteki Faker
+
+1. Instalacja biblioteki:
+
+pip install Faker
+
+2. Sprawdzenie zainstalowanej wersji:
+
+pip show Faker
+
+Przykładowy wynik:
+
+Name: Faker
+Version: 40.23.0
+
+3. Test działania biblioteki:
+
+python -c "from faker import Faker; print(Faker().name())"
+
+Przykładowy wynik:
+
+Rachel Pacheco
+
+Biblioteka Faker została poprawnie zainstalowana i działa w środowisku wirtualnym projektu.
