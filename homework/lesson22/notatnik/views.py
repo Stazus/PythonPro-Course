@@ -1,6 +1,6 @@
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404
-from .models import Note, Category, Article
+from .models import Note, Category, Article, Post
 
 
 def note_list(request):
@@ -65,3 +65,21 @@ def article_list(request):
         }
     )
 
+
+def posts_by_category(request, category_id):
+    category = get_object_or_404(Category, id=category_id)
+
+    posts = Post.objects.filter(
+        category=category
+    )
+
+    return render(
+        request,
+        "posts_by_category.html",
+        {
+            "category": category,
+            "posts": posts,
+        }
+    )
+    
+    

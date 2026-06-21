@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Posty w kategorii</title>
+</head>
+<body>
+    <h1>Posty w kategorii: {{ category.name }}</h1>
+
+    <ul>
+        {% for post in posts %}
+            <li>{{ post.title }}</li>
+        {% empty %}
+            <li>Brak postów w tej kategorii.</li>
+        {% endfor %}
+    </ul>
+
+    <p>
+        <a href="/categories/">Powrót do listy kategorii</a>
+    </p>
+</body>
+</html>

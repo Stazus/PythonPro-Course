@@ -18,6 +18,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from notatnik.views import category_list, category_detail_view
+from notatnik.views import posts_by_category
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -25,4 +26,5 @@ urlpatterns = [
     path("notatki/", include("notatnik.urls")),
     path("categories/<int:pk>/", category_detail_view, name="category_detail"),
     path("categories/", category_list, name="category_list"),
+    path("category/<int:category_id>/", posts_by_category, name="posts_by_category"),
 ]
