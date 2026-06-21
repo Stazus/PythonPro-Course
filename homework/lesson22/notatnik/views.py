@@ -83,3 +83,15 @@ def posts_by_category(request, category_id):
     )
     
     
+def post_list(request):
+    posts = Post.objects.order_by("-created_at")[:5]
+
+    return render(
+        request,
+        "post_list.html",
+        {
+            "posts": posts,
+        }
+    )
+    
+    

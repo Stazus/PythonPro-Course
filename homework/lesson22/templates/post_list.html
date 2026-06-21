@@ -1,0 +1,20 @@
+,<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Ostatnie posty</title>
+</head>
+<body>
+    <h1>5 najnowszych postów</h1>
+
+    <ul>
+        {% for post in posts %}
+            <li>
+                {{ post.title }} — {{ post.created_at }}
+            </li>
+        {% empty %}
+            <li>Brak postów.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
