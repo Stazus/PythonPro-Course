@@ -1,6 +1,6 @@
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404
-from .models import Note, Category
+from .models import Note, Category, Article
 
 
 def note_list(request):
@@ -39,6 +39,20 @@ def category_detail_view(request, pk):
         request,
         "category_detail.html",
         {"category": category}
+    )
+    
+    
+def article_list(request):
+    articles = Article.objects.filter(
+        is_published=True
+    ).order_by("-created_at")
+
+    return render(
+        request,
+        "article_list.html",
+        {
+            "articles": articles,
+        }
     )
     
     
