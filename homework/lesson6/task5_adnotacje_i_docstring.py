@@ -15,8 +15,8 @@ def kalkulator(a: float, b: float, operacja: str) -> float | str:
         return a + b
     elif operacja == "-":
         return a - b
-    elif operacja == "+":
-        return a + b
+    elif operacja == "*":
+        return a * b
     elif operacja == "/":
         if b != 0:
             return a / b
