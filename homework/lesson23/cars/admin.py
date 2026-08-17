@@ -10,6 +10,7 @@ class CarAdmin(admin.ModelAdmin):
     search_fields = ("brand", "model")
     list_filter = ("year", "is_available")
     ordering = ("-year", "brand")
+    actions = ("mark_as_available",)
 
     @admin.display(description="Wiek samochodu")
     def car_age(self, obj):
@@ -29,3 +30,7 @@ class CarAdmin(admin.ModelAdmin):
                 obj.photo.url,
             )
         return "Brak zdjęcia"
+
+    @admin.action(description="Oznacz wybrane samochody jako dostępne")
+    def mark_as_available(self, request, queryset):
+        queryset.update(is_available=True)
