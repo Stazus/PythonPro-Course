@@ -7,3 +7,4 @@ class CarAdmin(admin.ModelAdmin):
     list_display = ("brand", "model", "year", "is_available")
     search_fields = ("brand", "model")
     list_filter = ("year", "is_available")
+    ordering = ("-year", "brand")
