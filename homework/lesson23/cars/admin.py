@@ -1,11 +1,12 @@
 from datetime import date
 
 from django.contrib import admin
+from django.utils.html import format_html
 from .models import Car
 
 @admin.register(Car)
 class CarAdmin(admin.ModelAdmin):
-    list_display = ("brand", "model", "year", "is_available", "car_age")
+    list_display = ("brand", "model", "year", "availability_status", "car_age")
     search_fields = ("brand", "model")
     list_filter = ("year", "is_available")
     ordering = ("-year", "brand")
@@ -13,3 +14,9 @@ class CarAdmin(admin.ModelAdmin):
     @admin.display(description="Wiek samochodu")
     def car_age(self, obj):
         return date.today().year - obj.year
+
+    @admin.display(description="Dostępność")
+    def availability_status(self, obj):
+        if obj.is_available:
+            return format_html('<span style="color: green;">Dostępny</span>')
+        return format_html('<span style="color: red;">Niedostępny</span>')
