@@ -25,7 +25,7 @@ class CarAdmin(admin.ModelAdmin):
     def photo_thumbnail(self, obj):
         if obj.photo:
             return format_html(
-                '<img src="{}" width="100" height="60" style="object-fit: cover;">',
+                '<img src="{}" width="150" height="60" style="object-fit: cover;">',
                 obj.photo.url,
             )
         return "Brak zdjęcia"
