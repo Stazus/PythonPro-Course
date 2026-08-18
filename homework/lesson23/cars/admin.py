@@ -1,20 +1,18 @@
-from datetime import date
-
 from django.contrib import admin
 from django.utils.html import format_html
 from .models import Car
 
 @admin.register(Car)
 class CarAdmin(admin.ModelAdmin):
-    list_display = ("brand", "model", "year", "availability_status", "car_age", "photo_thumbnail")
+    list_display = ("brand", "model", "year", "availability_status", "photo_thumbnail", "full_name")
     search_fields = ("brand", "model")
     list_filter = ("year", "is_available")
     ordering = ("-year",)
     actions = ("mark_as_available",)
 
-    @admin.display(description="Wiek samochodu")
-    def car_age(self, obj):
-        return date.today().year - obj.year
+    @admin.display(description="Pełna nazwa")
+    def full_name(self, obj):
+        return f"{obj.brand} {obj.model}"
 
     @admin.display(description="Dostępność")
     def availability_status(self, obj):
