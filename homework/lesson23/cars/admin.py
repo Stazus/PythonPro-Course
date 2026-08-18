@@ -13,7 +13,7 @@ class DealerAdmin(admin.ModelAdmin):
 
 @admin.register(Car)
 class CarAdmin(admin.ModelAdmin):
-    list_display = ("brand", "model", "year", "availability_status", "photo_thumbnail", "full_name")
+    list_display = ("brand", "model", "year", "is_available", "photo_thumbnail", "full_name")
     search_fields = ("brand", "model")
     list_filter = ("year", "is_available")
     ordering = ("-year",)
@@ -25,12 +25,6 @@ class CarAdmin(admin.ModelAdmin):
         return f"{obj.brand} {obj.model}"
 
     full_name.short_description = "Pełna nazwa"
-
-    @admin.display(description="Dostępność")
-    def availability_status(self, obj):
-        if obj.is_available:
-            return format_html('<span style="color: green;">Dostępny</span>')
-        return format_html('<span style="color: red;">Niedostępny</span>')
 
     @admin.display(description="Zdjęcie")
     def photo_thumbnail(self, obj):
