@@ -20,9 +20,11 @@ class CarAdmin(admin.ModelAdmin):
     readonly_fields = ("year",)
     actions = ("mark_as_unavailable",)
 
-    @admin.display(description="Pełna nazwa")
+
     def full_name(self, obj):
         return f"{obj.brand} {obj.model}"
+
+    full_name.short_description = "Pełna nazwa"
 
     @admin.display(description="Dostępność")
     def availability_status(self, obj):
