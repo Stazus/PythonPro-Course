@@ -1,6 +1,15 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from .models import Car
+from .models import Car, Dealer
+
+class CarInline(admin.TabularInline):
+    model = Car
+    extra = 0
+
+@admin.register(Dealer)
+class DealerAdmin(admin.ModelAdmin):
+    list_display = ("name", "address")
+    inlines = [CarInline]
 
 @admin.register(Car)
 class CarAdmin(admin.ModelAdmin):
