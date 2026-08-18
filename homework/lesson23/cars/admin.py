@@ -9,7 +9,7 @@ class CarAdmin(admin.ModelAdmin):
     list_filter = ("year", "is_available")
     ordering = ("-year",)
     readonly_fields = ("year",)
-    actions = ("mark_as_available",)
+    actions = ("mark_as_unavailable",)
 
     @admin.display(description="Pełna nazwa")
     def full_name(self, obj):
@@ -30,6 +30,10 @@ class CarAdmin(admin.ModelAdmin):
             )
         return "Brak zdjęcia"
 
-    @admin.action(description="Oznacz wybrane samochody jako dostępne")
-    def mark_as_available(self, request, queryset):
-        queryset.update(is_available=True)
+    @admin.action(description="Oznacz jako niedostępne")
+    def mark_as_unavailable(self, request, queryset):
+        updated = queryset.update(is_available=False)
+        self.message_user(
+            request,
+            f"Oznaczono jako niedostępne: {updated}",
+        )
