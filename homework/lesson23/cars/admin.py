@@ -8,6 +8,7 @@ class CarAdmin(admin.ModelAdmin):
     search_fields = ("brand", "model")
     list_filter = ("year", "is_available")
     ordering = ("-year",)
+    readonly_fields = ("year",)
     actions = ("mark_as_available",)
 
     @admin.display(description="Pełna nazwa")
