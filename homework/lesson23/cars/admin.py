@@ -9,7 +9,7 @@ class CarAdmin(admin.ModelAdmin):
     list_display = ("brand", "model", "year", "availability_status", "car_age", "photo_thumbnail")
     search_fields = ("brand", "model")
     list_filter = ("year", "is_available")
-    ordering = ("-year", "brand")
+    ordering = ("-year",)
     actions = ("mark_as_available",)
 
     @admin.display(description="Wiek samochodu")
