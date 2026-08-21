@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson 24</title>
+</head>
+<body>
+
+<nav>
+    {% if user.is_authenticated %}
+        <a href="{% url 'profile' %}">Profil</a>
+        <a href="{% url 'logout' %}">Wyloguj</a>
+    {% else %}
+        <a href="{% url 'login' %}">Zaloguj</a>
+        <a href="{% url 'register' %}">Zarejestruj</a>
+    {% endif %}
+</nav>
+
+{% block content %}
+{% endblock %}
+
+</body>
+</html>
