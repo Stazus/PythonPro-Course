@@ -1,0 +1,16 @@
+Zadanie 7 - Przekierowanie po zalogowaniu
+
+Django automatycznie używa parametru "next" w adresie logowania.
+
+Przykład:
+Użytkownik niezalogowany próbuje wejść na:
+ /profile/
+
+Widok zabezpieczony dekoratorem @login_required przekierowuje go na:
+ /login/?next=/profile/
+
+Po poprawnym zalogowaniu LoginView odczytuje parametr "next"
+i przekierowuje użytkownika z powrotem na:
+ /profile/
+
+Mechanizm został sprawdzony w praktyce i działa poprawnie.
