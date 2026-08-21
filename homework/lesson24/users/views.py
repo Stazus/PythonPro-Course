@@ -1,9 +1,12 @@
 from django.contrib import messages
+from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
 
 from .forms import CustomUserCreationForm
+
 
 def register(request):
     if request.method == "POST":
@@ -22,6 +25,7 @@ def register(request):
 
     return render(request, "register.html", {"form": form})
 
+
 @login_required
 def profile(request):
     return render(request, "profile.html")
@@ -30,3 +34,9 @@ def profile(request):
 @login_required
 def home(request):
     return render(request, "home.html")
+
+
+@staff_member_required
+def user_list(request):
+    users = User.objects.all()
+    return render(request, "user_list.html", {"users": users})

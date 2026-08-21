@@ -18,11 +18,12 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.urls import path
 
-from users.views import home, profile, register
+from users.views import home, profile, register, user_list
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('profile/', profile, name='profile'),
+    path('users/', user_list, name='user_list'),
     path('register/', register, name='register'),
     path(
         'login/',
