@@ -1,0 +1,21 @@
+Zadanie 10 – Odświeżanie tokenu
+
+Wykorzystałem refresh token otrzymany podczas logowania i wysłałem zapytanie POST na endpoint:
+
+/auth/jwt/refresh/
+
+W odpowiedzi otrzymałem nowy access token.
+
+Następnie użyłem nowego access tokenu do odpytania chronionego endpointu:
+
+/api/protected/
+
+Zapytanie zakończyło się odpowiedzią:
+
+HTTP/1.1 200 OK
+
+Odpowiedź serwera:
+
+{"username":"testuser26"}
+
+Oznacza to, że refresh token poprawnie wygenerował nowy access token, a nowy access token został poprawnie użyty do uwierzytelnienia użytkownika w chronionym endpointcie.
