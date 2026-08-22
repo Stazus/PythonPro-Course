@@ -19,6 +19,8 @@ from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 
 from products.views import (
+    AuthorViewSet,
+    BookViewSet,
     NoteViewSet,
     ProductViewSet,
     calculate,
@@ -29,6 +31,8 @@ from products.views import (
 router = DefaultRouter()
 router.register("products", ProductViewSet)
 router.register("notes", NoteViewSet)
+router.register("authors", AuthorViewSet)
+router.register("books", BookViewSet)
 
 urlpatterns = [
     path("admin/", admin.site.urls),

@@ -1,0 +1,46 @@
+Lekcja 25 - Zadanie 9 - Relacje w API
+
+Utworzono modele:
+
+1. Author
+- name
+
+2. Book
+- title
+- publication_year
+- author - ForeignKey do modelu Author
+
+Utworzono:
+- AuthorSerializer
+- BookSerializer
+- AuthorViewSet
+- BookViewSet
+
+Endpointy:
+http://127.0.0.1:8000/api/authors/
+http://127.0.0.1:8000/api/books/
+
+W BookSerializer zastosowano StringRelatedField,
+dzięki czemu przy wyświetlaniu książki API zwraca nazwę autora,
+a nie tylko jego ID.
+
+Do zapisu relacji wykorzystano pole author_id.
+
+Testy wykonane w Postmanie:
+
+1. Utworzenie autora
+POST /api/authors/
+Wynik: HTTP 201 Created
+
+2. Utworzenie książki przypisanej do autora
+POST /api/books/
+Wynik: HTTP 201 Created
+
+3. Pobranie listy książek
+GET /api/books/
+Wynik: HTTP 200 OK
+
+API poprawnie zwraca:
+"author": "Adam Mickiewicz"
+
+Relacja Book -> Author działa poprawnie.

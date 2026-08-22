@@ -2,8 +2,13 @@ from rest_framework import viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from .models import Note, Product
-from .serializers import NoteSerializer, ProductSerializer
+from .models import Author, Book, Note, Product
+from .serializers import (
+    AuthorSerializer,
+    BookSerializer,
+    NoteSerializer,
+    ProductSerializer,
+)
 
 
 class ProductViewSet(viewsets.ModelViewSet):
@@ -27,6 +32,16 @@ class ProductViewSet(viewsets.ModelViewSet):
 class NoteViewSet(viewsets.ModelViewSet):
     queryset = Note.objects.all()
     serializer_class = NoteSerializer
+
+
+class AuthorViewSet(viewsets.ModelViewSet):
+    queryset = Author.objects.all()
+    serializer_class = AuthorSerializer
+
+
+class BookViewSet(viewsets.ModelViewSet):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
 
 
 @api_view(["GET"])
