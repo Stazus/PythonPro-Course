@@ -1,0 +1,21 @@
+Lekcja 25 - Zadanie 10 - Własna walidacja w serializerze
+
+W NoteSerializer dodano własną metodę walidacji:
+validate_title()
+
+Walidacja sprawdza, czy tytuł notatki ma co najmniej 5 znaków.
+
+Testy wykonane w Postmanie:
+
+1. Próba utworzenia notatki z tytułem "ABC"
+POST /api/notes/
+Wynik: HTTP 400 Bad Request
+
+Komunikat:
+"Tytuł notatki musi mieć co najmniej 5 znaków."
+
+2. Próba utworzenia notatki z poprawnym tytułem "Notatka testowa"
+POST /api/notes/
+Wynik: HTTP 201 Created
+
+Walidacja działa poprawnie.

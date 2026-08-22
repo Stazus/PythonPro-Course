@@ -14,6 +14,13 @@ class NoteSerializer(serializers.ModelSerializer):
         model = Note
         fields = ["id", "title", "content", "created_at"]
 
+    def validate_title(self, value):
+        if len(value) < 5:
+            raise serializers.ValidationError(
+                "Tytuł notatki musi mieć co najmniej 5 znaków."
+            )
+        return value
+
 
 class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
