@@ -1,0 +1,29 @@
+Lekcja 26 - Zadanie 6 - Logowanie i inspekcja tokenu
+
+W Postmanie wysłano żądanie:
+
+POST /auth/jwt/create/
+
+Zalogowano użytkownika:
+testuser26
+
+Serwer zwrócił:
+HTTP 200 OK
+
+W odpowiedzi otrzymano tokeny:
+- refresh
+- access
+
+Token access został zdekodowany na stronie jwt.io.
+
+W sekcji Payload znajdują się między innymi:
+user_id: 2
+iat: 1787423328
+exp: 1787423628
+
+Pole user_id jest obecne w tokenie.
+
+Różnica pomiędzy exp i iat wynosi 300 sekund,
+czyli access token wygasa po 5 minutach.
+
+Logowanie JWT i generowanie tokenów działa poprawnie.
