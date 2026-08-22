@@ -1,0 +1,3 @@
+Lekcja 26 - Zadanie 1 - Analiza Middleware
+
+SessionMiddleware zarządza sesją użytkownika, a AuthenticationMiddleware rozpoznaje użytkownika na podstawie danych uwierzytelniających i udostępnia go w żądaniu jako request.user.
