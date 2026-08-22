@@ -28,3 +28,40 @@ def set_name(request):
 def hello(request):
     name = request.COOKIES.get("user_name", "Gość")
     return Response({"message": f"Witaj, {name}!"})
+
+
+@api_view(["GET"])
+def calculate(request):
+    num1 = request.query_params.get("num1")
+    num2 = request.query_params.get("num2")
+    operation = request.query_params.get("operation")
+
+    try:
+        num1 = float(num1)
+        num2 = float(num2)
+    except (TypeError, ValueError):
+        return Response(
+            {"error": "Parametry num1 i num2 muszą być liczbami."},
+            status=400,
+        )
+
+    if operation == "add":
+        result = num1 + num2
+    elif operation == "subtract":
+        result = num1 - num2
+    elif operation == "multiply":
+        result = num1 * num2
+    elif operation == "divide":
+        if num2 == 0:
+            return Response(
+                {"error": "Nie można dzielić przez zero."},
+                status=400,
+            )
+        result = num1 / num2
+    else:
+        return Response(
+            {"error": "Nieprawidłowa operacja."},
+            status=400,
+        )
+
+    return Response({"result": result})

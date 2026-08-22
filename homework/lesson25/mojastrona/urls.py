@@ -18,7 +18,13 @@ from django.contrib import admin
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 
-from products.views import NoteViewSet, ProductViewSet, hello, set_name
+from products.views import (
+    NoteViewSet,
+    ProductViewSet,
+    calculate,
+    hello,
+    set_name,
+)
 
 router = DefaultRouter()
 router.register("products", ProductViewSet)
@@ -28,5 +34,6 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/hello/", hello, name="hello"),
     path("api/set-name/", set_name, name="set_name"),
+    path("api/calculate/", calculate, name="calculate"),
     path("api/", include(router.urls)),
 ]

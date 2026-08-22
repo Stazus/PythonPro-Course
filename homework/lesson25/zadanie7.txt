@@ -1,0 +1,59 @@
+Lekcja 25 - Zadanie 7 - API Kalkulatora
+
+Endpoint:
+/api/calculate/
+
+Widok funkcyjny został utworzony z użyciem:
+@api_view(["GET"])
+
+API przyjmuje parametry:
+- num1
+- num2
+- operation
+
+Obsługiwane operacje:
+- add - dodawanie
+- subtract - odejmowanie
+- multiply - mnożenie
+- divide - dzielenie
+
+Przeprowadzone testy:
+
+1. Dodawanie
+num1=10, num2=5, operation=add
+Wynik: 15.0
+HTTP 200 OK
+
+2. Odejmowanie
+num1=10, num2=5, operation=subtract
+Wynik: 5.0
+HTTP 200 OK
+
+3. Mnożenie
+num1=10, num2=5, operation=multiply
+Wynik: 50.0
+HTTP 200 OK
+
+4. Dzielenie
+num1=10, num2=5, operation=divide
+Wynik: 2.0
+HTTP 200 OK
+
+Obsługa błędów:
+
+5. Dzielenie przez zero
+num1=10, num2=0, operation=divide
+Wynik: HTTP 400 Bad Request
+Komunikat: Nie można dzielić przez zero.
+
+6. Nieprawidłowa operacja
+operation=power
+Wynik: HTTP 400 Bad Request
+Komunikat: Nieprawidłowa operacja.
+
+7. Nieprawidłowa wartość liczbowa
+num1=abc
+Wynik: HTTP 400 Bad Request
+Komunikat: Parametry num1 i num2 muszą być liczbami.
+
+API kalkulatora działa poprawnie i obsługuje wymagane przypadki błędów.
