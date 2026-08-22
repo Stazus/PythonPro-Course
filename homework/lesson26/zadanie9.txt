@@ -1,0 +1,32 @@
+Lekcja 26 - Zadanie 9 - Czas ważności tokenu JWT
+
+Skonfigurowano krótki czas ważności tokenu access JWT.
+
+Następnie wygenerowano token przez endpoint:
+
+POST /auth/jwt/create/
+
+Świeżo wygenerowany token access został użyty do wysłania żądania:
+
+GET /api/protected/
+
+Authorization: Bearer Token
+
+Przed wygaśnięciem tokenu chroniony endpoint był dostępny.
+
+Po upływie czasu ważności tego samego tokenu ponownie wysłano żądanie:
+
+GET /api/protected/
+
+Serwer zwrócił:
+
+HTTP 401 Unauthorized
+
+W odpowiedzi pojawił się komunikat:
+
+"Token is expired"
+
+Oznacza to, że po upływie ustawionego czasu ważności token access
+nie może być używany do uzyskania dostępu do chronionego endpointu.
+
+Mechanizm wygasania tokenu JWT działa poprawnie.
