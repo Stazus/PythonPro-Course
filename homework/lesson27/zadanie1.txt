@@ -1,0 +1,13 @@
+Zadanie 1 – Konfiguracja locmem cache
+
+W pliku settings.py skonfigurowałem domyślny cache Django z użyciem backendu:
+
+django.core.cache.backends.locmem.LocMemCache
+
+Następnie uruchomiłem serwer deweloperski Django.
+
+Serwer uruchomił się poprawnie bez błędów:
+
+System check identified no issues (0 silenced).
+
+Oznacza to, że konfiguracja LocMemCache działa poprawnie.
