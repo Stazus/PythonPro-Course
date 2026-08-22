@@ -1,0 +1,20 @@
+Lekcja 26 - Zadanie 5 - Rejestracja przez Postman
+
+Uruchomiono serwer deweloperski Django.
+
+W Postmanie wysłano żądanie:
+
+POST /auth/users/
+
+Dane użytkownika:
+username: testuser26
+email: test26@example.com
+
+Serwer zwrócił:
+HTTP 201 Created
+
+Następnie sprawdzono panel administracyjny Django.
+Użytkownik testuser26 został poprawnie utworzony i znajduje się
+na liście użytkowników.
+
+Rejestracja przez Djoser działa poprawnie.
