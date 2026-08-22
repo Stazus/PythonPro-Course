@@ -1,0 +1,35 @@
+Lekcja 25 - Zadanie 8 - Filtrowanie produktów po cenie
+
+Endpoint:
+http://127.0.0.1:8000/api/products/
+
+W ProductViewSet została nadpisana metoda get_queryset(),
+która umożliwia filtrowanie produktów według ceny.
+
+Dostępne parametry:
+- min_price - minimalna cena produktu
+- max_price - maksymalna cena produktu
+
+Testy:
+
+1. Filtrowanie według przedziału cenowego:
+GET /api/products/?min_price=100&max_price=300
+Wynik:
+Klawiatura - 249.99
+HTTP 200 OK
+
+2. Filtrowanie według ceny minimalnej:
+GET /api/products/?min_price=800
+Wynik:
+Laptop - 2999.99
+Monitor - 899.99
+HTTP 200 OK
+
+3. Filtrowanie według ceny maksymalnej:
+GET /api/products/?max_price=900
+Wynik:
+Monitor - 899.99
+Klawiatura - 249.99
+HTTP 200 OK
+
+Filtrowanie po min_price i max_price działa poprawnie.
