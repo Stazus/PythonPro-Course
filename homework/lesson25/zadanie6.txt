@@ -1,0 +1,38 @@
+Lekcja 25 - Zadanie 6 - API do notatek
+
+Endpoint:
+http://127.0.0.1:8000/api/notes/
+
+Model Note:
+- title
+- content
+- created_at
+
+API zostało zbudowane przy użyciu:
+- ModelSerializer
+- ModelViewSet
+- DefaultRouter
+
+Testy wykonane w Postmanie:
+
+1. Tworzenie notatki
+POST /api/notes/
+Wynik: HTTP 201 Created
+
+2. Lista notatek
+GET /api/notes/
+Wynik: HTTP 200 OK
+
+3. Szczegóły pojedynczej notatki
+GET /api/notes/1/
+Wynik: HTTP 200 OK
+
+4. Aktualizacja notatki
+PUT /api/notes/1/
+Wynik: HTTP 200 OK
+
+5. Usunięcie notatki
+DELETE /api/notes/1/
+Wynik: HTTP 204 No Content
+
+Wszystkie wymagane operacje CRUD zostały przetestowane i działają poprawnie.
