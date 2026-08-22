@@ -1,0 +1,14 @@
+Lekcja 26 - Zadanie 7 - Tworzenie własnego Middleware
+
+Utworzono własny middleware RequestMethodMiddleware.
+
+Middleware dla każdego przychodzącego żądania wyświetla w konsoli
+informację o użytej metodzie HTTP.
+
+Po wejściu w przeglądarce na /admin/ w konsoli pojawił się komunikat:
+
+Otrzymano zapytanie metodą GET
+
+Middleware został dodany do listy MIDDLEWARE w settings.py.
+
+Własny middleware działa poprawnie.
