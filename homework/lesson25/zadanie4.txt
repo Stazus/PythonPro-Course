@@ -1,0 +1,23 @@
+Lekcja 25 - Zadanie 4 - Testowanie w Postmanie
+
+Endpoint:
+http://127.0.0.1:8000/api/products/
+
+Za pomocą programu Postman dodano metodą POST trzy produkty:
+
+1. Laptop - 2999.99
+2. Monitor - 899.99
+3. Klawiatura - 249.99
+
+Każde zapytanie POST zakończyło się odpowiedzią:
+HTTP 201 Created
+
+Następnie wykonano zapytanie GET na endpoint:
+/api/products/
+
+Otrzymano odpowiedź:
+HTTP 200 OK
+
+Zapytanie GET zwróciło wszystkie trzy wcześniej dodane produkty.
+
+Zadanie zostało wykonane i przetestowane w Postmanie.
