@@ -23,4 +23,5 @@ urlpatterns = [
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.jwt')),
     path('api/protected/', ProtectedView.as_view(), name='protected'),
+    path("__debug__/", include("debug_toolbar.urls")),
 ]

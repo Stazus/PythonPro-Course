@@ -1,0 +1,11 @@
+Zadanie 2 – Instalacja Django Debug Toolbar
+
+Zainstalowałem pakiet django-debug-toolbar i skonfigurowałem go w projekcie Django.
+
+Dodałem "debug_toolbar" do INSTALLED_APPS oraz DebugToolbarMiddleware do MIDDLEWARE.
+
+Dodałem również adres "__debug__/" do konfiguracji URL oraz ustawiłem INTERNAL_IPS dla 127.0.0.1.
+
+Uruchomiłem serwer deweloperski Django. Aplikacja uruchomiła się bez błędów.
+
+Django Debug Toolbar jest widoczny w aplikacji, a w panelu dostępna jest zakładka "Cache".
