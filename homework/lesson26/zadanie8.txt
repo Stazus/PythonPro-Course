@@ -1,0 +1,40 @@
+Lekcja 26 - Zadanie 8 - Chroniony endpoint
+
+Utworzono widok ProtectedView oparty na APIView.
+
+Widok wykorzystuje:
+permission_classes = [IsAuthenticated]
+
+Endpoint:
+GET /api/protected/
+
+Widok zwraca nazwę zalogowanego użytkownika:
+request.user.username
+
+Test 1 - bez tokenu JWT:
+
+GET /api/protected/
+
+Authorization: No Auth
+
+Wynik:
+HTTP 401 Unauthorized
+
+Komunikat:
+"Authentication credentials were not provided."
+
+Test 2 - z poprawnym access tokenem JWT:
+
+GET /api/protected/
+
+Authorization: Bearer Token
+
+Wynik:
+HTTP 200 OK
+
+Odpowiedź:
+{
+    "username": "testuser26"
+}
+
+Chroniony endpoint działa poprawnie.
