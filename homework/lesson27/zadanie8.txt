@@ -1,0 +1,37 @@
+Zadanie 8 – Różne czasy cache dla różnych metod ViewSetu
+
+Utworzyłem model Product, serializer ProductSerializer oraz ProductViewSet.
+
+Dla metody list ustawiłem cache na 10 minut:
+
+@method_decorator(cache_page(60 * 10))
+
+Dla metody retrieve ustawiłem cache na 1 minutę:
+
+@method_decorator(cache_page(60))
+
+Metody create, update, partial_update oraz destroy nie zostały objęte cache.
+
+Test list:
+
+Pierwsze żądanie GET /api/products/ wykonało widok i w terminalu pojawił się komunikat:
+
+PRODUCT LIST - wykonano widok
+
+Drugie żądanie GET /api/products/ zostało obsłużone z cache.
+
+Test retrieve:
+
+Pierwsze żądanie GET /api/products/1/ wykonało widok i w terminalu pojawił się komunikat:
+
+PRODUCT RETRIEVE - wykonano widok
+
+Drugie żądanie GET /api/products/1/ zostało obsłużone z cache.
+
+Operacje niecachowane:
+
+POST /api/products/ -> HTTP 201 Created
+PATCH /api/products/2/ -> HTTP 200 OK
+DELETE /api/products/2/ -> HTTP 204 No Content
+
+Oznacza to, że list jest cachowany przez 10 minut, retrieve przez 1 minutę, a operacje create, update i destroy nie są cachowane.

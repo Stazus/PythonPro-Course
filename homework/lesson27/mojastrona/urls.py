@@ -18,6 +18,12 @@ from django.contrib import admin
 from django.urls import include, path
 from api.views import ProtectedView, SelectiveCacheView
 
+from rest_framework.routers import DefaultRouter
+from api.views import ProtectedView, SelectiveCacheView, ProductViewSet
+
+router = DefaultRouter()
+router.register(r'products', ProductViewSet)
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('djoser.urls')),
@@ -29,4 +35,5 @@ urlpatterns = [
         SelectiveCacheView.as_view(),
         name='selective-cache'
 ),
+    path('api/', include(router.urls)),
 ]

@@ -9,6 +9,10 @@ import time
 from django.contrib.auth import get_user_model
 from django.core.cache import cache
 
+from rest_framework import viewsets
+
+from .models import Product
+from .serializers import ProductSerializer
 
 class ProtectedView(APIView):
     permission_classes = [IsAuthenticated]
@@ -48,3 +52,18 @@ class SelectiveCacheView(APIView):
             "users_count": users_count,
             "complex_result": complex_result,
         })
+
+
+class ProductViewSet(viewsets.ModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+    @method_decorator(cache_page(60 * 10))
+    def list(self, request, *args, **kwargs):
+        print("PRODUCT LIST - wykonano widok")
+        return super().list(request, *args, **kwargs)
+
+    @method_decorator(cache_page(60))
+    def retrieve(self, request, *args, **kwargs):
+        print("PRODUCT RETRIEVE - wykonano widok")
+        return super().retrieve(request, *args, **kwargs)
