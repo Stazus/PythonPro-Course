@@ -1,0 +1,29 @@
+Zadanie 9 – Unieważnianie cache po aktualizacji obiektu
+
+Rozszerzyłem ProductViewSet z zadania 8 o własny klucz cache dla widoku szczegółów produktu.
+
+Dla każdego produktu używany jest klucz:
+
+product_detail_<id>
+
+Pierwsze żądanie GET /api/products/1/ zwróciło:
+
+PRODUCT 1 - CACHE MISS
+
+Drugie żądanie GET /api/products/1/ zwróciło:
+
+PRODUCT 1 - CACHE HIT
+
+Następnie wykonałem częściową aktualizację produktu:
+
+PATCH /api/products/1/
+
+Po aktualizacji w terminalu pojawił się komunikat:
+
+USUNIĘTO CACHE DLA PRODUKTU 1
+
+Kolejne żądanie GET /api/products/1/ zwróciło:
+
+PRODUCT 1 - CACHE MISS
+
+Oznacza to, że po operacji partial_update cache szczegółów konkretnego produktu został poprawnie unieważniony i odbudowany przy następnym odczycie.

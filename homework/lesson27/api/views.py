@@ -54,6 +54,7 @@ class SelectiveCacheView(APIView):
         })
 
 
+
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
@@ -63,7 +64,29 @@ class ProductViewSet(viewsets.ModelViewSet):
         print("PRODUCT LIST - wykonano widok")
         return super().list(request, *args, **kwargs)
 
-    @method_decorator(cache_page(60))
     def retrieve(self, request, *args, **kwargs):
-        print("PRODUCT RETRIEVE - wykonano widok")
-        return super().retrieve(request, *args, **kwargs)
+        product_id = kwargs["pk"]
+        cache_key = f"product_detail_{product_id}"
+
+        cached_data = cache.get(cache_key)
+
+        if cached_data is not None:
+            print(f"PRODUCT {product_id} - CACHE HIT")
+            return Response(cached_data)
+
+        print(f"PRODUCT {product_id} - CACHE MISS")
+
+        product = self.get_object()
+        serializer = self.get_serializer(product)
+
+        cache.set(cache_key, serializer.data, 60)
+
+        return Response(serializer.data)
+
+    def perform_update(self, serializer):
+        product = serializer.save()
+
+        cache_key = f"product_detail_{product.pk}"
+        cache.delete(cache_key)
+
+        print(f"USUNIĘTO CACHE DLA PRODUKTU {product.pk}")
