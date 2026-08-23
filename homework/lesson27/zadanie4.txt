@@ -1,0 +1,27 @@
+Zadanie 4 – Zabawa z niskopoziomowym API w shellu
+
+Uruchomiłem Django shell i zaimportowałem cache:
+
+from django.core.cache import cache
+
+Następnie zapisałem wartość w cache na 30 sekund:
+
+cache.set('my_key', 'hello world', 30)
+
+Bezpośrednio po zapisaniu:
+
+cache.get('my_key')
+
+zwróciło:
+
+'hello world'
+
+Po odczekaniu ponad 30 sekund ponowny odczyt:
+
+print(cache.get('my_key'))
+
+zwrócił:
+
+None
+
+Oznacza to, że wpis w cache wygasł po ustawionych 30 sekundach.
