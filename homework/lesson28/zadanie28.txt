@@ -1,0 +1,35 @@
+Lekcja 28 – zadanie domowe
+
+W ramach zadania z lekcji 28 wykorzystałem istniejący i rozwijany przeze mnie projekt portfolio wykonany w Django – system zarządzania przedsiębiorstwami i analizy sprawozdań finansowych XML (PRS/KRS).
+
+Projekt został już wcześniej zaimplementowany i zawiera funkcjonalności wymagane w ramach projektu omawianego na lekcji 28, a także dodatkowe elementy wykraczające poza podstawowy zakres zadania.
+
+Projekt posiada rozbudowaną dokumentację w dwóch wersjach językowych:
+- README.md – wersja angielska,
+- README_PL.md – wersja polska.
+
+Dokumentacja zawiera m.in.:
+- opis problemu, celu i funkcjonalności projektu,
+- architekturę aplikacji,
+- opis modelu danych i relacji,
+- diagram ERD,
+- opis logiki i najważniejszych funkcjonalności,
+- REST API,
+- walidację i bezpieczeństwo danych,
+- izolację danych użytkowników,
+- testy automatyczne,
+- panel administratora Django,
+- Docker,
+- Celery i zadania asynchroniczne,
+- deployment,
+- technologie wykorzystane w projekcie,
+- strukturę projektu,
+- instrukcję instalacji i uruchomienia,
+- plan dalszego rozwoju.
+
+Diagram ERD został dodatkowo uzupełniony w obu wersjach dokumentacji i przedstawia najważniejsze modele aplikacji oraz relacje między nimi.
+
+Zamiast tworzenia od podstaw drugiego, uproszczonego projektu na potrzeby lekcji 28, wymagania zadania zostały zrealizowane i udokumentowane w istniejącym projekcie portfolio.
+
+Repozytorium projektu:
+https://github.com/Stazus/projekt_django
