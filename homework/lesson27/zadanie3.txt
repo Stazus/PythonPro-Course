@@ -14,3 +14,19 @@ Drugie żądanie zostało wysłane w ciągu 60 sekund. Kod widoku nie został wy
 HTTP 200 OK
 
 Oznacza to, że pierwsze żądanie było cache miss, a drugie cache hit.
+
+Dodatkowo zweryfikowałem działanie cache za pomocą Django Debug Toolbar.
+
+Przy pierwszym żądaniu Django Debug Toolbar zarejestrował operacje cache:
+
+Cache: 3 calls
+
+Przy drugim żądaniu, wykonanym po 10 sekundach, odpowiedź zawierała nagłówek:
+
+Age: 10
+
+oraz Django Debug Toolbar zarejestrował:
+
+Cache: 2 calls
+
+Nagłówek Age: 10 oraz brak ponownego wykonania kodu widoku potwierdzają, że drugie żądanie było cache hit.
