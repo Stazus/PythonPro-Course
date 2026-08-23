@@ -1,0 +1,16 @@
+Zadanie 3 – Cachowanie widoku API
+
+Dla istniejącego widoku GET /api/protected/ zastosowałem cache na 60 sekund za pomocą dekoratora cache_page.
+
+Pierwsze żądanie wykonało kod widoku i w terminalu pojawił się komunikat:
+
+WYKONANO WIDOK - CACHE MISS
+
+Odpowiedź:
+HTTP 200 OK
+
+Drugie żądanie zostało wysłane w ciągu 60 sekund. Kod widoku nie został wykonany ponownie, a odpowiedź ponownie miała status:
+
+HTTP 200 OK
+
+Oznacza to, że pierwsze żądanie było cache miss, a drugie cache hit.
