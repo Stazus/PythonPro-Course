@@ -1,0 +1,38 @@
+Zadanie 5 – Czyszczenie cache
+
+Sprawdziłem dostępne komendy Django związane z cache:
+
+python manage.py help | grep -i cache
+
+Dostępna była komenda:
+
+createcachetable
+
+W używanej wersji Django 6.1 nie ma wbudowanej komendy
+manage.py służącej do wyczyszczenia całego cache.
+
+Dlatego użyłem niskopoziomowego API cache w Django:
+
+from django.core.cache import cache
+
+Najpierw zapisałem testową wartość:
+
+cache.set("test_clear", "wartosc", 300)
+
+Odczyt zwrócił:
+
+'wartosc'
+
+Następnie wyczyściłem cache:
+
+cache.clear()
+
+Po wyczyszczeniu:
+
+print(cache.get("test_clear"))
+
+zwróciło:
+
+None
+
+Oznacza to, że dane zapisane w cache zostały usunięte.
