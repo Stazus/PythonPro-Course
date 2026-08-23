@@ -15,7 +15,8 @@ from .models import Product
 from .serializers import ProductSerializer
 
 from django.http import JsonResponse
-from .tasks import hello_world
+from django.shortcuts import render
+from .tasks import hello_world, multiply
 
 class ProtectedView(APIView):
     permission_classes = [IsAuthenticated]
@@ -100,3 +101,21 @@ def hello_world_view(request):
     return JsonResponse({
         "message": "Zadanie hello_world zostało wysłane do Celery."
     })
+
+
+def multiply_view(request):
+    message = None
+
+    if request.method == "POST":
+        a = int(request.POST.get("a"))
+        b = int(request.POST.get("b"))
+
+        task = multiply.delay(a, b)
+
+        message = f"Zadanie wysłano do Celery. ID zadania: {task.id}"
+
+    return render(
+        request,
+        "api/multiply_form.html",
+        {"message": message},
+    )

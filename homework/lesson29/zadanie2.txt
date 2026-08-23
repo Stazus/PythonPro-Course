@@ -1,0 +1,23 @@
+Lekcja 29 – Zadanie 2
+
+Utworzono zadanie Celery multiply(a, b), które przyjmuje dwie liczby i zwraca ich iloczyn.
+
+Dodano formularz HTML z dwoma polami liczbowymi oraz widok Django, który po wysłaniu formularza przekazuje wartości do zadania Celery za pomocą:
+
+multiply.delay(a, b)
+
+Test wykonano dla liczb:
+
+6 i 7
+
+Worker Celery odebrał zadanie:
+
+Task api.tasks.multiply[...] received
+
+i zakończył je poprawnie wynikiem:
+
+42
+
+Potwierdza to poprawne działanie komunikacji:
+
+Django -> Redis -> Celery worker -> wynik zadania.

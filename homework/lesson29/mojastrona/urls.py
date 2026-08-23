@@ -23,6 +23,7 @@ from api.views import (
     SelectiveCacheView,
     ProductViewSet,
     hello_world_view,
+    multiply_view,
 )
 
 router = DefaultRouter()
@@ -44,5 +45,10 @@ urlpatterns = [
         "api/hello-celery/",
         hello_world_view,
         name="hello-celery",
-),
+    ),
+    path(
+        "api/multiply/",
+        multiply_view,
+        name="multiply",
+    ),
 ]

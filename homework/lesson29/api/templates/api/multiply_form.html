@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Mnożenie Celery</title>
+</head>
+<body>
+    <h1>Mnożenie dwóch liczb</h1>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <label for="a">Pierwsza liczba:</label>
+        <input type="number" name="a" id="a" required>
+
+        <br><br>
+
+        <label for="b">Druga liczba:</label>
+        <input type="number" name="b" id="b" required>
+
+        <br><br>
+
+        <button type="submit">Pomnóż</button>
+    </form>
+
+    {% if message %}
+        <p>{{ message }}</p>
+    {% endif %}
+</body>
+</html>
