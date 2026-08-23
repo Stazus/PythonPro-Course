@@ -47,3 +47,19 @@ Redis zwrócił:
 ":1:redis_test"
 
 Oznacza to, że Django poprawnie komunikuje się z serwerem Redis i używa go jako backendu cache.
+
+Dodatkowo sprawdziłem działanie cache za pomocą Django Debug Toolbar.
+
+Dla pierwszego żądania GET /api/products/1/ Django Debug Toolbar wykazał:
+
+SQL: 1 query
+Cache: 2 calls
+
+Przy kolejnym żądaniu do tego samego endpointu, wykonanym przed wygaśnięciem cache:
+
+SQL: 0 queries
+Cache: 1 call
+
+Brak zapytania SQL przy drugim żądaniu potwierdza, że odpowiedź została pobrana z cache.
+
+Panel Cache w Django Debug Toolbar poprawnie rejestruje operacje cache, a wcześniejszy test za pomocą redis-cli potwierdził, że backendem cache jest Redis.
