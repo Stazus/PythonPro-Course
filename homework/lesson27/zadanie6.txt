@@ -1,0 +1,30 @@
+Zadanie 6 – Implementacja cache plikowego
+
+Zmieniłem konfigurację cache w settings.py z LocMemCache na FileBasedCache:
+
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
+        "LOCATION": BASE_DIR / "file_cache",
+    }
+}
+
+Utworzyłem katalog file_cache.
+
+Następnie uruchomiłem serwer i wywołałem chroniony widok API
+z zadania 3.
+
+Pierwsze wywołanie zwróciło HTTP 200 OK, a w terminalu pojawił się komunikat:
+
+WYKONANO WIDOK - CACHE MISS
+
+Po pierwszym wywołaniu w katalogu file_cache pojawiły się pliki:
+
+2c472e277219c611e0f9f108f8965b10.djcache
+f72a8c4957613f99fa55fc0ff3245a72.djcache
+
+Pliki .djcache zawierają dane zapisane przez mechanizm cache Django
+w postaci binarnej/serializowanej, a nie jako zwykły tekst.
+
+Oznacza to, że FileBasedCache działa poprawnie i zapisuje dane cache
+w plikach na dysku.
