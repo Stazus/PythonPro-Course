@@ -1,0 +1,49 @@
+Zadanie 10 – Konfiguracja Redis jako backendu cache
+
+Sprawdziłem działanie Redis na porcie 6379:
+
+redis-cli ping
+
+Odpowiedź:
+
+PONG
+
+Zainstalowałem bibliotekę:
+
+django-redis
+
+Następnie zmieniłem konfigurację CACHES w settings.py tak, aby Django używało Redis jako backendu cache.
+
+Skonfigurowany adres Redis:
+
+redis://127.0.0.1:6379/1
+
+Po uruchomieniu serwera Django aplikacja wystartowała bez błędów.
+
+W Django shell wykonałem:
+
+from django.core.cache import cache
+
+cache.set("redis_test", "dziala", 60)
+
+Operacja zwróciła:
+
+True
+
+Następnie:
+
+cache.get("redis_test")
+
+zwróciło:
+
+'dziala'
+
+Dodatkowo sprawdziłem klucze bezpośrednio w Redis:
+
+redis-cli -n 1 keys '*'
+
+Redis zwrócił:
+
+":1:redis_test"
+
+Oznacza to, że Django poprawnie komunikuje się z serwerem Redis i używa go jako backendu cache.
