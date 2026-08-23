@@ -1,0 +1,39 @@
+Zadanie 1 – Pierwsze zadanie Celery
+
+Skonfigurowałem Celery z Redis jako brokerem wiadomości.
+
+Dla Lekcji 29 użyłem osobnej bazy Redis:
+
+redis://localhost:6379/2
+
+W pliku api/tasks.py utworzyłem zadanie:
+
+hello_world()
+
+Zadanie drukuje w konsoli workera:
+
+Hello from Celery!
+
+Utworzyłem również widok Django dostępny pod adresem:
+
+/api/hello-celery/
+
+Widok wywołuje zadanie asynchronicznie za pomocą:
+
+hello_world.delay()
+
+Po wywołaniu endpointu przez curl:
+
+curl http://127.0.0.1:8000/api/hello-celery/
+
+Django zwróciło odpowiedź:
+
+{"message":"Zadanie hello_world zostało wysłane do Celery."}
+
+W konsoli workera Celery pojawiły się komunikaty:
+
+Task api.tasks.hello_world[...] received
+Hello from Celery!
+Task api.tasks.hello_world[...] succeeded
+
+Oznacza to, że zadanie zostało poprawnie wysłane przez Django do kolejki Redis i wykonane przez worker Celery.
