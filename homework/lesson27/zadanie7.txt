@@ -1,0 +1,25 @@
+Zadanie 7 – Selektywne cachowanie w widoku
+
+Utworzyłem widok, który pobiera dane z dwóch źródeł.
+
+Pierwsze źródło to proste i szybkie zapytanie do bazy danych:
+User.objects.count()
+
+Drugie źródło symuluje kosztowne obliczenia za pomocą:
+time.sleep(3)
+
+Zastosowałem niskopoziomowe API cache Django tak, aby cachowany był tylko wynik kosztownego obliczenia.
+
+Przy pierwszym żądaniu w terminalu pojawiło się:
+
+WYKONANO ZAPYTANIE DO BAZY
+CACHE MISS - wykonuję skomplikowane obliczenia
+
+Przy drugim żądaniu pojawiło się:
+
+WYKONANO ZAPYTANIE DO BAZY
+CACHE HIT - wynik skomplikowanych obliczeń z cache
+
+Oznacza to, że zapytanie do bazy wykonywało się przy każdym żądaniu, natomiast wynik kosztownego obliczenia został pobrany z cache przy kolejnym żądaniu.
+
+Widok zwracał HTTP 200 OK.

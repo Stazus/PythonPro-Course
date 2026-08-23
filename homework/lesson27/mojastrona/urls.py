@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from api.views import ProtectedView
+from api.views import ProtectedView, SelectiveCacheView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,4 +24,9 @@ urlpatterns = [
     path('auth/', include('djoser.urls.jwt')),
     path('api/protected/', ProtectedView.as_view(), name='protected'),
     path("__debug__/", include("debug_toolbar.urls")),
+    path(
+        'api/selective-cache/',
+        SelectiveCacheView.as_view(),
+        name='selective-cache'
+),
 ]
