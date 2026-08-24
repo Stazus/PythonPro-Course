@@ -53,3 +53,21 @@ def process_video():
     print("Przetwarzanie wideo zakończone!")
 
     return "Przetwarzanie wideo zakończone!"
+
+
+@shared_task
+def send_email_notification(notification_id):
+    from django.utils import timezone
+    from .models import EmailNotification
+
+    notification = EmailNotification.objects.get(id=notification_id)
+
+    print(
+        f"Wysyłka maila do: {notification.recipient_email} | "
+        f"Temat: {notification.subject}"
+    )
+
+    notification.sent_at = timezone.now()
+    notification.save(update_fields=["sent_at"])
+
+    return notification.id

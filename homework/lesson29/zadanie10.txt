@@ -1,0 +1,41 @@
+Lekcja 29 – Zadanie 10
+
+Utworzyłem model EmailNotification z polami:
+
+- recipient_email
+- subject
+- body
+- sent_at
+
+Pole sent_at może początkowo mieć wartość null.
+
+Utworzyłem zadanie Celery:
+
+send_email_notification(notification_id)
+
+Zadanie przyjmuje ID obiektu EmailNotification, pobiera go z bazy danych,
+symuluje wysyłkę maila poprzez komunikat w konsoli workera,
+a następnie aktualizuje pole sent_at na aktualny czas.
+
+Test wykonano dla rekordu:
+
+recipient_email = test@example.com
+subject = Test Celery
+
+Przed wykonaniem zadania pole:
+
+sent_at = None
+
+Zadanie zostało uruchomione asynchronicznie:
+
+send_email_notification.delay(notification.id)
+
+Worker Celery odebrał zadanie i wyświetlił:
+
+Wysyłka maila do: test@example.com | Temat: Test Celery
+
+Po wykonaniu zadania pole sent_at zostało zaktualizowane
+do aktualnej daty i godziny.
+
+Potwierdza to poprawne przekazanie ID obiektu do Celery,
+pobranie rekordu z bazy oraz aktualizację pola sent_at.
