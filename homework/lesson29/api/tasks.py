@@ -42,3 +42,14 @@ def update_user_last_login(user_id):
     user.save(update_fields=["last_login"])
 
     return user.id
+
+
+@shared_task
+def process_video():
+    import time
+
+    time.sleep(15)
+
+    print("Przetwarzanie wideo zakończone!")
+
+    return "Przetwarzanie wideo zakończone!"

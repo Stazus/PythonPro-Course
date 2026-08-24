@@ -1,0 +1,32 @@
+Lekcja 29 – Zadanie 8
+
+Utworzyłem zadanie Celery process_video(), które symuluje
+przetwarzanie wideo przez 15 sekund za pomocą:
+
+time.sleep(15)
+
+Dodano widok Django, który uruchamia zadanie asynchronicznie:
+
+process_video.delay()
+
+Widok natychmiast zwraca komunikat:
+
+Przetwarzanie wideo rozpoczęte!
+
+Test wykonano za pomocą polecenia:
+
+time curl http://127.0.0.1:8000/api/process-video/
+
+Odpowiedź widoku została zwrócona w około 0,175 sekundy,
+czyli bez oczekiwania na zakończenie 15-sekundowego zadania.
+
+Worker Celery odebrał zadanie i zakończył je po około 15 sekundach:
+
+Task api.tasks.process_video[...] received
+
+Przetwarzanie wideo zakończone!
+
+Task api.tasks.process_video[...] succeeded in około 15 sekund.
+
+Potwierdza to, że długotrwałe zadanie jest wykonywane
+asynchronicznie w tle, a widok Django odpowiada użytkownikowi natychmiast.

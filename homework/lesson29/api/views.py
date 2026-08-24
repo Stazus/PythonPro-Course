@@ -16,7 +16,7 @@ from .serializers import ProductSerializer
 
 from django.http import JsonResponse
 from django.shortcuts import render
-from .tasks import hello_world, multiply
+from .tasks import hello_world, multiply, process_video
 
 class ProtectedView(APIView):
     permission_classes = [IsAuthenticated]
@@ -119,3 +119,11 @@ def multiply_view(request):
         "api/multiply_form.html",
         {"message": message},
     )
+
+
+def process_video_view(request):
+    process_video.delay()
+
+    return JsonResponse({
+        "message": "Przetwarzanie wideo rozpoczęte!"
+    })

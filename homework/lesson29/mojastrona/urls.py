@@ -24,7 +24,9 @@ from api.views import (
     ProductViewSet,
     hello_world_view,
     multiply_view,
+    process_video_view,
 )
+
 
 router = DefaultRouter()
 router.register(r'products', ProductViewSet)
@@ -50,5 +52,10 @@ urlpatterns = [
         "api/multiply/",
         multiply_view,
         name="multiply",
+    ),
+    path(
+        "api/process-video/",
+        process_video_view,
+        name="process-video",
     ),
 ]
