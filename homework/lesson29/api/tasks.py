@@ -28,3 +28,17 @@ def count_users():
     print(f"Liczba użytkowników w bazie danych: {count}")
 
     return count
+
+
+@shared_task
+def update_user_last_login(user_id):
+    from django.contrib.auth import get_user_model
+    from django.utils import timezone
+
+    User = get_user_model()
+    user = User.objects.get(id=user_id)
+
+    user.last_login = timezone.now()
+    user.save(update_fields=["last_login"])
+
+    return user.id

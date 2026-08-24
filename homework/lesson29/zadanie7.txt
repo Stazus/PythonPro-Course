@@ -1,0 +1,31 @@
+Lekcja 29 – Zadanie 7
+
+Utworzyłem zadanie Celery update_user_last_login(user_id),
+które przyjmuje ID użytkownika.
+
+Zadanie:
+- pobiera model użytkownika,
+- znajduje użytkownika w bazie na podstawie ID,
+- ustawia pole last_login na aktualny czas,
+- zapisuje zmianę w bazie.
+
+Do zadania Celery przekazywane jest tylko ID użytkownika,
+a nie cały obiekt Django.
+
+Test przeprowadzono dla użytkownika o ID 2.
+
+Przed wykonaniem zadania:
+
+last_login = None
+
+Zadanie zostało uruchomione za pomocą:
+
+update_user_last_login.delay(2)
+
+Worker Celery odebrał i poprawnie wykonał zadanie.
+
+Po wykonaniu zadania pole last_login zostało zaktualizowane
+do aktualnej daty i godziny.
+
+Potwierdza to poprawne przekazywanie ID obiektu do zadania Celery
+i późniejsze pobranie obiektu z bazy danych.
