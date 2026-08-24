@@ -1,0 +1,55 @@
+Lekcja 29 – Zadanie 11
+
+Utworzyłem zadanie Celery progress_task(), które wykonuje pętlę
+od 1 do 100 i w każdej iteracji wykonuje opóźnienie 0.1 sekundy.
+
+Zadanie zostało zdefiniowane z parametrem bind=True,
+co umożliwia aktualizowanie bieżącego stanu przez:
+
+self.update_state()
+
+Podczas działania zadania zapisywane są informacje:
+
+current – aktualny krok
+total – liczba wszystkich kroków
+
+Dodano endpoint:
+
+/api/start-progress-task/
+
+który uruchamia zadanie i zwraca jego task_id.
+
+Dodano również endpoint:
+
+/task-status/<task_id>/
+
+który odczytuje bieżący stan zadania.
+
+Podczas testu uzyskano kolejno:
+
+state = PROGRESS
+current = 20
+total = 100
+
+następnie:
+
+state = PROGRESS
+current = 49
+total = 100
+
+a po zakończeniu:
+
+state = SUCCESS
+current = 100
+total = 100
+
+Wynik końcowy:
+
+{
+    "current": 100,
+    "total": 100,
+    "status": "Zakończono"
+}
+
+Potwierdza to poprawne śledzenie postępu zadania Celery
+za pomocą update_state oraz endpointu statusu.

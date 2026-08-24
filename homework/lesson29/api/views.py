@@ -16,7 +16,7 @@ from .serializers import ProductSerializer
 
 from django.http import JsonResponse
 from django.shortcuts import render
-from .tasks import hello_world, multiply, process_video
+from .tasks import hello_world, multiply, process_video, progress_task
 
 class ProtectedView(APIView):
     permission_classes = [IsAuthenticated]
@@ -127,3 +127,35 @@ def process_video_view(request):
     return JsonResponse({
         "message": "Przetwarzanie wideo rozpoczęte!"
     })
+
+
+from celery.result import AsyncResult
+
+
+def start_progress_task_view(request):
+    task = progress_task.delay()
+
+    return JsonResponse({
+        "task_id": task.id,
+        "message": "Zadanie rozpoczęte.",
+    })
+
+
+def task_status_view(request, task_id):
+    result = AsyncResult(task_id)
+
+    response = {
+        "task_id": task_id,
+        "state": result.state,
+    }
+
+    if result.state == "PROGRESS":
+        response["current"] = result.info.get("current", 0)
+        response["total"] = result.info.get("total", 100)
+
+    elif result.state == "SUCCESS":
+        response["current"] = 100
+        response["total"] = 100
+        response["result"] = result.result
+
+    return JsonResponse(response)

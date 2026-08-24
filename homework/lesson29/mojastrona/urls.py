@@ -25,8 +25,9 @@ from api.views import (
     hello_world_view,
     multiply_view,
     process_video_view,
+    start_progress_task_view,
+    task_status_view,
 )
-
 
 router = DefaultRouter()
 router.register(r'products', ProductViewSet)
@@ -57,5 +58,15 @@ urlpatterns = [
         "api/process-video/",
         process_video_view,
         name="process-video",
+    ),
+    path(
+        "api/start-progress-task/",
+        start_progress_task_view,
+        name="start-progress-task",
+    ),
+    path(
+        "task-status/<str:task_id>/",
+        task_status_view,
+        name="task-status",
     ),
 ]

@@ -71,3 +71,25 @@ def send_email_notification(notification_id):
     notification.save(update_fields=["sent_at"])
 
     return notification.id
+
+
+@shared_task(bind=True)
+def progress_task(self):
+    import time
+
+    for i in range(1, 101):
+        time.sleep(0.1)
+
+        self.update_state(
+            state="PROGRESS",
+            meta={
+                "current": i,
+                "total": 100,
+            },
+        )
+
+    return {
+        "current": 100,
+        "total": 100,
+        "status": "Zakończono",
+    }
