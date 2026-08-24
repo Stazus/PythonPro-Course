@@ -93,3 +93,22 @@ def progress_task(self):
         "total": 100,
         "status": "Zakończono",
     }
+
+
+@shared_task
+def cleanup_old_logs():
+    from datetime import timedelta
+
+    from django.utils import timezone
+
+    from .models import LogEntry
+
+    cutoff_date = timezone.now() - timedelta(days=90)
+
+    deleted_count, _ = LogEntry.objects.filter(
+        created_at__lt=cutoff_date
+    ).delete()
+
+    print(f"Usunięto starych wpisów logów: {deleted_count}")
+
+    return deleted_count

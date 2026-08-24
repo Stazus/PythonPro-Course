@@ -1,0 +1,43 @@
+Lekcja 29 – Zadanie 12
+
+Utworzyłem model LogEntry z polami:
+
+- message
+- created_at
+
+Następnie utworzyłem zadanie Celery:
+
+cleanup_old_logs()
+
+Zadanie oblicza datę sprzed 90 dni i usuwa wszystkie rekordy
+LogEntry starsze niż ta data.
+
+Test działania wykonano na dwóch rekordach:
+
+- Stary log – utworzony 100 dni temu
+- Nowy log – utworzony 10 dni temu
+
+Po uruchomieniu:
+
+cleanup_old_logs.delay()
+
+worker Celery usunął dokładnie jeden stary rekord:
+
+Usunięto starych wpisów logów: 1
+
+Po wykonaniu zadania w bazie pozostał tylko nowszy wpis.
+
+Dodatkowo skonfigurowałem Celery Beat tak, aby zadanie:
+
+api.tasks.cleanup_old_logs
+
+uruchamiało się automatycznie raz dziennie o godzinie 01:00.
+
+Konfiguracja:
+
+"cleanup-old-logs-daily": {
+    "task": "api.tasks.cleanup_old_logs",
+    "schedule": crontab(hour=1, minute=0),
+}
+
+Celery Beat został uruchomiony i poprawnie odczytał konfigurację harmonogramu.
