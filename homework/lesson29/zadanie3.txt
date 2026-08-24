@@ -1,0 +1,19 @@
+Lekcja 29 – Zadanie 3
+
+Utworzyłem zadanie Celery log_timestamp(), które zapisuje aktualną datę i godzinę do pliku log.txt.
+
+Zadanie zostało wywołane asynchronicznie za pomocą:
+
+log_timestamp.delay()
+
+Celery zwrócił identyfikator zadania AsyncResult.
+
+Po wykonaniu zadania został utworzony plik:
+
+log.txt
+
+W pliku zapisano aktualną datę i godzinę, np.:
+
+2026-08-24 15:21:59.529621
+
+Oznacza to, że zadanie zostało poprawnie wykonane przez worker Celery i zapisało timestamp do pliku.
