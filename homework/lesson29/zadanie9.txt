@@ -1,0 +1,32 @@
+Lekcja 29 – Zadanie 9
+
+Utworzyłem własną komendę Django manage.py o nazwie:
+
+enqueue_tasks
+
+Komenda znajduje się w:
+
+api/management/commands/enqueue_tasks.py
+
+Po uruchomieniu:
+
+python manage.py enqueue_tasks
+
+komenda w pętli tworzy 50 zadań Celery multiply
+z losowymi argumentami.
+
+Dla każdego zadania losowane są dwie liczby całkowite,
+a następnie zadanie jest wysyłane do Celery za pomocą:
+
+multiply.delay(a, b)
+
+Komenda wypisuje numer zadania, wylosowane argumenty
+oraz task_id.
+
+Po wykonaniu komendy utworzono dokładnie 50 zadań.
+
+Worker Celery odebrał wszystkie zadania multiply
+i poprawnie je wykonał, zwracając wyniki mnożenia.
+
+Potwierdza to poprawne działanie własnej komendy manage.py
+oraz masowego dodawania zadań do kolejki Celery.
