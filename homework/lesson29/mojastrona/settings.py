@@ -187,4 +187,8 @@ CELERY_BEAT_SCHEDULE = {
         "task": "api.tasks.cleanup_old_logs",
         "schedule": crontab(hour=1, minute=0),
     },
+    "scrape-example-every-hour": {
+        "task": "api.tasks.scrape_example_title",
+        "schedule": crontab(minute=0),
+    },
 }

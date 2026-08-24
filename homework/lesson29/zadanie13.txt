@@ -1,0 +1,46 @@
+Lekcja 29 – Zadanie 13
+
+Utworzyłem zadanie Celery scrape_example_title(), które wykonuje
+web scraping strony:
+
+https://example.com
+
+Do pobrania strony wykorzystano bibliotekę requests,
+a do analizy HTML bibliotekę BeautifulSoup4.
+
+Zadanie pobiera zawartość strony, odczytuje tytuł dokumentu HTML
+i zapisuje wynik w bazie danych w modelu ScrapedPage.
+
+Model ScrapedPage zawiera pola:
+
+- url
+- title
+- scraped_at
+
+Podczas testu zadanie zostało uruchomione asynchronicznie za pomocą:
+
+scrape_example_title.delay()
+
+Worker Celery pobrał stronę i odczytał tytuł:
+
+Example Domain
+
+Następnie zapisano rekord w bazie danych:
+
+url = https://example.com
+title = Example Domain
+
+Dodatkowo skonfigurowałem Celery Beat tak, aby zadanie:
+
+api.tasks.scrape_example_title
+
+uruchamiało się automatycznie co godzinę.
+
+Konfiguracja harmonogramu:
+
+"scrape-example-every-hour": {
+    "task": "api.tasks.scrape_example_title",
+    "schedule": crontab(minute=0),
+}
+
+Celery Beat został uruchomiony i poprawnie odczytał konfigurację.

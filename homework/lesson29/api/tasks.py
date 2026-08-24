@@ -112,3 +112,28 @@ def cleanup_old_logs():
     print(f"Usunięto starych wpisów logów: {deleted_count}")
 
     return deleted_count
+
+
+@shared_task
+def scrape_example_title():
+    import requests
+    from bs4 import BeautifulSoup
+
+    from .models import ScrapedPage
+
+    url = "https://example.com"
+
+    response = requests.get(url, timeout=10)
+    response.raise_for_status()
+
+    soup = BeautifulSoup(response.text, "html.parser")
+    title = soup.title.string.strip()
+
+    scraped_page = ScrapedPage.objects.create(
+        url=url,
+        title=title,
+    )
+
+    print(f"Pobrano tytuł strony: {title}")
+
+    return scraped_page.id
