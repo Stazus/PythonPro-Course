@@ -1,0 +1,26 @@
+Lekcja 29 – Zadanie 4
+
+Skonfigurowałem Celery Beat tak, aby zadanie log_timestamp()
+z poprzedniego ćwiczenia było uruchamiane automatycznie co 10 sekund.
+
+W settings.py dodano harmonogram CELERY_BEAT_SCHEDULE dla zadania:
+
+api.tasks.log_timestamp
+
+z interwałem:
+
+10.0 sekund
+
+Uruchomiono osobno:
+- worker Celery,
+- Celery Beat.
+
+Celery Beat co 10 sekund wysyłał zadanie do kolejki, np.:
+
+Scheduler: Sending due task log-timestamp-every-10-seconds
+(api.tasks.log_timestamp)
+
+Worker Celery odbierał i poprawnie wykonywał zadania.
+
+Plik log.txt został uzupełniony kolejnymi znacznikami czasu
+w odstępach około 10 sekund, co potwierdza poprawne działanie harmonogramu.

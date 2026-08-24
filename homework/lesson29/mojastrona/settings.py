@@ -172,3 +172,10 @@ CELERY_TASK_SERIALIZER = "json"
 CELERY_RESULT_SERIALIZER = "json"
 
 CELERY_TIMEZONE = "Europe/Warsaw"
+
+CELERY_BEAT_SCHEDULE = {
+    "log-timestamp-every-10-seconds": {
+        "task": "api.tasks.log_timestamp",
+        "schedule": 10.0,
+    },
+}
