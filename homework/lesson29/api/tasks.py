@@ -16,3 +16,15 @@ def multiply(a, b):
 def log_timestamp():
     with open("log.txt", "a") as file:
         file.write(f"{datetime.now()}\n")
+
+
+@shared_task
+def count_users():
+    from django.contrib.auth import get_user_model
+
+    User = get_user_model()
+    count = User.objects.count()
+
+    print(f"Liczba użytkowników w bazie danych: {count}")
+
+    return count

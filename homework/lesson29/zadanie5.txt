@@ -1,0 +1,21 @@
+Lekcja 29 – Zadanie 5
+
+Utworzyłem zadanie Celery count_users(), które liczy wszystkich użytkowników zapisanych w bazie danych.
+
+W zadaniu wykorzystano:
+
+User.objects.count()
+
+Zadanie zostało uruchomione asynchronicznie za pomocą:
+
+count_users.delay()
+
+Worker Celery odebrał zadanie i wypisał w konsoli:
+
+Liczba użytkowników w bazie danych: 2
+
+Następnie zadanie zakończyło się poprawnie i zwróciło wynik:
+
+2
+
+Oznacza to, że zadanie poprawnie komunikuje się z bazą danych Django i wykonuje zapytanie o liczbę użytkowników.
