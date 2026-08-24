@@ -1,0 +1,48 @@
+Lekcja 29 – Zadanie 14
+
+Utworzyłem zadanie Celery generate_users_csv(), które generuje
+raport CSV ze wszystkimi użytkownikami oraz ich adresami e-mail.
+
+Raport jest zapisywany w katalogu:
+
+media/reports/users.csv
+
+Plik zawiera kolumny:
+
+username,email
+
+Zadanie zostało uruchomione asynchronicznie przez endpoint:
+
+/api/start-users-csv-report/
+
+Endpoint zwrócił task_id.
+
+Następnie status zadania został sprawdzony przez:
+
+/api/users-csv-report-status/<task_id>/
+
+Po zakończeniu zadania endpoint zwrócił:
+
+state = SUCCESS
+
+oraz:
+
+download_url = /media/reports/users.csv
+
+Plik CSV został następnie pobrany przez HTTP.
+
+Zawartość testowego raportu:
+
+username,email
+Username,username@gmail.com
+testuser26,test26@example.com
+
+Żądanie do pliku:
+
+/media/reports/users.csv
+
+zakończyło się kodem HTTP 200.
+
+Potwierdza to poprawne działanie generowania raportu CSV w tle,
+zapisu pliku w MEDIA_ROOT, odczytu statusu zadania
+oraz pobierania gotowego raportu przez HTTP.

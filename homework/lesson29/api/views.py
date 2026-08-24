@@ -16,7 +16,13 @@ from .serializers import ProductSerializer
 
 from django.http import JsonResponse
 from django.shortcuts import render
-from .tasks import hello_world, multiply, process_video, progress_task
+from .tasks import (
+    hello_world,
+    multiply,
+    process_video,
+    progress_task,
+    generate_users_csv,
+)
 
 class ProtectedView(APIView):
     permission_classes = [IsAuthenticated]
@@ -157,5 +163,28 @@ def task_status_view(request, task_id):
         response["current"] = 100
         response["total"] = 100
         response["result"] = result.result
+
+    return JsonResponse(response)
+
+
+def start_users_csv_report_view(request):
+    task = generate_users_csv.delay()
+
+    return JsonResponse({
+        "task_id": task.id,
+        "message": "Generowanie raportu CSV rozpoczęte.",
+    })
+
+
+def users_csv_report_status_view(request, task_id):
+    result = AsyncResult(task_id)
+
+    response = {
+        "task_id": task_id,
+        "state": result.state,
+    }
+
+    if result.state == "SUCCESS":
+        response["download_url"] = f"/media/{result.result}"
 
     return JsonResponse(response)

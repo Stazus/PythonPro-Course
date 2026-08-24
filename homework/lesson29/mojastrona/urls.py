@@ -16,6 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from django.conf import settings
+from django.conf.urls.static import static
 from rest_framework.routers import DefaultRouter
 
 from api.views import (
@@ -27,6 +29,8 @@ from api.views import (
     process_video_view,
     start_progress_task_view,
     task_status_view,
+    start_users_csv_report_view,
+    users_csv_report_status_view,
 )
 
 router = DefaultRouter()
@@ -69,4 +73,20 @@ urlpatterns = [
         task_status_view,
         name="task-status",
     ),
+    path(
+        "api/start-users-csv-report/",
+        start_users_csv_report_view,
+        name="start-users-csv-report",
+    ),
+    path(
+        "api/users-csv-report-status/<str:task_id>/",
+        users_csv_report_status_view,
+        name="users-csv-report-status",
+    ),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(
+        settings.MEDIA_URL,
+        document_root=settings.MEDIA_ROOT,
+    )

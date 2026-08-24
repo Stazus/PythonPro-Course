@@ -137,3 +137,29 @@ def scrape_example_title():
     print(f"Pobrano tytuł strony: {title}")
 
     return scraped_page.id
+
+
+@shared_task
+def generate_users_csv():
+    import csv
+    from pathlib import Path
+
+    from django.conf import settings
+    from django.contrib.auth import get_user_model
+
+    User = get_user_model()
+
+    reports_dir = Path(settings.MEDIA_ROOT) / "reports"
+    reports_dir.mkdir(parents=True, exist_ok=True)
+
+    file_path = reports_dir / "users.csv"
+
+    with open(file_path, "w", newline="", encoding="utf-8") as csv_file:
+        writer = csv.writer(csv_file)
+
+        writer.writerow(["username", "email"])
+
+        for user in User.objects.all():
+            writer.writerow([user.username, user.email])
+
+    return "reports/users.csv"
