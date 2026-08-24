@@ -1,0 +1,24 @@
+Lekcja 29 – Zadanie 6
+
+Skonfigurowałem Celery Beat tak, aby zadanie count_users()
+uruchamiało się automatycznie codziennie o godzinie 23:00.
+
+Do konfiguracji harmonogramu wykorzystano crontab:
+
+"count-users-daily-at-23": {
+    "task": "api.tasks.count_users",
+    "schedule": crontab(hour=23, minute=0),
+}
+
+W pliku settings.py dodano import:
+
+from celery.schedules import crontab
+
+Celery Beat został uruchomiony poleceniem:
+
+celery -A mojastrona beat -l info
+
+Beat uruchomił się poprawnie i odczytał konfigurację harmonogramu.
+
+Zadanie count_users() jest zaplanowane do wykonywania
+każdego dnia o godzinie 23:00.
