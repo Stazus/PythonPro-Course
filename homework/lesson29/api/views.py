@@ -3,6 +3,7 @@ from django.views.decorators.cache import cache_page
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from celery import chain
 
 import time
 
@@ -23,6 +24,9 @@ from .tasks import (
     progress_task,
     generate_users_csv,
     classify_uploaded_image,
+    generate_random_number,
+    multiply_by_ten,
+    save_chain_result,
 )
 
 class ProtectedView(APIView):
@@ -214,3 +218,18 @@ def upload_image_view(request):
         })
 
     return render(request, "api/upload_image.html")
+
+
+def start_chain_view(request):
+    task_chain = chain(
+        generate_random_number.s(),
+        multiply_by_ten.s(),
+        save_chain_result.s(),
+    )
+
+    result = task_chain.apply_async()
+
+    return JsonResponse({
+        "task_id": result.id,
+        "message": "Łańcuch zadań został uruchomiony.",
+    })

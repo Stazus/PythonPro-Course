@@ -32,6 +32,7 @@ from api.views import (
     start_users_csv_report_view,
     users_csv_report_status_view,
     upload_image_view,
+    start_chain_view,
 )
 
 router = DefaultRouter()
@@ -88,6 +89,11 @@ urlpatterns = [
         "api/upload-image/",
         upload_image_view,
         name="upload-image",
+    ),
+    path(
+        "api/start-chain/",
+        start_chain_view,
+        name="start-chain",
     ),
 ]
 

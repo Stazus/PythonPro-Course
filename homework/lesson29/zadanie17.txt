@@ -1,0 +1,44 @@
+Lekcja 29 – Zadanie 17
+
+Utworzyłem łańcuch zadań Celery przy użyciu mechanizmu chain.
+
+Łańcuch składa się z trzech zadań:
+
+1. generate_random_number()
+   - losuje liczbę całkowitą od 1 do 100.
+
+2. multiply_by_ten(number)
+   - otrzymuje wynik poprzedniego zadania
+   - mnoży liczbę przez 10.
+
+3. save_chain_result(result)
+   - otrzymuje wynik mnożenia
+   - zapisuje go do pliku:
+
+media/chain_results/result.txt
+
+Łańcuch jest uruchamiany z widoku Django przez endpoint:
+
+/api/start-chain/
+
+Widok tworzy chain i uruchamia go za pomocą:
+
+task_chain.apply_async()
+
+Podczas testu wylosowano liczbę:
+
+51
+
+Drugie zadanie obliczyło:
+
+51 * 10 = 510
+
+Trzecie zadanie zapisało wynik do pliku.
+
+Zawartość pliku:
+
+Wynik łańcucha zadań: 510
+
+Potwierdza to poprawne przekazywanie wyniku pomiędzy kolejnymi
+zadaniami Celery oraz uruchamianie całego łańcucha jednym poleceniem
+z widoku Django.

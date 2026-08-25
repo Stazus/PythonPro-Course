@@ -223,3 +223,42 @@ def classify_uploaded_image(image_id):
     print(f"Klasyfikacja obrazu {image_id}: {result}")
 
     return result
+
+
+@shared_task
+def generate_random_number():
+    import random
+
+    number = random.randint(1, 100)
+
+    print(f"Wylosowano liczbę: {number}")
+
+    return number
+
+
+@shared_task
+def multiply_by_ten(number):
+    result = number * 10
+
+    print(f"{number} * 10 = {result}")
+
+    return result
+
+
+@shared_task
+def save_chain_result(result):
+    from pathlib import Path
+
+    from django.conf import settings
+
+    results_dir = Path(settings.MEDIA_ROOT) / "chain_results"
+    results_dir.mkdir(parents=True, exist_ok=True)
+
+    file_path = results_dir / "result.txt"
+
+    with open(file_path, "w", encoding="utf-8") as file:
+        file.write(f"Wynik łańcucha zadań: {result}\n")
+
+    print(f"Zapisano wynik do pliku: {result}")
+
+    return "chain_results/result.txt"
