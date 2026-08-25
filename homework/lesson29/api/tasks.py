@@ -163,3 +163,32 @@ def generate_users_csv():
             writer.writerow([user.username, user.email])
 
     return "reports/users.csv"
+
+
+@shared_task(bind=True)
+def retry_failed_request(self):
+    import requests
+
+    url = "https://this-address-does-not-exist.invalid"
+
+    try:
+        response = requests.get(url, timeout=10)
+        response.raise_for_status()
+
+        return {
+            "status": "success",
+            "status_code": response.status_code,
+        }
+
+    except requests.RequestException as exc:
+        print(
+            f"Błąd połączenia. "
+            f"Próba {self.request.retries + 1}. "
+            f"Ponowienie za 60 sekund."
+        )
+
+        raise self.retry(
+            exc=exc,
+            countdown=60,
+            max_retries=3,
+        )

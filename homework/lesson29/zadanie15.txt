@@ -1,0 +1,30 @@
+Lekcja 29 – Zadanie 15
+
+Utworzyłem zadanie Celery retry_failed_request(), które wykonuje
+żądanie HTTP do nieistniejącego adresu URL.
+
+Zadanie wykorzystuje obsługę wyjątków try/except oraz mechanizm
+self.retry() Celery.
+
+W przypadku błędu połączenia wykonywane jest:
+
+self.retry(
+    exc=exc,
+    countdown=60,
+    max_retries=3,
+)
+
+Oznacza to ponowienie zadania po 60 sekundach oraz maksymalnie
+3 ponowienia po pierwszej nieudanej próbie.
+
+Test wykazał następujące wykonania:
+
+Próba 1 – błąd połączenia, retry za 60 sekund.
+Próba 2 – błąd połączenia, retry za 60 sekund.
+Próba 3 – błąd połączenia, retry za 60 sekund.
+Próba 4 – błąd połączenia i zakończenie zadania po wyczerpaniu
+limitu ponowień.
+
+Łącznie wykonano pierwszą próbę oraz 3 ponowienia.
+
+Mechanizm obsługi błędów i ponawiania zadań Celery działa poprawnie.
