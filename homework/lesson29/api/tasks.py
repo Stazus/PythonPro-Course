@@ -192,3 +192,34 @@ def retry_failed_request(self):
             countdown=60,
             max_retries=3,
         )
+
+
+@shared_task
+def classify_uploaded_image(image_id):
+    from PIL import Image
+
+    from .models import UploadedImage
+
+    uploaded_image = UploadedImage.objects.get(id=image_id)
+
+    with Image.open(uploaded_image.image.path) as image:
+        mode = image.mode
+        width, height = image.size
+
+        if mode == "L":
+            image_type = "skala szarości"
+        else:
+            image_type = "obraz kolorowy"
+
+        result = (
+            f"Typ: {image_type}; "
+            f"tryb: {mode}; "
+            f"wymiary: {width}x{height}"
+        )
+
+    uploaded_image.classification_result = result
+    uploaded_image.save(update_fields=["classification_result"])
+
+    print(f"Klasyfikacja obrazu {image_id}: {result}")
+
+    return result

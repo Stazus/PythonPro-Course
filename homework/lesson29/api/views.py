@@ -11,7 +11,7 @@ from django.core.cache import cache
 
 from rest_framework import viewsets
 
-from .models import Product
+from .models import Product, UploadedImage
 from .serializers import ProductSerializer
 
 from django.http import JsonResponse
@@ -22,6 +22,7 @@ from .tasks import (
     process_video,
     progress_task,
     generate_users_csv,
+    classify_uploaded_image,
 )
 
 class ProtectedView(APIView):
@@ -188,3 +189,28 @@ def users_csv_report_status_view(request, task_id):
         response["download_url"] = f"/media/{result.result}"
 
     return JsonResponse(response)
+
+
+def upload_image_view(request):
+    if request.method == "POST":
+        image_file = request.FILES.get("image")
+
+        if not image_file:
+            return JsonResponse(
+                {"error": "Nie przesłano obrazu."},
+                status=400,
+            )
+
+        uploaded_image = UploadedImage.objects.create(
+            image=image_file
+        )
+
+        task = classify_uploaded_image.delay(uploaded_image.id)
+
+        return JsonResponse({
+            "image_id": uploaded_image.id,
+            "task_id": task.id,
+            "message": "Obraz zapisano i przekazano do klasyfikacji.",
+        })
+
+    return render(request, "api/upload_image.html")

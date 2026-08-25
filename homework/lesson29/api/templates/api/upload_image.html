@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Klasyfikacja obrazu</title>
+</head>
+<body>
+    <h1>Klasyfikacja obrazu</h1>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <label for="image">Wybierz obraz:</label>
+        <input type="file" id="image" name="image" accept="image/*" required>
+
+        <button type="submit">Wyślij obraz</button>
+    </form>
+</body>
+</html>

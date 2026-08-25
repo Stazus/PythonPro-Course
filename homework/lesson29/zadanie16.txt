@@ -1,0 +1,44 @@
+Lekcja 29 – Zadanie 16
+
+Utworzyłem model UploadedImage z polami:
+
+- image – ImageField
+- classification_result – CharField
+
+Użytkownik może przesłać obraz przez formularz dostępny pod adresem:
+
+/api/upload-image/
+
+Po przesłaniu obraz zostaje zapisany w bazie danych,
+a następnie uruchamiane jest zadanie Celery:
+
+classify_uploaded_image(image_id)
+
+Do zadania przekazywane jest ID obrazu.
+
+Zadanie Celery pobiera obiekt UploadedImage z bazy,
+otwiera obraz za pomocą biblioteki Pillow i sprawdza:
+
+- tryb obrazu,
+- czy obraz jest w skali szarości czy kolorowy,
+- szerokość,
+- wysokość.
+
+Podczas testu przesłano obraz:
+
+uploaded_images/Praca_zdalna.jpeg
+
+Worker Celery zwrócił wynik:
+
+Typ: obraz kolorowy; tryb: RGB; wymiary: 2048x1536
+
+Wynik został zapisany w polu classification_result.
+
+Sprawdzenie rekordu w bazie potwierdziło:
+
+classification_result =
+Typ: obraz kolorowy; tryb: RGB; wymiary: 2048x1536
+
+Potwierdza to poprawne działanie przesyłania obrazu,
+przekazywania ID do Celery, analizy obrazu przez Pillow
+oraz zapisu wyniku klasyfikacji w bazie danych.

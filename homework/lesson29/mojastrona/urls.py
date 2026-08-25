@@ -31,6 +31,7 @@ from api.views import (
     task_status_view,
     start_users_csv_report_view,
     users_csv_report_status_view,
+    upload_image_view,
 )
 
 router = DefaultRouter()
@@ -82,6 +83,11 @@ urlpatterns = [
         "api/users-csv-report-status/<str:task_id>/",
         users_csv_report_status_view,
         name="users-csv-report-status",
+    ),
+    path(
+        "api/upload-image/",
+        upload_image_view,
+        name="upload-image",
     ),
 ]
 
