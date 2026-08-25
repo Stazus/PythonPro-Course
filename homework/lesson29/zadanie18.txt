@@ -1,0 +1,51 @@
+Lekcja 29 – Zadanie 18
+
+Skonfigurowałem dwie osobne kolejki Celery:
+
+- default
+- priority_queue
+
+Domyślna kolejka została ustawiona jako:
+
+CELERY_TASK_DEFAULT_QUEUE = "default"
+
+Dla zadania:
+
+api.tasks.send_priority_email
+
+skonfigurowałem routing do kolejki:
+
+priority_queue
+
+Konfiguracja:
+
+CELERY_TASK_ROUTES = {
+    "api.tasks.send_priority_email": {
+        "queue": "priority_queue",
+    },
+}
+
+Uruchomiłem dwóch osobnych workerów Celery.
+
+Worker domyślny:
+
+celery -A mojastrona worker -l info -Q default -n default_worker@%h
+
+Worker priorytetowy:
+
+celery -A mojastrona worker -l info -Q priority_queue -n priority_worker@%h
+
+Następnie uruchomiłem zadanie przez endpoint:
+
+/api/send-priority-email/
+
+Endpoint zwrócił task_id.
+
+Zadanie zostało odebrane przez worker priority_worker,
+czyli przez worker obsługujący kolejkę priority_queue.
+
+Worker wyświetlił treść wiadomości e-mail w konsoli
+i zakończył zadanie sukcesem.
+
+Potwierdza to poprawne działanie różnych kolejek Celery
+oraz routingu zadania priorytetowego do osobnego workera.

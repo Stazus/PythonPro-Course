@@ -27,6 +27,7 @@ from .tasks import (
     generate_random_number,
     multiply_by_ten,
     save_chain_result,
+    send_priority_email,
 )
 
 class ProtectedView(APIView):
@@ -232,4 +233,13 @@ def start_chain_view(request):
     return JsonResponse({
         "task_id": result.id,
         "message": "Łańcuch zadań został uruchomiony.",
+    })
+
+
+def send_priority_email_view(request):
+    task = send_priority_email.delay()
+
+    return JsonResponse({
+        "task_id": task.id,
+        "message": "Wiadomość priorytetowa została przekazana do kolejki.",
     })

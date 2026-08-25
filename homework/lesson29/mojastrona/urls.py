@@ -33,6 +33,7 @@ from api.views import (
     users_csv_report_status_view,
     upload_image_view,
     start_chain_view,
+    send_priority_email_view,
 )
 
 router = DefaultRouter()
@@ -94,6 +95,11 @@ urlpatterns = [
         "api/start-chain/",
         start_chain_view,
         name="start-chain",
+    ),
+    path(
+        "api/send-priority-email/",
+        send_priority_email_view,
+        name="send-priority-email",
     ),
 ]
 

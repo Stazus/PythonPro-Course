@@ -176,6 +176,14 @@ CELERY_RESULT_SERIALIZER = "json"
 
 CELERY_TIMEZONE = "Europe/Warsaw"
 
+CELERY_TASK_DEFAULT_QUEUE = "default"
+
+CELERY_TASK_ROUTES = {
+    "api.tasks.send_priority_email": {
+        "queue": "priority_queue",
+    },
+}
+
 CELERY_BEAT_SCHEDULE = {
     "log-timestamp-every-10-seconds": {
         "task": "api.tasks.log_timestamp",

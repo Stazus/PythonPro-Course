@@ -262,3 +262,20 @@ def save_chain_result(result):
     print(f"Zapisano wynik do pliku: {result}")
 
     return "chain_results/result.txt"
+
+
+@shared_task
+def send_priority_email():
+    from django.core.mail import send_mail
+
+    send_mail(
+        subject="Wiadomość priorytetowa",
+        message="To jest wiadomość wysłana przez priority_queue.",
+        from_email="noreply@example.com",
+        recipient_list=["test@example.com"],
+        fail_silently=False,
+    )
+
+    print("Wysłano wiadomość z kolejki priorytetowej.")
+
+    return "Wiadomość priorytetowa została wysłana."
