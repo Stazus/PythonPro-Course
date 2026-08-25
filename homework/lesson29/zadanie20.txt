@@ -1,0 +1,43 @@
+Lekcja 29 – Zadanie 20
+
+Utworzyłem model TransactionItem z polami:
+
+- name
+- processed
+
+Następnie utworzyłem zadanie Celery:
+
+process_transaction_item(item_id)
+
+Zadanie pobiera obiekt TransactionItem po ID,
+ustawia pole processed na True i zapisuje zmianę w bazie.
+
+W widoku Django zastosowałem:
+
+transaction.atomic()
+
+oraz:
+
+transaction.on_commit()
+
+Obiekt TransactionItem jest tworzony wewnątrz transakcji,
+a zadanie Celery jest uruchamiane dopiero po poprawnym
+zatwierdzeniu transakcji:
+
+transaction.on_commit(
+    lambda: process_transaction_item.delay(item.id)
+)
+
+Podczas testu utworzono rekordy TransactionItem.
+
+Worker Celery odebrał zadania dla rekordów o ID 2 i 3
+i poprawnie je przetworzył.
+
+Sprawdzenie bazy danych wykazało:
+
+id=2, processed=True
+id=3, processed=True
+
+Potwierdza to, że zadanie Celery jest uruchamiane
+dopiero po zatwierdzeniu transakcji bazodanowej
+za pomocą transaction.on_commit().

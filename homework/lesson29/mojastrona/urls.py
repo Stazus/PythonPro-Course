@@ -34,6 +34,7 @@ from api.views import (
     upload_image_view,
     start_chain_view,
     send_priority_email_view,
+    create_transaction_item_view,
 )
 
 router = DefaultRouter()
@@ -100,6 +101,11 @@ urlpatterns = [
         "api/send-priority-email/",
         send_priority_email_view,
         name="send-priority-email",
+    ),
+    path(
+        "api/create-transaction-item/",
+        create_transaction_item_view,
+        name="create-transaction-item",
     ),
 ]
 

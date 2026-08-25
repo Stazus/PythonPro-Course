@@ -279,3 +279,20 @@ def send_priority_email():
     print("Wysłano wiadomość z kolejki priorytetowej.")
 
     return "Wiadomość priorytetowa została wysłana."
+
+
+@shared_task
+def process_transaction_item(item_id):
+    from .models import TransactionItem
+
+    item = TransactionItem.objects.get(id=item_id)
+
+    item.processed = True
+    item.save(update_fields=["processed"])
+
+    print(
+        f"Przetworzono TransactionItem "
+        f"id={item.id}, name={item.name}"
+    )
+
+    return item.id

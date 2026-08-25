@@ -1,5 +1,6 @@
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
+from django.db import transaction
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -12,7 +13,7 @@ from django.core.cache import cache
 
 from rest_framework import viewsets
 
-from .models import Product, UploadedImage
+from .models import Product, UploadedImage, TransactionItem
 from .serializers import ProductSerializer
 
 from django.http import JsonResponse
@@ -28,6 +29,7 @@ from .tasks import (
     multiply_by_ten,
     save_chain_result,
     send_priority_email,
+    process_transaction_item,
 )
 
 class ProtectedView(APIView):
@@ -242,4 +244,23 @@ def send_priority_email_view(request):
     return JsonResponse({
         "task_id": task.id,
         "message": "Wiadomość priorytetowa została przekazana do kolejki.",
+    })
+
+
+def create_transaction_item_view(request):
+    with transaction.atomic():
+        item = TransactionItem.objects.create(
+            name="Obiekt utworzony w transakcji"
+        )
+
+        transaction.on_commit(
+            lambda: process_transaction_item.delay(item.id)
+        )
+
+    return JsonResponse({
+        "item_id": item.id,
+        "message": (
+            "Obiekt utworzono. "
+            "Zadanie Celery zostanie uruchomione po zatwierdzeniu transakcji."
+        ),
     })
