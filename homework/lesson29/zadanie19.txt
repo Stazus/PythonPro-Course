@@ -1,0 +1,36 @@
+Lekcja 29 – Zadanie 19
+
+Zainstalowałem Flower do monitorowania zadań Celery.
+
+Flower został uruchomiony dla projektu poleceniem:
+
+celery -A mojastrona flower --port=5555
+
+Panel Flower był dostępny pod adresem:
+
+http://127.0.0.1:5555
+
+Flower poprawnie połączył się z brokerem Redis:
+
+redis://localhost:6379/2
+
+Następnie uruchomiłem worker Celery:
+
+celery -A mojastrona worker -l info
+
+W panelu Flower w zakładce Workers widoczny był aktywny
+worker celery@user-komputer1 ze statusem Online.
+
+Przejrzałem zakładki Workers, Tasks oraz Broker.
+
+W celu sprawdzenia monitorowania zadań uruchomiłem:
+
+from api.tasks import multiply
+multiply.delay(7, 8)
+
+Flower zarejestrował zadanie api.tasks.multiply.
+
+W zakładce Tasks zadanie było widoczne ze statusem SUCCESS
+oraz informacją o workerze, który je wykonał.
+
+Flower poprawnie monitoruje workery i zadania Celery.
