@@ -1,0 +1,14 @@
+[
+    {
+        "snapshot_id": "snap-8480a21f",
+        "created_at": "2026-08-31T00:05:06.409683",
+        "ec2": {
+            "instance_id": "i-example123",
+            "status": "snapshot-created"
+        },
+        "rds": {
+            "database_id": "db-example123",
+            "status": "snapshot-created"
+        }
+    }
+]
