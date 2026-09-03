@@ -1,0 +1,16 @@
+Lekcja 37 - Zadanie 8
+
+1. Utworzono niestandardową sieć bridge:
+   docker network create zadanie8-network
+
+2. Uruchomiono dwa kontenery:
+   - kontener1
+   - kontener2
+
+3. Oba kontenery zostały podłączone do sieci zadanie8-network.
+
+4. Sprawdzono komunikację poleceniem ping:
+   - kontener1 -> kontener2
+   - kontener2 -> kontener1
+
+Wynik: komunikacja po nazwach działa poprawnie (0% packet loss).
