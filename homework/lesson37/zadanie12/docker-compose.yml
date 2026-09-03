@@ -1,0 +1,23 @@
+services:
+  backend:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app.py:/app/app.py
+    command: uvicorn app:app --host 0.0.0.0 --port 8000 --reload
+    depends_on:
+      database:
+        condition: service_healthy
+
+  database:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: booksdb
+      POSTGRES_USER: booksuser
+      POSTGRES_PASSWORD: bookspassword
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U booksuser -d booksdb"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
