@@ -1,0 +1,28 @@
+services:
+  backend:
+    build: .
+    depends_on:
+      database:
+        condition: service_healthy
+
+  database:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: booksdb
+      POSTGRES_USER: booksuser
+      POSTGRES_PASSWORD: bookspassword
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U booksuser -d booksdb"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./static:/usr/share/nginx/html/static:ro
+    depends_on:
+      - backend
