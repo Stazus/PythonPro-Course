@@ -1,0 +1,36 @@
+name: Lekcja 38 - Zadanie 14
+
+on:
+  push:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t lesson38-zadanie14 homework/lesson38/zadanie14/
+
+      - name: Run tests in container
+        run: docker run --rm lesson38-zadanie14
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v4
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push image to GHCR
+        uses: docker/build-push-action@v7
+        with:
+          context: homework/lesson38/zadanie14
+          push: true
+          tags: ghcr.io/stazus/lesson38-zadanie14:latest
