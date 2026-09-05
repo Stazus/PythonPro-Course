@@ -1,0 +1,20 @@
+name: Lekcja 38 - Zadanie 11
+
+on:
+  push:
+
+env:
+  GLOBAL_MESSAGE: "To jest zmienna globalna"
+
+jobs:
+  environment-variables:
+    runs-on: ubuntu-latest
+
+    env:
+      JOB_MESSAGE: "To jest zmienna lokalna dla joba"
+
+    steps:
+      - name: Show environment variables
+        run: |
+          echo "$GLOBAL_MESSAGE"
+          echo "$JOB_MESSAGE"
