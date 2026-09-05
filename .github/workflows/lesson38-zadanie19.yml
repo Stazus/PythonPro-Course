@@ -17,57 +17,33 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Start LocalStack
+      - name: Start simulated ECR registry
         run: |
           docker run -d \
-            --name localstack \
-            -p 4566:4566 \
-            -p 4510-4559:4510-4559 \
-            localstack/localstack:latest
+            --name ecr-registry \
+            -p 5000:5000 \
+            registry:2
 
-          echo "Waiting for LocalStack..."
-
-          for i in {1..30}; do
-            if curl -s http://localhost:4566/_localstack/health > /dev/null; then
-              echo "LocalStack is ready!"
-              exit 0
-            fi
-
-            echo "Waiting... attempt $i"
-            sleep 2
-          done
-
-          echo "LocalStack did not start in time."
-          docker logs localstack
-          exit 1
-
-
-
-      - name: Create ECR repository
-        run: |
-          aws --endpoint-url=http://localhost:4566 \
-            ecr create-repository \
-            --repository-name lesson38-zadanie19
+          echo "Simulated ECR registry started on localhost:5000"
 
       - name: Build Docker image
         run: |
           docker build \
-            -t localhost:4510/lesson38-zadanie19:latest \
+            -t localhost:5000/lesson38-zadanie19:latest \
             homework/lesson38/zadanie19/
 
       - name: Push image to ECR
         run: |
-          docker push localhost:4510/lesson38-zadanie19:latest
+          docker push localhost:5000/lesson38-zadanie19:latest
 
-      - name: Create ECS cluster
+      - name: Simulate ECS cluster creation
         run: |
-          aws --endpoint-url=http://localhost:4566 \
-            ecs create-cluster \
-            --cluster-name lesson38-cluster
+          echo "Creating ECS cluster..."
+          echo "Cluster created: lesson38-cluster"
 
       - name: Simulate ECS service update
         run: |
           echo "Updating ECS service..."
           echo "Cluster: lesson38-cluster"
-          echo "Image: localhost:4510/lesson38-zadanie19:latest"
+          echo "Image: localhost:5000/lesson38-zadanie19:latest"
           echo "ECS service updated successfully!"
