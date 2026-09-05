@@ -25,7 +25,23 @@ jobs:
             -p 4510-4559:4510-4559 \
             localstack/localstack:latest
 
-          sleep 15
+          echo "Waiting for LocalStack..."
+
+          for i in {1..30}; do
+            if curl -s http://localhost:4566/_localstack/health > /dev/null; then
+              echo "LocalStack is ready!"
+              exit 0
+            fi
+
+            echo "Waiting... attempt $i"
+            sleep 2
+          done
+
+          echo "LocalStack did not start in time."
+          docker logs localstack
+          exit 1
+
+
 
       - name: Create ECR repository
         run: |
