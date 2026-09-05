@@ -1,0 +1,37 @@
+stages:
+  - build
+  - test
+  - deploy
+
+default:
+  image: python:3.11
+
+cache:
+  key: pip-cache
+  paths:
+    - .cache/pip/
+
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+
+build:
+  stage: build
+  script:
+    - python --version
+    - pip install pytest
+    - echo "Build completed!"
+
+test:
+  stage: test
+  script:
+    - pip install pytest
+    - pytest homework/lesson38/zadanie4/tests/test_math.py > test-results.txt
+  artifacts:
+    paths:
+      - test-results.txt
+    expire_in: 1 week
+
+deploy:
+  stage: deploy
+  script:
+    - echo "Deploying..."
