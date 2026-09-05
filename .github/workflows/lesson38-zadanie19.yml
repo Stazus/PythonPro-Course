@@ -1,0 +1,57 @@
+name: Lekcja 38 - Zadanie 19
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  aws-deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_DEFAULT_REGION: us-east-1
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Start LocalStack
+        run: |
+          docker run -d \
+            --name localstack \
+            -p 4566:4566 \
+            -p 4510-4559:4510-4559 \
+            localstack/localstack:latest
+
+          sleep 15
+
+      - name: Create ECR repository
+        run: |
+          aws --endpoint-url=http://localhost:4566 \
+            ecr create-repository \
+            --repository-name lesson38-zadanie19
+
+      - name: Build Docker image
+        run: |
+          docker build \
+            -t localhost:4510/lesson38-zadanie19:latest \
+            homework/lesson38/zadanie19/
+
+      - name: Push image to ECR
+        run: |
+          docker push localhost:4510/lesson38-zadanie19:latest
+
+      - name: Create ECS cluster
+        run: |
+          aws --endpoint-url=http://localhost:4566 \
+            ecs create-cluster \
+            --cluster-name lesson38-cluster
+
+      - name: Simulate ECS service update
+        run: |
+          echo "Updating ECS service..."
+          echo "Cluster: lesson38-cluster"
+          echo "Image: localhost:4510/lesson38-zadanie19:latest"
+          echo "ECS service updated successfully!"
