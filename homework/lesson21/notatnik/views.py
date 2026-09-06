@@ -1,3 +1,5 @@
+from datetime import timedelta
+from django.utils import timezone
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404
 from .models import Note, Category, Article
@@ -56,12 +58,15 @@ def article_list(request):
 
     articles = articles.order_by("-created_at")
 
+    three_days_ago = timezone.now() - timedelta(days=3)
+
     return render(
         request,
         "article_list.html",
         {
             "articles": articles,
             "q": q,
+            "three_days_ago": three_days_ago,
         }
     )
 

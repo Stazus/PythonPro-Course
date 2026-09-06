@@ -28,9 +28,10 @@
             <li>
                 {{ article.title }}
 
-                {% if article.created_at %}
+                {% if article.created_at >= three_days_ago %}
                     <strong>NOWOŚĆ!</strong>
                 {% endif %}
+
             </li>
         {% empty %}
             <li>Brak opublikowanych artykułów.</li>
